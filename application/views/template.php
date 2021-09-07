@@ -89,7 +89,7 @@
 
                 <!-- Menu Support-->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#">
+                    <a class="nav-link collapsed" href="<?= site_url('dashboard/support') ?>">
                         <i class="fas fa-fw fa-question-circle"></i>
                         <span>Support</span></a>
                 </li>

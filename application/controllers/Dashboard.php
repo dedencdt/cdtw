@@ -3,6 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Dashboard extends CI_Controller
 {
+
 	function __construct()
 	{
 		parent::__construct();
@@ -60,5 +61,44 @@ class Dashboard extends CI_Controller
 			}
 			redirect('dashboard');
 		}
+	}
+
+	// start 
+
+	public function rts()
+	{
+		$basepage = 'dashboard/rts/'; // url sampai segment (2)
+		$per_page = 15; // masukan baris limit data
+
+		//ambil data search
+		if ($this->input->post('search')) {
+			$data['keyword'] = $this->input->post('keyword');
+			$this->session->set_userdata('keyword', $data['keyword']);
+		} else {
+			$data['keyword'] = null;
+		}
+
+		//configurasi pagination
+		$status = 'refunded';
+		$config['total_rows'] = $this->dashboard_m->countAllRTS($data['keyword'], $status); //ambil count ALl di Model
+
+
+		$config['per_page'] = $per_page;
+		$config['base_url'] = base_url() . $basepage;
+		$data['start'] = $this->uri->segment(3);
+		$data['total_rows'] = $config['total_rows'];
+
+
+		//initialize
+		$this->pagination->initialize($config);
+
+		$data['row'] = $this->dashboard_m->getDataRTS($config['per_page'], $data['start'], $data['keyword'],  $status)->result();
+		$this->template->load('template', 'orders/cs/order_rts', $data);
+	}
+
+
+	public function support()
+	{
+		$this->template->load('template', 'dashboard/member_support');
 	}
 }

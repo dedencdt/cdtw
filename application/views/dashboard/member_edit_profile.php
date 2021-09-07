@@ -16,7 +16,7 @@
     <div class="container-fluid">
         <div class="card p-2">
             <div class="card-header text-center">
-                Formulir Edit pengguna
+                Edit profile
             </div>
             <div class="card-body">
                 <?php if (validation_errors()) : ?>
@@ -57,7 +57,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="nohp">No HP / Whatsapp *</label>
-                                <input type="number" class="form-control form-control-user" id="nohp" name="nohp" placeholder="No. HP / Whatsapp" value="<?= $this->input->post('nohp') ?? $row->nohp ?>">
+                                <input type="number" class="form-control form-control-user" id="nohp" name="nohp" placeholder="62851223xxx" value="<?= $this->input->post('nohp') ?? $row->nohp ?>">
                             </div>
                             <div class="form-group">
                                 <label for="rekening">Rekening </label>

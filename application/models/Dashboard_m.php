@@ -3,6 +3,7 @@
 class Dashboard_m extends CI_Model
 {
     private $tableuser = 'tb_user';
+    private $tblQVOrderan = 'qv_orderan_jn';
 
     public function getVisitor($userid, $tgl = null, $page = null)
     {
@@ -19,7 +20,7 @@ class Dashboard_m extends CI_Model
     {
 
         $params['user_id'] = $post['user_id'];
-        $params['username'] = $post['username'];
+        // $params['username'] = $post['username'];
         $params['nama'] = $post['nama'];
         if (!empty($post['password'])) {
             $params['password'] = sha1($post['password']);
@@ -34,4 +35,67 @@ class Dashboard_m extends CI_Model
         $this->db->where('user_id', $post['user_id']);
         $this->db->update($this->tableuser, $params);
     }
+
+
+
+    // RTS START
+    private function _setQueryLikeRTS($keyword = null, $status = null)
+    {
+        // edit OR Like disini
+        $arr = [
+            'penerima' => $keyword,
+            'order_id' => $keyword,
+            'nowa' => $keyword,
+            'resi' => $keyword,
+            'created_at' => $keyword
+        ];
+        $this->db->like('status', $status, 'none');
+        return $this->db->or_like($arr,);
+    }
+
+    // Setting Query
+    private function _setQueryRTS(
+        $limit,
+        $start,
+        $keyword = null,
+        $status = null
+    ) {
+        $this->db->from($this->tblQVOrderan);
+        if ($keyword) {
+            $this->_setQueryLikeRTS($keyword);
+        }
+        $this->db->like('status', $status, 'none');
+        $this->db->order_by('created_at', 'DESC');
+
+        $this->db->limit($limit, $start);
+    }
+
+
+    private function _getQueryLikeRTS($keyword = null, $status = null)
+    {
+        return $this->_setQueryLikeRTS($keyword, $status);
+    }
+
+
+    //pencarian
+    public function countAllRTS($keyword = null,  $status = null)
+    {
+
+        $this->_getQueryLikeRTS($keyword,  $status);
+        $this->db->from($this->tblQVOrderan);
+
+        return $this->db->count_all_results();
+    }
+
+    // gate utama
+    public function getDataRTS(
+        $limit,
+        $start,
+        $keyword = null,
+        $status = null
+    ) {
+        $this->_setQueryRTS($limit, $start, $keyword,  $status);
+        return $this->db->get();
+    }
+    //  RTS END
 }
