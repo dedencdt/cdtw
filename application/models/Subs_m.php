@@ -3,6 +3,9 @@
 class Subs_m extends CI_Model
 {
 
+    private $tblLangganan = 'tb_langganan';
+
+
     public function getid($id = null)
     {
 
@@ -25,4 +28,61 @@ class Subs_m extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+
+    // JUNK SUBS
+    private function _setQueryLikeSUBS($keyword = null)
+    {
+        // edit OR Like disini
+        $arr = [
+            'created_at' => $keyword
+        ];
+        return $this->db->or_like($arr,);
+    }
+
+    // Setting Query
+    private function _setQuerySUBS(
+        $limit,
+        $start,
+        $keyword = null,
+
+        $userid = null
+    ) {
+        $this->db->from($this->tblLangganan);
+        if ($keyword) {
+            $this->_setQueryLikeSUBS($keyword);
+        }
+        $this->db->like('user_id', $userid, 'none');
+        $this->db->order_by('created_at', 'DESC');
+
+        $this->db->limit($limit, $start);
+    }
+
+
+    private function _getQueryLikeSUBS($keyword = null)
+    {
+        return $this->_setQueryLikeSUBS($keyword);
+    }
+
+
+    //pencarian
+    public function countAllSUBS($keyword = null)
+    {
+
+        $this->_getQueryLikeSUBS($keyword);
+        $this->db->from($this->tblLangganan);
+
+        return $this->db->count_all_results();
+    }
+
+    // gate utama
+    public function getDataSUBS(
+        $limit,
+        $start,
+        $keyword = null,
+        $userid = null
+    ) {
+        $this->_setQuerySUBS($limit, $start, $keyword, $userid);
+        return $this->db->get();
+    }
+    //  RTS SUBUS
 }

@@ -8,7 +8,6 @@
          <i class="fas fa-fw fa-clipboard"></i>
          <span>Cek Orderan</span></a>
  </li>
-
  <li class="nav-item">
      <a class="nav-link" href="<?= site_url('orders') ?> ">
          <i class="fas fa-fw fa-shopping-cart"></i>

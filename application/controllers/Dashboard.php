@@ -88,12 +88,44 @@ class Dashboard extends CI_Controller
 		$data['start'] = $this->uri->segment(3);
 		$data['total_rows'] = $config['total_rows'];
 
-
+		$user = $this->fungsi->user_login()->user_id;
 		//initialize
 		$this->pagination->initialize($config);
 
-		$data['row'] = $this->dashboard_m->getDataRTS($config['per_page'], $data['start'], $data['keyword'],  $status)->result();
-		$this->template->load('template', 'orders/cs/order_rts', $data);
+		$data['row'] = $this->dashboard_m->getDataRTS($config['per_page'], $data['start'], $data['keyword'],  $status, $user)->result();
+		$this->template->load('template', 'dashboard/member_rts', $data);
+	}
+
+
+	public function junk()
+	{
+		$basepage = 'dashboard/junk/'; // url sampai segment (2)
+		$per_page = 15; // masukan baris limit data
+
+		//ambil data search
+		if ($this->input->post('search')) {
+			$data['keyword'] = $this->input->post('keyword');
+			$this->session->set_userdata('keyword', $data['keyword']);
+		} else {
+			$data['keyword'] = null;
+		}
+
+		//configurasi pagination
+		$status = 'junk';
+		$config['total_rows'] = $this->dashboard_m->countAllJUNK($data['keyword'], $status); //ambil count ALl di Model
+
+
+		$config['per_page'] = $per_page;
+		$config['base_url'] = base_url() . $basepage;
+		$data['start'] = $this->uri->segment(3);
+		$data['total_rows'] = $config['total_rows'];
+
+		$user = $this->fungsi->user_login()->user_id;
+		//initialize
+		$this->pagination->initialize($config);
+
+		$data['row'] = $this->dashboard_m->getDataJUNK($config['per_page'], $data['start'], $data['keyword'],  $status, $user)->result();
+		$this->template->load('template', 'dashboard/member_junk', $data);
 	}
 
 

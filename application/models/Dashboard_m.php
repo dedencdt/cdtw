@@ -58,12 +58,14 @@ class Dashboard_m extends CI_Model
         $limit,
         $start,
         $keyword = null,
-        $status = null
+        $status = null,
+        $userid = null
     ) {
         $this->db->from($this->tblQVOrderan);
         if ($keyword) {
             $this->_setQueryLikeRTS($keyword);
         }
+        $this->db->where('user_id', $userid);
         $this->db->like('status', $status, 'none');
         $this->db->order_by('created_at', 'DESC');
 
@@ -92,10 +94,76 @@ class Dashboard_m extends CI_Model
         $limit,
         $start,
         $keyword = null,
-        $status = null
+        $status = null,
+        $userid = null
     ) {
-        $this->_setQueryRTS($limit, $start, $keyword,  $status);
+        $this->_setQueryRTS($limit, $start, $keyword,  $status, $userid);
         return $this->db->get();
     }
     //  RTS END
+
+
+    // JUNK START
+    private function _setQueryLikeJUNK($keyword = null, $status = null)
+    {
+        // edit OR Like disini
+        $arr = [
+            'penerima' => $keyword,
+            'order_id' => $keyword,
+            'nowa' => $keyword,
+            'resi' => $keyword,
+            'created_at' => $keyword
+        ];
+        $this->db->like('status', $status, 'none');
+        return $this->db->or_like($arr,);
+    }
+
+    // Setting Query
+    private function _setQueryJUNK(
+        $limit,
+        $start,
+        $keyword = null,
+        $status = null,
+        $userid = null
+    ) {
+        $this->db->from($this->tblQVOrderan);
+        if ($keyword) {
+            $this->_setQueryLikeJUNK($keyword);
+        }
+        $this->db->where('user_id', $userid);
+        $this->db->like('status', $status, 'none');
+        $this->db->order_by('created_at', 'DESC');
+
+        $this->db->limit($limit, $start);
+    }
+
+
+    private function _getQueryLikeJUNK($keyword = null, $status = null)
+    {
+        return $this->_setQueryLikeJUNK($keyword, $status);
+    }
+
+
+    //pencarian
+    public function countAllJUNK($keyword = null,  $status = null)
+    {
+
+        $this->_getQueryLikeJUNK($keyword,  $status);
+        $this->db->from($this->tblQVOrderan);
+
+        return $this->db->count_all_results();
+    }
+
+    // gate utama
+    public function getDataJUNK(
+        $limit,
+        $start,
+        $keyword = null,
+        $status = null,
+        $userid = null
+    ) {
+        $this->_setQueryJUNK($limit, $start, $keyword,  $status, $userid);
+        return $this->db->get();
+    }
+    //  RTS junk
 }

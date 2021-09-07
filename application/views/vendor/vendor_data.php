@@ -28,7 +28,9 @@
         <div class="card p-2">
             <div class="card-header">
                 <h2>Management data vendor</h2>
-
+            </div>
+            <div class="card-body">
+                untuk menambahkan akun vendor baru, silahkan buat terlebiih dahulu akun untuk login, setelah itu klik add vendor
             </div>
             <div class="card-body table-responsive">
                 <?php if ($this->session->flashdata('success')) : ?>

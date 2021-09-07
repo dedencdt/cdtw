@@ -74,7 +74,7 @@
                     <tbody>
                         <?php
 
-                        foreach ($row->result() as $data) : ?>
+                        foreach ($row as $data) : ?>
                             <tr>
                                 <td><?= $data->invoice ?></td>
                                 <td><?= $data->created_at ?></td>
@@ -86,7 +86,7 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-
+                <?= $this->pagination->create_links() ?>
             </div>
         </div>
     </div>

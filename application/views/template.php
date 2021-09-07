@@ -63,11 +63,11 @@
 
             if (
                 //cek role member
-                $this->fungsi->user_login()->role == 2 ||
+                $this->fungsi->user_login()->role == 2
                 // cek member sudah terdaftar di langganan atau
                 // $this->fungsi->user_login()->user_id == $this->fungsi->member_active()->user_id ||
                 //cek role admin
-                $this->fungsi->user_login()->role == 1
+                // $this->fungsi->user_login()->role == 1
             ) :
                 if ($today <= $this->fungsi->durasi_langganan() && $this->fungsi->member_active()->status == 'Paid' || $this->fungsi->user_login()->role == 1) { ?>
                     <!-- include menu user -->
@@ -97,7 +97,7 @@
 
             <!-- MODUL CS -->
             <!-- Judul NAv HEad -->
-            <?php if ($this->fungsi->user_login()->role == 3 || $this->fungsi->user_login()->role == 1) : ?>
+            <?php if ($this->fungsi->user_login()->role == 3) : ?>
                 <hr class="sidebar-divider my-0">
                 <?php $this->view('template/menu_cs') ?>
             <?php endif; ?>

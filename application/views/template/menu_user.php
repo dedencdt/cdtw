@@ -21,7 +21,7 @@
 
 <!-- Menu Produk-->
 <li class="nav-item">
-    <a class="nav-link" href="?<?= site_url('dashboard/junk') ?>">
+    <a class="nav-link" href="<?= site_url('dashboard/junk') ?>">
         <i class="fas fa-fw fa-trash"></i>
         <span>Junk Order</span></a>
 </li>
