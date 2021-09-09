@@ -35,8 +35,8 @@
     <div class="container-fluid">
         <div class="card text-center">
             <div class="card-body">
-                <h6 class="card-title">Akun anda Aktif sampai</h6>
-                <h5 class="card-title"> <?= $this->fungsi->durasi_langganan() ?> <br></h5>
+                <h6 class="card-title">Akun anda <?= $this->fungsi->durasi_langganan() <= date('Y-m-d') ? 'tidak aktif'  : 'aktif sampai' ?></h6>
+                <h5 class="card-title"><strong><?= $this->fungsi->durasi_langganan() ?> </strong> <br></h5>
                 <p class="card-text">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Perpanjang</button>
                 </p>

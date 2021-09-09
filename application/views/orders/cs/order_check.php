@@ -79,7 +79,7 @@
                                 <td> <?= ++$start ?></td>
                                 <td> <?= $data->nama_publisher ?></td>
                                 <td> <?= $data->nama_cs ?></td>
-                                <td><?= $data->status ?></td>
+                                <td><span class="badge badge-<?= $data->status == 'processing' ? 'warning' : ($data->status == 'packing' ? 'info' : ($data->status == 'delivery' ? 'info' : ($data->status == 'completed' ? 'success' : 'danger'))) ?> p-2"><?= $data->status ?> </span> </td>
                                 <td> <?= $data->order_id ?></td>
                                 <td> <?= $data->nama_produk ?></td>
                                 <td> <?= $data->created_at ?></td>

@@ -67,6 +67,7 @@ class Dashboard extends CI_Controller
 
 	public function rts()
 	{
+		check_memberaktif();
 		$basepage = 'dashboard/rts/'; // url sampai segment (2)
 		$per_page = 15; // masukan baris limit data
 
@@ -99,6 +100,7 @@ class Dashboard extends CI_Controller
 
 	public function junk()
 	{
+		check_memberaktif();
 		$basepage = 'dashboard/junk/'; // url sampai segment (2)
 		$per_page = 15; // masukan baris limit data
 

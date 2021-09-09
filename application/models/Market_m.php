@@ -41,7 +41,7 @@ class Market_m extends CI_Model
         $this->db->select('tb_marketlink.*', 'user_id as market_user_id');
         $this->db->like('tb_marketlink.user_id', $user, 'none');
         $this->db->like('tb_marketlink.produk_id', $produk, 'none');
-        $this->db->like('tb_marketlink.produk_id', $produk, 'none');
+        // $this->db->like('tb_marketlink.produk_id', $produk, 'none');
         $this->db->join('p_linkproduk', 'p_linkproduk.linkproduk_id = tb_marketlink.linkproduk_id');
         $this->db->join('m_frame', 'm_frame.frame_id = tb_marketlink.frame_id');
         $this->db->from('tb_marketlink');
