@@ -58,6 +58,13 @@ class Api_m extends CI_Model
 
     public function senddata($data)
     {
+        // $label = $data['label'];
+        // $frame = $data['frame_id'];
+        // $tgl = $data['created_at'];
+        // $queryVisitor = $this->db->query("SELECT * FROM m_tracking WHERE label='" . $label . "' AND frame_id ='" . $frame . "' AND created_at ='" . $tgl . "'")->num_rows();
+        // $cekQuery = isset($queryVisitor) ? ($queryVisitor) : 0;
+
+        // if ($cekQuery == 0) {
         $add = $this->db->insert('m_tracking', $data);
 
         if ($add) {
@@ -65,6 +72,11 @@ class Api_m extends CI_Model
         } else {
             return false;
         }
+
+        //     // jika sudah ada
+        // } else {
+        //     $this->db->query("UPDATE m_tracking SET visit=visit+1 WHERE  label='" . $label . "' AND frame_id ='" . $frame . "' AND created_at ='" . $tgl . "'");
+        // }
     }
 
     public function getdata($id = null)

@@ -59,8 +59,23 @@ class Fungsi
     /**
      * hitug visit,letakan di halaman
      */
+    function counter($userid, $page, $start, $end)
+    {
+        $this->ci->db->select_sum('visit')
+            ->join('m_frame', 'm_frame.frame_id = m_tracking.frame_id')
+            ->like('m_tracking.label', $page, 'none')
+            ->where('m_frame.user_id', $userid)
+            ->where('m_tracking.created_at >=', $start)
+            ->where('m_tracking.created_at >=', $end);
+
+        $result = $this->ci->db->get('m_tracking')->row();
+        return $result->visit;
+    }
+
     function count_visit($userid, $page, $start, $end)
     {
+        // $this->ci->db->select('SUM(visit)');
+        // $this->ci->db->select('visit');
         $this->ci->db->join('m_frame', 'm_frame.frame_id = m_tracking.frame_id');
         $this->ci->db->from('m_tracking');
         // $this->ci->db->like('m_tracking.created_at', $tgl, 'none');
@@ -69,6 +84,7 @@ class Fungsi
         $this->ci->db->where('m_tracking.created_at >=', $start);
         $this->ci->db->where('m_tracking.created_at <=', $end);
 
+        // $query = $this->ci->db->get()->num_rows();
         $query = $this->ci->db->get()->num_rows();
         return $query;
     }

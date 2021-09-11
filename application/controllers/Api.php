@@ -83,9 +83,6 @@ class Api extends CI_Controller
         redirect('api');
     }
 
-
-
-
     /**
      * METHOD UNTUK API PUBLIC
      */

@@ -3,6 +3,22 @@
 </div>
 <!-- Menu member- Pages Collapse Menu -->
 <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dropdonKomisi" aria-expanded="true" aria-controls="dropdonKomisi">
+        <i class="fas fa-fw fa-money-bill-wave"></i>
+        <span>Manage Komisi</span>
+    </a>
+    <div id="dropdonKomisi" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Modul Komisi:</h6>
+            <a class="collapse-item" href="<?= site_url('komisi/settanggal') ?>">Setting Tanggal gaji</a>
+            <a class="collapse-item" href="<?= site_url('orders') ?>">Rekap data</a>
+            <a class="collapse-item" href="<?= site_url('orders') ?>">Komisi</a>
+        </div>
+    </div>
+</li>
+
+<!-- Menu member- Pages Collapse Menu -->
+<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dropdonwOrder" aria-expanded="true" aria-controls="dropdonwOrder">
         <i class="fas fa-fw fa-users-cog"></i>
         <span>Orders</span>
