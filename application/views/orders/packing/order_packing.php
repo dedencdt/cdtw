@@ -5,11 +5,21 @@
         <nav aria-label="breadcrumb ">
             <ol class="breadcrumb bg-transparent">
                 <li class="breadcrumb-item"><a href="<?= base_url() ?>">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Proses COD</li>
+                <li class="breadcrumb-item active" aria-current="page">Packing</li>
             </ol>
         </nav>
 
     </div>
+    <?php if ($this->db->affected_rows() > 0) :  ?>
+        <div class="col">
+            <a href="<?= site_url() ?>orders/toexcel" class="btn btn-default btn-icon-split float-right">
+                <span class="icon text-white-50">
+                    <i class="fas fa-print"></i>
+                </span>
+                <span class="text"> export <strong><?= $this->db->affected_rows() ?> data</strong></span>
+            </a>
+        </div>
+    <?php endif; ?>
 </div>
 
 <!-- TABEL user -->
@@ -17,7 +27,7 @@
     <div class="container-fluid">
         <div class="card p-2">
             <div class="card-header">
-                <h2>Proses COD</h2>
+                <h2>Packing & Input Resi</h2>
 
             </div>
             <div class="card-body table-responsive">
@@ -33,6 +43,7 @@
                 <?php endif; ?>
 
                 <table class="table table-hover" id="dataTable1">
+
                     <!-- PENCARIAN INPUT -->
                     <div class="row mt-3">
                         <div class="col">
@@ -55,11 +66,10 @@
                                     <?= $this->db->affected_rows(); ?>
                                 <?php endif; ?>
                             </span>
-
                         </div>
                     </div>
-                    <!-- BATAS PENCARIAN -->
 
+                    <!-- BATAS PENCARIAN -->
                     <thead class="thead-light">
                         <tr>
                             <th scope="col">#</th>
@@ -82,7 +92,7 @@
                             $adrs = str_replace('~', ' ', $data->alamat);
                         ?>
                             <tr>
-                                <td> <?= ++$start ?></td>
+                                <td> <?= $no++ ?></td>
                                 <td> <?= $data->order_id ?></td>
                                 <td> <?= $data->nama_produk ?></td>
                                 <td> <?= $data->status ?></td>
@@ -93,36 +103,52 @@
                                 <td> <?= $data->resi ?></td>
                                 <td> <?= $data->created_at ?></td>
                                 <td>
-                                    <form action="<?= base_url('orders/process') ?>" method="post">
-                                        <!-- hidden input -->
-                                        <input type="hidden" name="order_id" value="<?= $data->order_id ?>">
-                                        <input type="hidden" name="in_order_id" value="<?= $data->in_order_id ?>">
-                                        <input type="hidden" name="orderan_id" value="<?= $data->orderan_id ?>">
-
-                                        <!-- second input -->
-                                        <input type="hidden" name="cs_id" value="<?= $data->cs_id ?>">
-                                        <input type="hidden" name="user_id" value="<?= $data->user_id ?>">
-                                        <input type="hidden" name="vendor_id" value="<?= $data->vendor_id ?>">
-                                        <input type="hidden" name="ongkir" value="<?= $data->ongkir ?>">
-                                        <input type="hidden" name="member_in" value="<?= $this->fungsi->getProduk($data->produk_id)->komisi ?>">
-                                        <input type="hidden" name="vendor_in" value="<?= $this->fungsi->getProduk($data->produk_id)->harga_vendor ?>">
-                                        <div class="input-group">
-                                            <select class="custom-select" id="status" name="status" required>
-                                                <option value="">- status -</option>
-                                                <option value="completed">Delivered</option>
-                                                <option value="refunded">RTS</option>
-                                            </select>
-                                            <div class="input-group-append">
-                                                <button class="btn text-gray-100 bg-warning" type="submit" name="lastedit">Ubah</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    <div class="row">
+                                        <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#detailorder<?= $data->in_order_id ?>"><i class=" fa fa-shipping-fast"></i> Input resi</button>
+                                    </div>
                                 </td>
                             </tr>
+
+                            <!-- modal mulai -->
+                            <div class="row">
+                                <div class="col">
+                                    <div class="modal fade" id="detailorder<?= $data->in_order_id ?>" tabindex="-1" aria-labelledby="detailorder<?= $data->in_order_id ?>Label" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="detailorder<?= $data->in_order_id ?>Label"><strong>Input Resi </strong></h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="<?= site_url('packing/process') ?>" method="post">
+                                                    <!-- HIDDEN INPUT -->
+                                                    <input type="hidden" name="orderan_id" value="<?= $data->orderan_id ?>">
+                                                    <input type="hidden" name="in_order_id" value="<?= $data->in_order_id ?>">
+                                                    <input type="hidden" name="vendor_id" value="<?= $data->vendor_id ?>">
+
+
+                                                    <!-- modal body -->
+                                                    <input type="hidden" name="status" value="delivery">
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label for="resi" class="col-form-label">No. Resi / AWB</label>
+                                                            <input type="text" class="form-control" id="resi" name="resi" placeholder="JNXXXX.." value="<?= $data->resi ?>" />
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <input type="submit" class="btn btn-primary" name="editResi" value="Simpan">
+                                                        </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- modal end -->
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <!-- PASANG PAGINATION -->
                 <?= $this->pagination->create_links() ?>
 
             </div>

@@ -20,12 +20,12 @@
          <i class="fab fa-fw fa-whatsapp"></i>
          <span>Data Followup By CS</span></a>
  </li>
- <!-- Nav Item - Data Followup By CS -->
+ <!-- Nav Item - Data Followup By CS
  <li class="nav-item">
      <a class="nav-link" href="<?= site_url('orders/packing') ?> ">
          <i class="fas fa-fw fa-box"></i>
          <span>Data Packing</span></a>
- </li>
+ </li> -->
  <!-- Nav Item - Closing Order -->
  <li class="nav-item">
      <a class="nav-link" href="<?= site_url('orders/cod') ?> ">

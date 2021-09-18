@@ -82,7 +82,7 @@
                             </tr>
                         <?php endif; ?>
                         <?php
-                        $no = 1;
+
                         foreach ($row->result() as $data) : ?>
                             <tr>
                                 <td><?= ++$start ?></td>

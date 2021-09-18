@@ -161,4 +161,33 @@ class Fungsi
             echo 'Pesan terkirim';
         }
     }
+
+    // get data produk dari produk id
+    function getProduk($id = null)
+    {
+        $this->ci->load->model('produk_m');
+        $query = $this->ci->produk_m->get($id);
+        return $query->row();
+    }
+
+    function cek_data_komisi($tgl, $user)
+    {
+        $query = $this->ci->db
+            ->query("SELECT * FROM tb_mkomisi WHERE tgl_gajian = '$tgl' AND user_id = '$user' AND status = 'menunggu'");
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // fungsi komisi
+    function getdataKomisi($start, $end)
+    {
+        $query = $this->ci->db
+            ->query("SELECT SUM(member_in) AS komisi_member, SUM(member_out) AS rts,.tb_siapcair.user_id,tb_user.username FROM tb_siapcair JOIN tb_user ON tb_user.user_id = tb_siapcair.user_id WHERE tb_siapcair.created_at >= '$start' AND tb_siapcair.created_at <= '$end' GROUP BY tb_siapcair.user_id");
+
+
+        return $query;
+    }
 }

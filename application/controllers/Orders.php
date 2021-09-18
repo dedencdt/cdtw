@@ -15,7 +15,7 @@ class Orders extends CI_Controller
         parent::__construct();
         check_not_login();
         check_cs();
-        $this->load->model(['orders_m']);
+        $this->load->model(['orders_m', 'komisi_m']);
         $this->url = $this->setter->get_apiwc_url();
         $this->consumer_key = $this->setter->get_apiwc_ck();
         $this->consumer_secret = $this->setter->get_apiwc_sk();
@@ -134,7 +134,7 @@ class Orders extends CI_Controller
     public function cod()
     {
         $basepage = 'orders/cod/'; // url sampai segment (2)
-        $per_page = 15; // masukan baris limit data
+        $per_page = 15; // masukan baris limit data 
 
         //ambil data search
         if ($this->input->post('search')) {
@@ -265,6 +265,11 @@ class Orders extends CI_Controller
             $data = [
                 'status' => $this->input->post('status')
             ];
+            if ($post['status'] == 'completed') {
+                $this->orders_m->oktosiapcair($post);
+            } else {
+                $this->orders_m->rtstosiapcair($post);
+            }
             $this->orders_m->editClosingOrderan($post);
             $this->orders_m->editInOrderStatus($post);
             $woocommerce->put($endpoint, $data);

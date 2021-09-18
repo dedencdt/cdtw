@@ -573,4 +573,36 @@ class Orders_m extends CI_Model
         $query = $this->db->get();
         return  $query;
     }
+
+    public function oktosiapcair($post)
+    {
+        $random = date('ymd') . random_string('alnum', 4);
+        $params = [
+            'siapcair_id' => $random,
+            'member_in' => $post['member_in'],
+            'vendor_in' => $post['vendor_in'],
+            'cs_in' => 4000,
+            'user_id' => $post['user_id'],
+            'cs_id' => $post['cs_id'],
+            'vendor_id' => $post['vendor_id'],
+            'created_at' => date('Y-m-d')
+
+        ];
+        $this->db->insert('tb_siapcair', $params);
+    }
+
+    public function rtstosiapcair($post)
+    {
+        $random = date('ymd') . random_string('alnum', 4);
+        $params = [
+            'siapcair_id' => $random,
+            'member_out' => $post['ongkir'],
+            'user_id' => $post['user_id'],
+            'cs_id' => $post['cs_id'],
+            'vendor_id' => $post['vendor_id'],
+            'created_at' => date('Y-m-d')
+
+        ];
+        $this->db->insert('tb_siapcair', $params);
+    }
 }

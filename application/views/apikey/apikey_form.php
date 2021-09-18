@@ -11,7 +11,7 @@
     </div>
 
     <div class="col">
-        <a href="<?= site_url() ?>apikey" class="btn btn-warning btn-icon-split float-right">
+        <a href="<?= site_url() ?>api" class="btn btn-warning btn-icon-split float-right">
             <span class="icon text-white-50">
                 <i class="fas fa-undo"></i>
             </span>

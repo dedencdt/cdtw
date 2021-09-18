@@ -11,8 +11,10 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Modul Komisi:</h6>
             <a class="collapse-item" href="<?= site_url('komisi/settanggal') ?>">Setting Tanggal gaji</a>
-            <a class="collapse-item" href="<?= site_url('orders') ?>">Rekap data</a>
-            <a class="collapse-item" href="<?= site_url('orders') ?>">Komisi</a>
+            <a class="collapse-item" href="<?= site_url('komisi/rekapdatamember') ?>">Rekap data member</a>
+            <a class="collapse-item" href="<?= site_url('komisi/rekapdatacs') ?>">Rekap data cs</a>
+            <a class="collapse-item" href="<?= site_url('komisi/rekapdatavendor') ?>">Rekap data vendor</a>
+            <a class="collapse-item" href="<?= site_url('komisi/data') ?>">Komisi</a>
         </div>
     </div>
 </li>

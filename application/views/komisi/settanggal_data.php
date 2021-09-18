@@ -58,14 +58,28 @@
                                 <td><?= $data->tgl_rekap ?></td>
                                 <td><?= $data->tutup_buku ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#ModalSettanggalId<?= $data->tglgajian_id ?>">
-                                        <i class="fa fa-fw fa-edit "></i>
-                                        Edit
-                                    </button>
-                                    <a href="<?= site_url() ?>komisi/delTgl/<?= $data->tglgajian_id ?>" onclick="return confirm('Yakin ingin menghapus ??')" class="btn btn-sm btn-danger">
-                                        <i class="fa fa-fw fa-trash "></i>
-                                        Delete
-                                    </a>
+                                    <div class="row">
+                                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#ModalSettanggalId<?= $data->tglgajian_id ?>">
+                                            <i class="fa fa-fw fa-edit "></i>
+                                            Edit
+                                        </button>
+
+                                        <a href="<?= site_url() ?>komisi/delTgl/<?= $data->tglgajian_id ?>" onclick="return confirm('Yakin ingin menghapus ??')" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-fw fa-trash "></i>
+                                            Delete
+                                        </a>
+
+                                        <div class="dropdown">
+                                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-info-circle"></i> Lihat Data Komisi
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                <a class="dropdown-item" href="<?= site_url('komisi/salesmember/') ?><?= $data->tglgajian_id ?>">Komisi Members</a>
+                                                <a class="dropdown-item" href="<?= site_url('komisi/salescs/') ?><?= $data->tglgajian_id ?>">Komisi CS</a>
+                                                <a class="dropdown-item" href="<?= site_url('komisi/salesvendor/') ?><?= $data->tglgajian_id ?>">Komisi Vendor</a>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
                                     <!-- Modal -->
@@ -100,6 +114,7 @@
                                                 </form>
                                             </div>
                                         </div>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -145,6 +160,3 @@
         </div>
     </div>
 </div>
-<script>
-
-</script>

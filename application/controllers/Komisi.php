@@ -12,6 +12,13 @@ class Komisi extends CI_Controller
         check_admin();
     }
 
+    public function salesmember($id)
+    {
+        $data['row'] = $this->komisi_m->getId($id)->row();
+
+        $this->template->load('template', 'komisi/rekap_data_member', $data);
+    }
+
     public function settanggal()
     {
         $basepage = 'komisi/settanggal/'; // url
@@ -61,6 +68,16 @@ class Komisi extends CI_Controller
             redirect('komisi/settanggal');
         } elseif (isset($_POST['konfirmasi'])) {
             $this->komisi_m->setConfStatus($post);
+        } elseif (isset($_POST['savetokomisi'])) {
+            // dari rekap member kirim data ke tb komisi member
+
+            $this->komisi_m->addtoKomisimember($post);
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('success', 'Data berhasil di hapus');
+            }
+            echo "<script>
+            window.location = document.referrer;
+            </script>";
         }
 
         // if ($this->db->affected_rows() > 0) {

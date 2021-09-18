@@ -6,10 +6,7 @@ class Packing extends CI_Controller
     {
         parent::__construct();
         check_not_login();
-        $this->load->model(['orders_m']);
-        $this->url = $this->setter->get_apiwc_url();
-        $this->consumer_key = $this->setter->get_apiwc_ck();
-        $this->consumer_secret = $this->setter->get_apiwc_sk();
+        $this->load->model(['orders_m', 'produk_m']);
     }
     public function index()
     {
@@ -40,6 +37,23 @@ class Packing extends CI_Controller
 
         $data['row'] = $this->orders_m->getDataPK($config['per_page'], $data['start'], $data['keyword'],  $status)->result();
 
-        $this->template->load('template', 'orders/cs/order_packing', $data);
+        $this->template->load('template', 'orders/packing/order_packing', $data);
+    }
+
+
+    public function process()
+    {
+        $post = $this->input->post(NULL, TRUE);
+        if (isset($_POST['editResi'])) {
+
+            $this->orders_m->editOrderan($post);
+            $this->orders_m->editInOrderStatus($post);
+        }
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Data berhasil di simpan');
+        }
+        echo "<script>
+        window.location = document.referrer;
+        </script>";
     }
 }

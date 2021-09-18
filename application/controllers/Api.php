@@ -83,54 +83,7 @@ class Api extends CI_Controller
         redirect('api');
     }
 
-    /**
-     * METHOD UNTUK API PUBLIC
-     */
-    //ENDPOINT - POST
-    // di gunakan tracking page di pasang di setiap landing page
-    // label isikan dengan  prelander -> untuk prelanding , landingpage -> untuk landing page
-    // formorder -> untuk halaman Add to Cart , lead -> halaman terimakasih atau purchase
-    // berikut cara untuk mengambil api melalui Curl
-
-    // function request_api($method, $url, $data = null)
-    // {
-    //     $curl = curl_init();
-
-    //     curl_setopt_array($curl, [
-    //         CURLOPT_URL => $url,
-    //         CURLOPT_RETURNTRANSFER => true,
-    //         CURLOPT_SSL_VERIFYPEER => false,
-    //         CURLOPT_SSL_VERIFYHOST => false,
-    //         CURLOPT_CUSTOMREQUEST => $method,
-    //         CURLOPT_HEADER => [
-    //             'key' => ''
-    //         ]
-    //     ]);
-    //     if ($method == 'POST' || $method == 'PUT') {
-    //         curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
-    //     }
-
-    //     $response = curl_exec($curl);
-    //     $err = curl_error($curl);
-
-    //     curl_close($curl);
-
-    //     if ($err) {
-    //         return "cURL Error #:" . $err;
-    //     } else {
-    //         return $response;
-    //     }
-    // }
-
-    // $data = [
-    //     'linkreff_id' => 'awa2daw',
-    //     'label_link' => 'Landingpage',
-    //     'link' => $_SERVER['PHP_SELF'] //untuk mendapatkan url saat ini
-    // ];
-    // $url = 'http://codtech.local/cdtmember/api/set_track/awa2daw';
-    // $s = request_api('POST', $url, $data);
-    // $s = json_decode($s);
-    // var_dump($s->data->user_id);
+    ////////////
 
 
     public function sendtracking($id)

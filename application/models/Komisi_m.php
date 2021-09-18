@@ -2,7 +2,59 @@
 
 class Komisi_m extends CI_Model
 {
-    private $tblsetTanggal = 'tb_tglgajian';
+    private $tblsetTanggal = 'tb_tglgajian',
+        $tblsiapcair = 'tb_siapcair',
+        $tblMKomisi = 'tb_mkomisi';
+
+
+    public function addtoKomisimember($post)
+    {
+        $total = $post['komisi_member'] - $post['rts'] - $post['lainlain'];
+        $params = [
+            'mkomisi_id' => $post['mkomisi_id'],
+            'invoice' => $post['invoice'],
+            'tgl_gajian' => $post['tgl_gajian'],
+            'komisisales' => $post['komisi_member'],
+            'rts' => $post['rts'],
+            'lainlain' => $post['lainlain'],
+            'diterima' => $total,
+            'status' => $post['status'],
+            'note' => $post['note'],
+            'user_id' => $post['publisher'],
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+        $this->db->insert($this->tblMKomisi, $params);
+    }
+
+
+    public function getdataKomisi($page, $start, $end)
+    {
+        $this->db
+            ->select('siapcair_id,SUM(member_in) as komisi_member,SUM(cs_in) as komisi_cs,SUM(vendor_in) as komisi_vendor,SUM(member_out) as rts,cs_id,vendor_id,user_id')
+            ->where('created_at <=', $start)
+            ->where('created_at >=', $end);
+        if ($page == 'member') {
+            $this->db->group_by('user_id');
+            // ->order_by('komisi_member', 'asc');
+        } elseif ($page == 'cs') {
+            $this->db->group_by('cs_id');
+            // ->order_by('komisi_cs', 'asc');
+        } elseif ($page == 'vendor') {
+            $this->db->group_by('vendor_id');
+            // ->order_by('komisi_vendor', 'asc');
+        }
+        $query = $this->db->get($this->tblsiapcair);
+        return $query;
+    }
+
+    public function getId($id)
+    {
+        $this->db->select('*')
+            ->from($this->tblsetTanggal)
+            ->where('tglgajian_id', $id);
+        $query = $this->db->get();
+        return $query;
+    }
 
     public function addTgl($post)
     {
@@ -48,6 +100,11 @@ class Komisi_m extends CI_Model
         $this->db->delete($this->tblsetTanggal);
     }
 
+
+
+    // =============================
+    // PAGINATION
+    // ==============================
 
     // Seting Configurasi
     // Query Like
@@ -95,4 +152,6 @@ class Komisi_m extends CI_Model
         return $this->db->get();
     }
     // Batas PAgination
+
+
 }
