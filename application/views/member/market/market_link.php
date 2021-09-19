@@ -104,8 +104,8 @@
                     <div class="col">
                         <form action="<?= site_url('market/process') ?>" method="post">
                             <!-- GENRATE ID-->
-                            <input type="hidden" name="marketlink_id" id="marketlink_id" value="<?= random_string('alnum', 10)  ?>">
-                            <input type="hidden" name="frame_id" id="frame_id" value="<?= random_string('alnum', 10)  ?>">
+                            <input type="hidden" name="marketlink_id" id="marketlink_id" value="<?= 'cdt' . date('ymd') . random_string('alnum', 21) ?>">
+                            <input type="hidden" name="frame_id" id="frame_id" value="<?= 'cdt' . date('ymd') . random_string('alnum', 21) ?>">
                             <!-- GET ID -->
                             <input type="hidden" name="user_id" id="user_id" value="<?= $this->fungsi->user_login()->user_id  ?>">
                             <input type="hidden" name="produk_id" id="produk_id" value="<?= $produk->produk_id  ?>">

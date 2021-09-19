@@ -39,7 +39,7 @@
                                 <label for="nama">Nama lengkap *</label>
                                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap" value="<?= set_value('nama') ?>">
                                 <!-- fORM ID HIDDEN -->
-                                <input type="hidden" class="form-control" id="user_id" name="user_id" placeholder="Nama Lengkap" value="<?= random_string('alnum', 10) ?>">
+                                <input type="hidden" class="form-control" id="user_id" name="user_id" placeholder="Nama Lengkap" value="<?= 'cdt' . date('ymd') . random_string('alnum', 21) ?>">
                             </div>
                             <div class="form-group">
                                 <label for="username">Username *</label>

@@ -576,7 +576,7 @@ class Orders_m extends CI_Model
 
     public function oktosiapcair($post)
     {
-        $random = date('ymd') . random_string('alnum', 4);
+        $random = 'cdt' . date('ymd') . random_string('alnum', 21);
         $params = [
             'siapcair_id' => $random,
             'member_in' => $post['member_in'],
@@ -593,7 +593,7 @@ class Orders_m extends CI_Model
 
     public function rtstosiapcair($post)
     {
-        $random = date('ymd') . random_string('alnum', 4);
+        $random = 'cdt' . date('ymd') . random_string('alnum', 21);
         $params = [
             'siapcair_id' => $random,
             'member_out' => $post['ongkir'],

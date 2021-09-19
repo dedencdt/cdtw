@@ -64,8 +64,8 @@
                                 <td>
                                     <form action="<?= site_url() ?>orders/process" method="post">
                                         <!-- input hidden -->
-                                        <input type="hidden" name="in_order_id" value="<?= random_string('alnum', 10) ?>">
-                                        <input type="hidden" name="orderan_id" value="<?= random_string('alnum', 10) ?>">
+                                        <input type="hidden" name="in_order_id" value="<?= 'cdt' . date('ymd') . random_string('alnum', 21) ?>">
+                                        <input type="hidden" name="orderan_id" value="<?= 'cdt' . date('ymd') . random_string('alnum', 21) ?>">
                                         <input type="hidden" name="order_id" value="<?= $data->id ?>">
                                         <input type="hidden" name="status" value="on-hold">
                                         <input type="hidden" name="penerima" value="<?= $data->billing->first_name  ?>">

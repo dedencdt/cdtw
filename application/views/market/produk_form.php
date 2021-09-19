@@ -31,7 +31,7 @@
                     <!-- form -->
                     <form method="post" action="<?= site_url('produk/process') ?>">
                         <!-- form hidden -->
-                        <input type="hidden" name="produk_id" id="produk_id" value="<?= $row->produk_id != '' ? $row->produk_id : random_string('alnum', 10)  ?>">
+                        <input type="hidden" name="produk_id" id="produk_id" value="<?= $row->produk_id != '' ? $row->produk_id : 'cdt' . date('ymd') . random_string('alnum', 21)  ?>">
                         <div class="form-group">
                             <label for="nama_produk">Nama barang*</label>
                             <input type="text" class="form-control" name="nama_produk" id="nama_produk" value="<?= $row->nama_produk ?>" required>

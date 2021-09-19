@@ -36,7 +36,7 @@
                         <div class="col-xl-4 col-md-8 offset-md-2 offset-xl-4">
                             <div class="form-group">
                                 <!-- fORM ID HIDDEN -->
-                                <input type="hidden" class="form-control" id="expdate_id" name="expdate_id" placeholder="Nama Lengkap" value="<?= $row->expdate_id != '' ? $row->expdate_id : random_string('alnum', 10)  ?>">
+                                <input type="hidden" class="form-control" id="expdate_id" name="expdate_id" placeholder="Nama Lengkap" value="<?= $row->expdate_id != '' ? $row->expdate_id : 'cdt' . date('ymd') . random_string('alnum', 21) ?>">
                             </div>
                             <div class="form-group">
                                 <label for="masa_exp">Masa aktif</label>

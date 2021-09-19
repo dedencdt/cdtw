@@ -92,7 +92,7 @@ class Api extends CI_Controller
         $id = $this->uri->segment(3);
         // $post = $this->input->post_get(null, true);
         $data = [
-            'tracking_id' => random_string('alnum', 10),
+            'tracking_id' => 'cdt' . date('ymd') . random_string('alnum', 21),
             'label' => $this->input->post_get('label', true),
             'url' => $this->input->post_get('url', true),
             'visit' => 1,

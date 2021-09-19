@@ -31,14 +31,14 @@
                     <!-- form -->
                     <form method="post" action="<?= site_url('api/process') ?>">
                         <!-- form hidden -->
-                        <input type="hidden" name="apikey_id" id="apikey_id" value="<?= $row->apikey_id != '' ? $row->apikey_id : random_string('alnum', 10)  ?>">
+                        <input type="hidden" name="apikey_id" id="apikey_id" value="<?= $row->apikey_id != '' ? $row->apikey_id : 'cdt' . date('ymd') . random_string('alnum', 21)  ?>">
                         <div class="form-group">
                             <label for="nama">Nama *</label>
                             <input type="text" class="form-control" name="nama" id="nama" value="<?= $row->nama ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="key">Key*</label>
-                            <input type="text" class="form-control" name="key" id="key" value="<?= $row->key != '' ? $row->key : random_string('alnum', 10) ?>" required>
+                            <input type="text" class="form-control" name="key" id="key" value="<?= $row->key != '' ? $row->key : 'cdt' . date('ymd') . random_string('alnum', 21) ?>" required>
                         </div>
                         <div class="row">
                             <div class="col">

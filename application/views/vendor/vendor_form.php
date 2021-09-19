@@ -36,7 +36,7 @@
                         <div class="col-xl-4 col-md-8 offset-md-2 offset-xl-4">
                             <div class="form-group">
                                 <!-- fORM ID HIDDEN -->
-                                <input type="hidden" class="form-control" id="vendor_id" name="vendor_id" placeholder="Nama Lengkap" value="<?= $row->vendor_id != '' ? $row->vendor_id : random_string('alnum', 10)  ?>">
+                                <input type="hidden" class="form-control" id="vendor_id" name="vendor_id" placeholder="Nama Lengkap" value="<?= $row->vendor_id != '' ? $row->vendor_id : 'cdt' . date('ymd') . random_string('alnum', 21)  ?>">
                             </div>
                             <div class="form-group">
                                 <label for="vendor_name">Nama* </label>

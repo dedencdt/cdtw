@@ -107,7 +107,7 @@
                 <form action="<?= site_url('subs/process') ?>" method="post">
 
                     <!-- Create ID -->
-                    <input type="hidden" class="form-control" id="langganan_id" name="langganan_id" placeholder="Nama Lengkap" value="<?= random_string('alnum', 10)  ?>">
+                    <input type="hidden" class="form-control" id="langganan_id" name="langganan_id" placeholder="Nama Lengkap" value="<?= 'cdt' . date('ymd') . random_string('alnum', 21) ?>">
                     <!-- Invoice -->
                     <input type="hidden" class="form-control" id="invoice" name="invoice" value="<?= 'SUB/' . date('Ymd') . '/' . strtoupper(random_string('alnum', 4)) ?>">
                     <!-- get UserID -->

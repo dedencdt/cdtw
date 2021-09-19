@@ -142,7 +142,7 @@
                 <div class="modal-body">
 
                     <!-- Isi konten disini -->
-                    <input type="hidden" name="tglgajian_id" value="<?= date('ymd') . random_string('alnum', 4) ?>">
+                    <input type="hidden" name="tglgajian_id" value="<?= 'cdt' . date('ymd') . random_string('alnum', 21) ?>">
                     <!-- hidden -->
                     <label for="tglgajian">Tanggal Gajian</label>
                     <input type="date" name="tglgajian" id="tglgajian" class="form-control">

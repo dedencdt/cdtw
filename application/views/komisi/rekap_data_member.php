@@ -106,7 +106,7 @@
                                                 <!-- hidden -->
                                                 <input type="hidden" name="publisher" id="publisher" class="form-control" value="<?= $data->user_id ?>">
                                                 <input type="hidden" name="status" id="status" class="form-control" value="menunggu">
-                                                <input type="hidden" name="mkomisi_id" id="mkomisi_id" class="form-control" value="<?= date('ymd') . random_string('alnum', 4) ?>">
+                                                <input type="hidden" name="mkomisi_id" id="mkomisi_id" class="form-control" value="<?= 'cdt' . date('ymd') . random_string('alnum', 21) ?>">
 
 
                                                 <!-- konten -->

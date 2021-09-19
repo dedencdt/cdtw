@@ -103,7 +103,7 @@ $bukabuku = $tgl->modify('-7 day');
                                                 <!-- hidden -->
                                                 <input type="hidden" name="vendorid" id="cs" class="form-control" value="<?= $data->vendorid ?>">
                                                 <input type="hidden" name="status" id="status" class="form-control" value="menunggu">
-                                                <input type="hidden" name="vkomisi_id" id="cskomisi_id" class="form-control" value="<?= date('ymd') . random_string('alnum', 4) ?>">
+                                                <input type="hidden" name="vkomisi_id" id="cskomisi_id" class="form-control" value="<?= 'cdt' . date('ymd') . random_string('alnum', 21) ?>">
 
 
                                                 <!-- konten -->

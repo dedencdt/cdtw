@@ -104,7 +104,7 @@
                                                 <!-- hidden -->
                                                 <input type="hidden" name="cs_id" id="cs" class="form-control" value="<?= $data->cs_id ?>">
                                                 <input type="hidden" name="status" id="status" class="form-control" value="menunggu">
-                                                <input type="hidden" name="cskomisi_id" id="cskomisi_id" class="form-control" value="<?= date('ymd') . random_string('alnum', 4) ?>">
+                                                <input type="hidden" name="cskomisi_id" id="cskomisi_id" class="form-control" value="<?= 'cdt' . date('ymd') . random_string('alnum', 21) ?>">
 
 
                                                 <!-- konten -->
@@ -145,16 +145,3 @@
         </div>
     </div>
 </div>
-
-<!-- <script>
-    $(document).ready(function() {
-        $('.cin-komisi, .cin-rts, .cin-lainlain').keyup(function() {
-            let komisi = $('.cin-komisi').val();
-            let rts = $('.cin-rts').val();
-            let lainlain = $('.cin-lainlain').val();
-            let total = komisi - rts - lainlain;
-
-            $('.cin-diterima').val(total);
-        });
-    });
-</script> -->

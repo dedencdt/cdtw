@@ -50,7 +50,7 @@
                         <div class="col-xl-4 col-md-8 offset-md-2 offset-xl-4">
                             <div class="form-group">
                                 <!-- fORM ID HIDDEN -->
-                                <input type="hidden" class="form-control" id="langganan_id" name="langganan_id" placeholder="Nama Lengkap" value="<?= $row->langganan_id != '' ? $row->langganan_id : random_string('alnum', 10)  ?>">
+                                <input type="hidden" class="form-control" id="langganan_id" name="langganan_id" placeholder="Nama Lengkap" value="<?= $row->langganan_id != '' ? $row->langganan_id : 'cdt' . date('ymd') . random_string('alnum', 21)  ?>">
                             </div>
                             <div class="form-group">
                                 <label for="invoice">No. Invoice</label>
