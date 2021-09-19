@@ -19,6 +19,20 @@ class Komisi extends CI_Controller
         $this->template->load('template', 'komisi/rekap_data_member', $data);
     }
 
+    public function salescs($id)
+    {
+        $data['row'] = $this->komisi_m->getId($id)->row();
+
+        $this->template->load('template', 'komisi/rekap_data_cs', $data);
+    }
+
+    public function salesvendor($id)
+    {
+        $data['row'] = $this->komisi_m->getId($id)->row();
+
+        $this->template->load('template', 'komisi/rekap_data_vendor', $data);
+    }
+
     public function settanggal()
     {
         $basepage = 'komisi/settanggal/'; // url
@@ -72,6 +86,26 @@ class Komisi extends CI_Controller
             // dari rekap member kirim data ke tb komisi member
 
             $this->komisi_m->addtoKomisimember($post);
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('success', 'Data berhasil di hapus');
+            }
+            echo "<script>
+            window.location = document.referrer;
+            </script>";
+        } elseif (isset($_POST['savetokomisics'])) {
+            // dari rekap cs kirim data ke tb komisi member
+
+            $this->komisi_m->addtoKomisics($post);
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('success', 'Data berhasil di hapus');
+            }
+            echo "<script>
+            window.location = document.referrer;
+            </script>";
+        } elseif (isset($_POST['savetokomisivendor'])) {
+            // dari rekap cs kirim data ke tb komisi member
+
+            $this->komisi_m->addtoKomisivendor($post);
             if ($this->db->affected_rows() > 0) {
                 $this->session->set_flashdata('success', 'Data berhasil di hapus');
             }

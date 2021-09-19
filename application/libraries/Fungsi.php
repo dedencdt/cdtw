@@ -181,12 +181,51 @@ class Fungsi
         }
     }
 
+    function cek_data_komisi_cs($tgl, $user)
+    {
+        $query = $this->ci->db
+            ->query("SELECT * FROM tb_cskomisi WHERE tgl_gajian = '$tgl' AND cs_id = '$user' AND status = 'menunggu'");
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function cek_data_komisi_vendor($tgl, $user)
+    {
+        $query = $this->ci->db
+            ->query("SELECT * FROM tb_vkomisi WHERE tgl_gajian = '$tgl' AND vendor_id = '$user' AND status = 'menunggu'");
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // fungsi komisi
     function getdataKomisi($start, $end)
     {
         $query = $this->ci->db
-            ->query("SELECT SUM(member_in) AS komisi_member, SUM(member_out) AS rts,.tb_siapcair.user_id,tb_user.username FROM tb_siapcair JOIN tb_user ON tb_user.user_id = tb_siapcair.user_id WHERE tb_siapcair.created_at >= '$start' AND tb_siapcair.created_at <= '$end' GROUP BY tb_siapcair.user_id");
+            ->query("SELECT SUM(member_in) AS komisi_member, SUM(member_out) AS rts,tb_siapcair.user_id,tb_user.username FROM tb_siapcair JOIN tb_user ON tb_user.user_id = tb_siapcair.user_id WHERE tb_siapcair.created_at >= '$start' AND tb_siapcair.created_at <= '$end' GROUP BY tb_siapcair.user_id");
 
+
+        return $query;
+    }
+
+    function getdataKomisiCS($start, $end)
+    {
+        $query = $this->ci->db
+            ->query("SELECT SUM(cs_in) AS komisi_cs,cs_id ,tb_user.username FROM tb_siapcair JOIN tb_user ON tb_user.user_id = tb_siapcair.cs_id WHERE tb_siapcair.created_at >= '$start' AND tb_siapcair.created_at <= '$end' GROUP BY cs_id");
+
+
+        return $query;
+    }
+
+    function getdataKomisiVendor($start, $end)
+    {
+        $query = $this->ci->db
+            ->query("SELECT SUM(vendor_in) AS komisi_vendor, qv_usrvndrdetail.username , qv_usrvndrdetail.vendorid FROM tb_siapcair JOIN qv_usrvndrdetail ON qv_usrvndrdetail.vendor_id = tb_siapcair.vendor_id  WHERE tb_siapcair.created_at >= '$start' AND tb_siapcair.created_at <= '$end' GROUP BY tb_siapcair.vendor_id");
 
         return $query;
     }

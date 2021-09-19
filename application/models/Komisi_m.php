@@ -4,7 +4,9 @@ class Komisi_m extends CI_Model
 {
     private $tblsetTanggal = 'tb_tglgajian',
         $tblsiapcair = 'tb_siapcair',
-        $tblMKomisi = 'tb_mkomisi';
+        $tblMKomisi = 'tb_mkomisi',
+        $tblMKomisics = 'tb_cskomisi',
+        $tblMKomisivn = 'tb_vkomisi';
 
 
     public function addtoKomisimember($post)
@@ -26,26 +28,38 @@ class Komisi_m extends CI_Model
         $this->db->insert($this->tblMKomisi, $params);
     }
 
-
-    public function getdataKomisi($page, $start, $end)
+    public function addtoKomisics($post)
     {
-        $this->db
-            ->select('siapcair_id,SUM(member_in) as komisi_member,SUM(cs_in) as komisi_cs,SUM(vendor_in) as komisi_vendor,SUM(member_out) as rts,cs_id,vendor_id,user_id')
-            ->where('created_at <=', $start)
-            ->where('created_at >=', $end);
-        if ($page == 'member') {
-            $this->db->group_by('user_id');
-            // ->order_by('komisi_member', 'asc');
-        } elseif ($page == 'cs') {
-            $this->db->group_by('cs_id');
-            // ->order_by('komisi_cs', 'asc');
-        } elseif ($page == 'vendor') {
-            $this->db->group_by('vendor_id');
-            // ->order_by('komisi_vendor', 'asc');
-        }
-        $query = $this->db->get($this->tblsiapcair);
-        return $query;
+        $params = [
+            'cskomisi_id' => $post['cskomisi_id'],
+            'invoice' => $post['invoice'],
+            'tgl_gajian' => $post['tgl_gajian'],
+            'komisi_cs' => $post['komisi_cs'],
+            'diterima' => $post['komisi_cs'],
+            'status' => $post['status'],
+            'note' => $post['note'],
+            'cs_id' => $post['cs_id'],
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+        $this->db->insert($this->tblMKomisics, $params);
     }
+
+    public function addtoKomisivendor($post)
+    {
+        $params = [
+            'vkomisi_id' => $post['vkomisi_id'],
+            'invoice' => $post['invoice'],
+            'tgl_gajian' => $post['tgl_gajian'],
+            'komisi_vendor' => $post['komisi_vendor'],
+            'diterima' => $post['komisi_vendor'],
+            'status' => $post['status'],
+            'note' => $post['note'],
+            'vendor_id' => $post['vendorid'], // = id user bukan id vendor
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+        $this->db->insert($this->tblMKomisivn, $params);
+    }
+
 
     public function getId($id)
     {
