@@ -9,6 +9,16 @@ class Komisi_m extends CI_Model
         $tblMKomisivn = 'tb_vkomisi';
 
 
+    public function getSetTanggal($id = null)
+    {
+        $this->db->from($this->tblsetTanggal);
+        if ($id != null) {
+            $this->db->where('tglgajian_id', $id);
+        }
+        $query = $this->db->get();
+        return $query;
+    }
+
     public function addtoKomisimember($post)
     {
         $total = $post['komisi_member'] - $post['rts'] - $post['lainlain'];
@@ -165,7 +175,239 @@ class Komisi_m extends CI_Model
         $this->_setQuery($limit, $start, $keyword);
         return $this->db->get();
     }
-    // Batas PAgination
+
+    // ============= data komisi MEMBER 
+    // Seting Configurasi
+    // Query Like
+    private function _setQueryLikeDM($keyword = null)
+    {
+        // edit OR Like disini
+        $arr = [
+            'tgl_gajian' => $keyword,
+            'invoice' => $keyword,
+            'status' => $keyword,
+            'user_id' => $keyword
+
+        ];
+        return $this->db->or_like($arr, 'none');
+    }
+
+    // Setting Query
+    private function _setQueryDM($limit, $start, $keyword = null)
+    {
+        $this->db->select('tb_mkomisi.*,tb_user.username');
+        $this->db->join('tb_user', 'tb_user.user_id = tb_mkomisi.user_id');
+        $this->db->from($this->tblMKomisi);
+        // $this->db->join('tb_user', 'tb_user.user_id = user_id'); //inner
+        $this->db->order_by('created_at', 'DESC');
+        if ($keyword) {
+            $this->_setQueryLikeDM($keyword);
+        }
+        $this->db->limit($limit, $start);
+    }
 
 
+    private function _getQueryLikeDM($keyword = null)
+    {
+        return $this->_setQueryLikeDM($keyword);
+    }
+
+
+
+    public function countAllDM($keyword = null)
+    {
+        $this->_getQueryLikeDM($keyword);
+        $this->db->from($this->tblMKomisi);
+        return $this->db->count_all_results();
+    }
+
+    public function getDataDM($limit, $start, $keyword = null)
+    {
+        $this->_setQueryDM($limit, $start, $keyword);
+        return $this->db->get();
+    }
+
+    // ============= DATA KOMISI CS
+    // Seting Configurasi
+    // Query Like
+    private function _setQueryLikeCS($keyword = null)
+    {
+        // edit OR Like disini
+        $arr = [
+            'tgl_gajian' => $keyword,
+            'invoice' => $keyword,
+            'status' => $keyword,
+            'cs_id' => $keyword
+
+        ];
+        return $this->db->or_like($arr, 'none');
+    }
+
+    // Setting Query
+    private function _setQueryCS($limit, $start, $keyword = null)
+    {
+        $this->db->select('tb_cskomisi.*,tb_user.username');
+        $this->db->join('tb_user', 'tb_user.user_id = tb_cskomisi.cs_id');
+        $this->db->from($this->tblMKomisics);
+        // $this->db->join('tb_user', 'tb_user.user_id = user_id'); //inner
+        $this->db->order_by('created_at', 'DESC');
+        if ($keyword) {
+            $this->_setQueryLikeCS($keyword);
+        }
+        $this->db->limit($limit, $start);
+    }
+
+
+    private function _getQueryLikeCS($keyword = null)
+    {
+        return $this->_setQueryLikeCS($keyword);
+    }
+
+
+
+    public function countAllCS($keyword = null)
+    {
+        $this->_getQueryLikeCS($keyword);
+        $this->db->from($this->tblMKomisics);
+        return $this->db->count_all_results();
+    }
+
+    public function getDataCS($limit, $start, $keyword = null)
+    {
+        $this->_setQueryCS($limit, $start, $keyword);
+        return $this->db->get();
+    }
+
+    // ============= DATA KOMISI VENDOR
+    // Seting Configurasi
+    // Query Like
+    private function _setQueryLikeVNDR($keyword = null)
+    {
+        // edit OR Like disini
+        $arr = [
+            'tgl_gajian' => $keyword,
+            'invoice' => $keyword,
+            'status' => $keyword,
+            'vendor_id' => $keyword
+
+        ];
+        return $this->db->or_like($arr, 'none');
+    }
+
+    // Setting Query
+    private function _setQueryVNDR($limit, $start, $keyword = null)
+    {
+        $this->db->select('tb_vkomisi.*,tb_user.username');
+        $this->db->join('tb_user', 'tb_user.user_id = tb_vkomisi.vendor_id');
+        $this->db->from($this->tblMKomisivn);
+        // $this->db->join('tb_user', 'tb_user.user_id = user_id'); //inner
+        $this->db->order_by('created_at', 'DESC');
+        if ($keyword) {
+            $this->_setQueryLikeVNDR($keyword);
+        }
+        $this->db->limit($limit, $start);
+    }
+
+
+    private function _getQueryLikeVNDR($keyword = null)
+    {
+        return $this->_setQueryLikeVNDR($keyword);
+    }
+
+
+
+    public function countAllVNDR($keyword = null)
+    {
+        $this->_getQueryLikeVNDR($keyword);
+        $this->db->from($this->tblMKomisivn);
+        return $this->db->count_all_results();
+    }
+
+    public function getDataVNDR($limit, $start, $keyword = null)
+    {
+        $this->_setQueryVNDR($limit, $start, $keyword);
+        return $this->db->get();
+    }
+
+    // ===============================
+    // BATA END PAGINATION
+    // ===============================
+
+    public function sendkomisitotal($post)
+    {
+        $totalkomisiid = 'cdt' . date('ymd') . random_string('alnum', 21);
+        $params = [
+            'totalkomisi_id' => $totalkomisiid,
+            'total' => $post['diterima'],
+            'user_id' => $post['user_id'],
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+        $this->db->insert('tb_totalkomisi', $params);
+    }
+
+    public function updatekomisitotal($post)
+    {
+        $currenttotal = $this->getTotalKomisi($post['user_id'])->total;
+        $total = $currenttotal + $post['diterima'];
+        $params = [
+            'user_id' => $post['user_id'],
+            'total' => $total,
+            'updated' => date('Y-m-d H:i:s')
+        ];
+        $this->db
+            ->where('user_id', $post['user_id'])
+            ->update('tb_totalkomisi', $params);
+    }
+
+    public function ubahstomember($post)
+    {
+        $params = [
+            'mkomisi_id' => $post['mkomisi_id'],
+            'status' => $post['status'],
+            'updated' => date('Y-m-d H:i:s')
+        ];
+        $this->db
+            ->where('mkomisi_id', $post['mkomisi_id'])
+            ->update('tb_mkomisi', $params);
+    }
+
+    public function ubahstocs($post)
+    {
+        $params = [
+            'cskomisi_id' => $post['cskomisi_id'],
+            'status' => $post['status'],
+            'updated' => date('Y-m-d H:i:s')
+        ];
+        $this->db
+            ->where('cskomisi_id', $post['cskomisi_id'])
+            ->update('tb_cskomisi', $params);
+    }
+
+    public function ubahstovendor($post)
+    {
+        $params = [
+            'vkomisi_id' => $post['vkomisi_id'],
+            'status' => $post['status'],
+            'updated' => date('Y-m-d H:i:s')
+        ];
+        $this->db
+            ->where('vkomisi_id', $post['vkomisi_id'])
+            ->update('tb_vkomisi', $params);
+    }
+
+    public function sendtorts($post)
+    {
+        $params = [
+            'siapcair_id' => 'cdt' . date('ymd') . random_string('alnum', 21),
+            'member_out' => abs($post['diterima']),
+            'user_id' => $post['user_id']
+        ];
+        $this->db->insert('tb_siapcair', $params);
+    }
+
+    function getTotalKomisi($userid)
+    {
+        $query = $this->db->query("SELECT * FROM tb_totalkomisi WHERE user_id = '$userid'");
+        return $query->row();
+    }
 }

@@ -85,7 +85,7 @@
                                 <td> <?= ++$start ?></td>
                                 <td> <?= $data->order_id ?></td>
                                 <td> <?= $data->nama_produk ?></td>
-                                <td> <?= $data->status ?></td>
+                                <td> <span class="badge badge-<?= $data->status == 'delivery' ? 'info' : 'secondary' ?>"><?= $data->status ?></span></td>
                                 <td> <?= $data->penerima ?></td>
                                 <td> <?= $adrs ?></td>
                                 <td> <?= $data->nowa ?></td>
@@ -93,30 +93,32 @@
                                 <td> <?= $data->resi ?></td>
                                 <td> <?= $data->created_at ?></td>
                                 <td>
-                                    <form action="<?= base_url('orders/process') ?>" method="post">
-                                        <!-- hidden input -->
-                                        <input type="hidden" name="order_id" value="<?= $data->order_id ?>">
-                                        <input type="hidden" name="in_order_id" value="<?= $data->in_order_id ?>">
-                                        <input type="hidden" name="orderan_id" value="<?= $data->orderan_id ?>">
+                                    <?php if ($data->status == 'delivery') : ?>
+                                        <form action="<?= base_url('orders/process') ?>" method="post">
+                                            <!-- hidden input -->
+                                            <input type="hidden" name="order_id" value="<?= $data->order_id ?>">
+                                            <input type="hidden" name="in_order_id" value="<?= $data->in_order_id ?>">
+                                            <input type="hidden" name="orderan_id" value="<?= $data->orderan_id ?>">
 
-                                        <!-- second input -->
-                                        <input type="hidden" name="cs_id" value="<?= $data->cs_id ?>">
-                                        <input type="hidden" name="user_id" value="<?= $data->user_id ?>">
-                                        <input type="hidden" name="vendor_id" value="<?= $data->vendor_id ?>">
-                                        <input type="hidden" name="ongkir" value="<?= $data->ongkir ?>">
-                                        <input type="hidden" name="member_in" value="<?= $this->fungsi->getProduk($data->produk_id)->komisi ?>">
-                                        <input type="hidden" name="vendor_in" value="<?= $this->fungsi->getProduk($data->produk_id)->harga_vendor ?>">
-                                        <div class="input-group">
-                                            <select class="custom-select" id="status" name="status" required>
-                                                <option value="">- status -</option>
-                                                <option value="completed">Delivered</option>
-                                                <option value="refunded">RTS</option>
-                                            </select>
-                                            <div class="input-group-append">
-                                                <button class="btn text-gray-100 bg-warning" type="submit" name="lastedit">Ubah</button>
+                                            <!-- second input -->
+                                            <input type="hidden" name="cs_id" value="<?= $data->cs_id ?>">
+                                            <input type="hidden" name="user_id" value="<?= $data->user_id ?>">
+                                            <input type="hidden" name="vendor_id" value="<?= $data->vendor_id ?>">
+                                            <input type="hidden" name="ongkir" value="<?= $data->ongkir ?>">
+                                            <input type="hidden" name="member_in" value="<?= $this->fungsi->getProduk($data->produk_id)->komisi ?>">
+                                            <input type="hidden" name="vendor_in" value="<?= $this->fungsi->getProduk($data->produk_id)->harga_vendor ?>">
+                                            <div class="input-group">
+                                                <select class="custom-select" id="status" name="status" required>
+                                                    <option value="">- status -</option>
+                                                    <option value="completed">Delivered</option>
+                                                    <option value="refunded">RTS</option>
+                                                </select>
+                                                <div class="input-group-append">
+                                                    <button class="btn text-gray-100 bg-warning" type="submit" name="lastedit" onclick="return confirm('Pastikan No. Resi <?= $data->resi ?> di cek terlebih dahulu !! ')">Ubah</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

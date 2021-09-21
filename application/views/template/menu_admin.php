@@ -11,10 +11,10 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Modul Komisi:</h6>
             <a class="collapse-item" href="<?= site_url('komisi/settanggal') ?>">Setting Tanggal gaji</a>
-            <a class="collapse-item" href="<?= site_url('komisi/rekapdatamember') ?>">Rekap data member</a>
-            <a class="collapse-item" href="<?= site_url('komisi/rekapdatacs') ?>">Rekap data cs</a>
-            <a class="collapse-item" href="<?= site_url('komisi/rekapdatavendor') ?>">Rekap data vendor</a>
-            <a class="collapse-item" href="<?= site_url('komisi/data') ?>">Komisi</a>
+            <a class="collapse-item" href="<?= site_url('komisi/waitingtotf') ?>">Menunggu TF</a>
+            <a class="collapse-item" href="<?= site_url('komisi/datamember') ?>">Komisi Member</a>
+            <a class="collapse-item" href="<?= site_url('komisi/datacs') ?>">Komisi CS</a>
+            <a class="collapse-item" href="<?= site_url('komisi/datavendor') ?>">Komisi Vendor</a>
         </div>
     </div>
 </li>
@@ -71,7 +71,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dropdownmarket" aria-expanded="true" aria-controls="dropdownmarket">
         <i class="fas fa-fw fa-box"></i>
-        <span>Market</span>
+        <span>Produk</span>
     </a>
     <div id="dropdownmarket" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
@@ -92,7 +92,7 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Modul Vendor:</h6>
             <a class="collapse-item" href="<?= site_url('vendor/data') ?>">Semua Vendor</a>
-            <a class="collapse-item" href="<?= site_url('vendor/add') ?>">Tambah Member</a>
+            <a class="collapse-item" href="<?= site_url('vendor/add') ?>">Tambah Vendor</a>
         </div>
     </div>
 </li>

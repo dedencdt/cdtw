@@ -16,7 +16,7 @@
 
 <?php
 $no = 1;
-$tgl = new DateTime($row->tgl_rekap);
+$tgl = new DateTime($row->tutup_buku);
 $bukabuku = $tgl->modify('-7 day');
 ?>
 
@@ -66,7 +66,7 @@ $bukabuku = $tgl->modify('-7 day');
                     </thead>
                     <tbody>
                         <?php
-                        $vendor = $this->fungsi->getdataKomisiVendor($bukabuku->format('Y-m-d'), $row->tgl_rekap);
+                        $vendor = $this->fungsi->getdataKomisiVendor($bukabuku->format('Y-m-d'), $row->tutup_buku);
                         foreach ($vendor->result() as $data) :
                         ?>
                             <tr>
@@ -76,10 +76,14 @@ $bukabuku = $tgl->modify('-7 day');
                                 <td>Rp. <?= $data->komisi_vendor ?></td>
                                 <td>
                                     <?php if (!$this->fungsi->cek_data_komisi_vendor($row->tgl_gajian, $data->vendorid) > 0) { ?>
-                                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#ModalRekapkomisi<?= $data->vendorid ?>">
-                                            <i class="fa fa-fw fa-edit "></i>
-                                            Rekap Komisi
-                                        </button>
+                                        <?php if (date('Y-m-d') == $row->tgl_gajian) : ?>
+                                            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#ModalRekapkomisi<?= $data->vendorid ?>">
+                                                <i class="fa fa-fw fa-edit "></i>
+                                                Rekap Komisi
+                                            </button>
+                                        <?php else : ?>
+                                            <span class="badge badge-danger">Rekapan Tersedia tgl : <?= date('d M Y', strtotime($row->tgl_gajian)) ?></span>
+                                        <?php endif; ?>
                                     <?php } else { ?>
                                         <span class="badge badge-success p-2">Sudah di Rekap</span>
                                     <?php } ?>
@@ -128,7 +132,7 @@ $bukabuku = $tgl->modify('-7 day');
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary" name="savetokomisivendor">Save</button>
+                                                <button type="submit" class="btn btn-primary" name="savetokomisivendor" onclick="return confirm('Apakah anda yakin semua data rekapan sudah benar ?')">Rekap</button>
                                             </div>
 
                                         </form>

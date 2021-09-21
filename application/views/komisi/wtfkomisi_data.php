@@ -31,9 +31,6 @@
             </div>
             <div class="card-body table-responsive">
                 <p>
-                    <strong>Keterangan* : </strong> Rekapan komisi otomatis terekap selama H -7 dari tanggal tutup buku. <br>
-                    <strong><em>Set tanggal</em></strong> di gunakan untuk menentukan tanggal gajian, dan secara otomatis tanggal rekap dan tutup buku terbuat <br>
-                    <strong><em>Lihat Data Komisi</em></strong> Data Rekapan Komisi Yang harus di konfirmasi (direkap) oleh admin, Rekapan data dibuat secara otomatis oleh sistem.
 
 
                 </p>
@@ -52,40 +49,30 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Tanggal Gajian</th>
-                            <th scope="col">Tanggal Rekap</th>
-                            <th scope="col">Tutup Buku</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Details</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($row->result() as $data) : ?>
+                        <?php
+                        $no = 1;
+                        foreach ($row->result() as $data) :
+                            $tgl = new DateTime($data->tgl_gajian);
+                            $tglgajianstr = $tgl->format('D, d M Y');
+                        ?>
                             <tr>
                                 <td><?= ++$start ?></td>
-                                <td><?= $data->tgl_gajian ?></td>
-                                <td><?= $data->tgl_rekap ?></td>
-                                <td><?= $data->tutup_buku ?></td>
+                                <td><?= $tglgajianstr ?></td>
                                 <td>
                                     <div class="row">
-                                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#ModalSettanggalId<?= $data->tglgajian_id ?>">
-                                            <i class="fa fa-fw fa-edit "></i>
-                                            Edit
-                                        </button>
-
-                                        <a href="<?= site_url() ?>komisi/delTgl/<?= $data->tglgajian_id ?>" onclick="return confirm('Yakin ingin menghapus ??')" class="btn btn-sm btn-danger">
-                                            <i class="fa fa-fw fa-trash "></i>
-                                            Delete
+                                        <a href="<?= site_url('komisi/wtfmember/') ?><?= $data->tglgajian_id ?>" class="btn btn-info btn-sm">
+                                            <i class="fa fa-user"></i> Komisi Member
                                         </a>
-
-                                        <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fa fa-info-circle"></i> Lihat Data Komisi
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                <a class="dropdown-item" href="<?= site_url('komisi/salesmember/') ?><?= $data->tglgajian_id ?>">Rekap Komisi Members</a>
-                                                <a class="dropdown-item" href="<?= site_url('komisi/salescs/') ?><?= $data->tglgajian_id ?>">Rekap Komisi CS</a>
-                                                <a class="dropdown-item" href="<?= site_url('komisi/salesvendor/') ?><?= $data->tglgajian_id ?>">Rekap Komisi Vendor</a>
-                                            </div>
-                                        </div>
+                                        <a href="<?= site_url('komisi/wtfcs/') ?><?= $data->tglgajian_id ?>" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-user"></i> Komisi CS
+                                        </a>
+                                        <a href="<?= site_url('komisi/wtfvendor/') ?><?= $data->tglgajian_id ?>" class="btn btn-secondary btn-sm">
+                                            <i class="fa fa-user"></i> Komisi Vendor
+                                        </a>
                                     </div>
 
 

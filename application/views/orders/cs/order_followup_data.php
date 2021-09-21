@@ -98,33 +98,34 @@
                                         ";
 
                                     ?>
+                                    <?php if ($data->status == 'on-hold') : ?>
+                                        <div class="row">
+                                            <a href="<?= $this->fungsi->sendwa($data->nowa, $text) ?>" target="_blank">
+                                                <button class="btn btn-success"><i class="fab fa-whatsapp"></i> Follow up</button>
+                                            </a>
+                                            <button class="btn btn-info" data-toggle="modal" data-target="#detailorder<?= $data->in_order_id ?>"><i class=" fa fa-info"></i> Edit</button>
+                                            <!-- UBAH STATUS -->
+                                            <form action="<?= site_url('orders/process') ?>" method="post">
+                                                <!-- data optional -->
 
-                                    <div class="row">
-                                        <a href="<?= $this->fungsi->sendwa($data->nowa, $text) ?>" target="_blank">
-                                            <button class="btn btn-success"><i class="fab fa-whatsapp"></i> Follow up</button>
-                                        </a>
-                                        <button class="btn btn-info" data-toggle="modal" data-target="#detailorder<?= $data->in_order_id ?>"><i class=" fa fa-info"></i> Edit</button>
-                                        <!-- UBAH STATUS -->
-                                        <form action="<?= site_url('orders/process') ?>" method="post">
-                                            <!-- data optional -->
-
-                                            <!-- data hidden for orderan -->
-                                            <input type="hidden" name="orderan_id" value="<?= $data->orderan_id ?>">
-                                            <input type="hidden" name="in_order_id" value="<?= $data->in_order_id ?>">
-                                            <input type="hidden" name="vendor_id" value="<?= $this->fungsi->getVendorOrder($data->produk_id)->vendor_id ?>">
-                                            <div class="input-group">
-                                                <select class="custom-select" id="status" name="status" required>
-                                                    <option value="">- status -</option>
-                                                    <option value="packing">Packing</option>
-                                                    <option value="junk">Junk Order</option>
-                                                    <option value="cencelled">Cencelled</option>
-                                                </select>
-                                                <div class="input-group-append">
-                                                    <button class="btn text-gray-100 bg-warning" type="submit" name="ubahstatus">Ubah</button>
+                                                <!-- data hidden for orderan -->
+                                                <input type="hidden" name="orderan_id" value="<?= $data->orderan_id ?>">
+                                                <input type="hidden" name="in_order_id" value="<?= $data->in_order_id ?>">
+                                                <input type="hidden" name="vendor_id" value="<?= $this->fungsi->getVendorOrder($data->produk_id)->vendor_id ?>">
+                                                <div class="input-group">
+                                                    <select class="custom-select" id="status" name="status" required>
+                                                        <option value="">- status -</option>
+                                                        <option value="packing">Packing</option>
+                                                        <option value="junk">Junk Order</option>
+                                                        <option value="cencelled">Cencelled</option>
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <button class="btn text-gray-100 bg-warning" type="submit" name="ubahstatus" onclick="return confirm('Pastikan Sudah memfollow up pembeli dengan sungguh sungguh !!')">Ubah</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </form>
-                                    </div>
+                                            </form>
+                                        </div>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
 

@@ -73,6 +73,7 @@
                                         <i class="fa fa-fw fa-trash "></i>
                                         Delete
                                     </a>
+
                                 </td>
                             </tr>
                         <?php endforeach; ?>

@@ -104,7 +104,7 @@
 
             <!-- MODUL VENDOR -->
             <!-- Judul NAv HEad -->
-            <?php if ($this->fungsi->user_login()->role == 4 || $this->fungsi->user_login()->role == 1) : ?>
+            <?php if ($this->fungsi->user_login()->role == 4) : ?>
                 <hr class="sidebar-divider my-0">
                 <?php $this->view('template/menu_vendor') ?>
             <?php endif; ?>

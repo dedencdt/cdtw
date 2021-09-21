@@ -239,6 +239,17 @@ class Orders extends CI_Controller
         $this->load->view('orders/cs/order_toexcel', $data);
     }
 
+    function check_axist_orderid($id)
+    {
+        $query = $this->db->query("SELECT * FROM tb_in_order WHERE order_id = '$id'");
+        if ($query->num_rows() > 0) {
+            // jika data order id sudah ada nilai TRUE
+            return true;
+        } else {
+            // jika belum ada nilai False
+            return false;
+        }
+    }
 
     public function process()
     {
@@ -250,9 +261,16 @@ class Orders extends CI_Controller
             $data = [
                 'status' => 'on-hold'
             ];
-            $this->orders_m->add($post);
-            $this->orders_m->addToOrderanFromFP($post);
-            $woocommerce->put($endpoint, $data);
+            if ($this->check_axist_orderid($post['order_id']) == false) {
+
+                $this->orders_m->add($post);
+                $this->orders_m->addToOrderanFromFP($post);
+                $woocommerce->put($endpoint, $data);
+            } else {
+                echo "<script>
+                    confirm('Follow Up data Gagal, orderan sudah di follow up cs lain');
+                    </script>";
+            }
         } elseif (isset($_POST['edit'])) {
             $this->orders_m->edit($post);
         } elseif (isset($_POST['ubahstatus'])) {

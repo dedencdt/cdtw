@@ -21,6 +21,7 @@
                 <h2>Lead Masuk</h2>
             </div>
             <div class="card-body table-responsive">
+
                 <?php if ($this->session->flashdata('success')) : ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <?= $this->session->flashdata('success'); ?> <span class="float-right"><a href="<?= site_url() ?>orders/followup">Lihat data disini</a></span>

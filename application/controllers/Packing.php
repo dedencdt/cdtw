@@ -40,6 +40,18 @@ class Packing extends CI_Controller
         $this->template->load('template', 'orders/packing/order_packing', $data);
     }
 
+    public function toexcel()
+    {
+        $status = 'packing';
+        $filename = date('Y-m-d') . '-codtech-orderan' .  '.xls';
+        $inorder = $this->orders_m->getOrderan($status, 10);
+        $data = [
+            'row' => $inorder->result()
+        ];
+        header("Content-Disposition: attachment; filename=$filename");
+        header("Content-Type: application/vnd.ms-excel");
+        $this->load->view('orders/cs/order_toexcel', $data);
+    }
 
     public function process()
     {

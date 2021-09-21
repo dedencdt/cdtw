@@ -24,10 +24,13 @@
     <div class="container-fluid">
         <div class="card p-2">
             <div class="card-header text-center">
-                <?= ucfirst($page) ?> data
+                <?= ucfirst($page) ?> data link
             </div>
             <div class="card-body">
                 <div class="col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+                    <p>
+                        <strong>note :</strong> 1 produk tidak boleh lebih dari 1 link , pastikan produk belum mensetting link.!!
+                    </p>
                     <!-- form -->
                     <form method="post" action="<?= site_url('linkproduk/process') ?>">
                         <!-- form hidden -->

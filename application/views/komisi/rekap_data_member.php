@@ -63,9 +63,9 @@
                     <tbody>
                         <?php
                         $no = 1;
-                        $tgl = new DateTime($row->tgl_rekap);
+                        $tgl = new DateTime($row->tutup_buku);
                         $bukabuku = $tgl->modify('-7 day');
-                        $member = $this->fungsi->getdataKomisi($bukabuku->format('Y-m-d'), $row->tgl_rekap);
+                        $member = $this->fungsi->getdataKomisi($bukabuku->format('Y-m-d'), $row->tutup_buku);
                         foreach ($member->result() as $data) :
 
 
@@ -78,10 +78,14 @@
                                 <td>Rp. <?= $data->rts != null ? $data->rts : 0 ?></td>
                                 <td>
                                     <?php if (!$this->fungsi->cek_data_komisi($row->tgl_gajian, $data->user_id) > 0) { ?>
-                                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#ModalRekapkomisi<?= $data->user_id ?>">
-                                            <i class="fa fa-fw fa-edit "></i>
-                                            Rekap Komisi
-                                        </button>
+                                        <?php if (date('Y-m-d') == $row->tgl_gajian) : ?>
+                                            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#ModalRekapkomisi<?= $data->user_id ?>">
+                                                <i class="fa fa-fw fa-edit "></i>
+                                                Rekap Komisi
+                                            </button>
+                                        <?php else : ?>
+                                            <span class="badge badge-danger">Rekapan Tersedia tgl : <?= date('d M Y', strtotime($row->tgl_gajian)) ?></span>
+                                        <?php endif; ?>
                                     <?php } else { ?>
                                         <span class="badge badge-success p-2">Sudah di Rekap</span>
                                     <?php } ?>
@@ -122,7 +126,7 @@
                                                         <span class="input-group-text " id="basic-addon1">Rp.</span>
                                                     </div>
                                                     <!-- input -->
-                                                    <input type="number" name="komisi_member" id="komisi_member" class="form-control cin-komisi" value="<?= $data->komisi_member ?>" readonly>
+                                                    <input type="number" name="komisi_member" id="komisi_member" class="form-control cin-komisi" value="<?= $data->komisi_member != null ? $data->komisi_member : 0  ?>" readonly>
                                                 </div>
 
                                                 <label for="rts">Biaya RTS</label>
@@ -150,7 +154,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary" name="savetokomisi">Save</button>
+                                                <button type="submit" class="btn btn-primary" name="savetokomisi" onclick="return confirm('Apakah anda yakin semua data rekapan sudah benar ?')">Rekap</button>
                                             </div>
 
                                         </form>

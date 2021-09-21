@@ -4,6 +4,7 @@ class Dashboard_m extends CI_Model
 {
     private $tableuser = 'tb_user';
     private $tblQVOrderan = 'qv_orderan_jn';
+    private $tblMKomisi = 'tb_mkomisi';
 
     public function getVisitor($userid, $tgl = null, $page = null)
     {
@@ -36,8 +37,58 @@ class Dashboard_m extends CI_Model
         $this->db->update($this->tableuser, $params);
     }
 
+    // ============= data komisi MEMBER 
+    // Seting Configurasi
+    // Query Like
+    private function _setQueryLikeDM($keyword = null)
+    {
+        // edit OR Like disini
+        $arr = [
+            'tgl_gajian' => $keyword,
+            'invoice' => $keyword,
+            'status' => $keyword
+
+        ];
+        return $this->db->or_like($arr, 'none');
+    }
+
+    // Setting Query
+    private function _setQueryDM($limit, $start, $keyword = null, $user)
+    {
+        $this->db->select('*');
+        $this->db->from($this->tblMKomisi);
+        $this->db->where('user_id', $user);
+        // $this->db->join('tb_user', 'tb_user.user_id = user_id'); //inner
+        $this->db->order_by('created_at', 'DESC');
+        if ($keyword) {
+            $this->_setQueryLikeDM($keyword);
+        }
+        $this->db->limit($limit, $start);
+    }
 
 
+    private function _getQueryLikeDM($keyword = null)
+    {
+        return $this->_setQueryLikeDM($keyword);
+    }
+
+
+
+    public function countAllDM($keyword = null)
+    {
+        $this->_getQueryLikeDM($keyword);
+        $this->db->from($this->tblMKomisi);
+        return $this->db->count_all_results();
+    }
+
+    public function getDataDM($limit, $start, $keyword = null, $user)
+    {
+        $this->_setQueryDM($limit, $start, $keyword, $user);
+        return $this->db->get();
+    }
+
+
+    // ============ RTS
     // RTS START
     private function _setQueryLikeRTS($keyword = null, $status = null)
     {

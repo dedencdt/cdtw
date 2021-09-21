@@ -98,6 +98,10 @@
                                         <i class="fa fa-fw fa-trash "></i>
                                         Delete
                                     </a>
+                                    <a href="<?= site_url() ?>linkproduk" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-fw fa-link "></i>
+                                        Setting link
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

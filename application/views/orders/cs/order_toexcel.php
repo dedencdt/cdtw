@@ -1,4 +1,4 @@
-<table border="1px">
+<table>
     <tr>
         <th>Nama Penerima</th>
         <th>Alamat Penerima</th>

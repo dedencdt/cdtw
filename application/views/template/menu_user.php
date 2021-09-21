@@ -7,7 +7,7 @@
 
 <!-- Menu Link Affiliate-->
 <li class="nav-item">
-    <a class="nav-link " href="">
+    <a class="nav-link " href="<?= site_url('dashboard/komisi') ?>">
         <i class="fas fa-fw fa-dollar-sign"></i>
         <span>Komisi</span></a>
 </li>

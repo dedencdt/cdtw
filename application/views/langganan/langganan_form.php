@@ -54,13 +54,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="invoice">No. Invoice</label>
-                                <input type="text" class="form-control" id="invoice" name="invoice" value="<?= $row->invoice != '' ? $row->invoice : 'SUB/' . date('Ymd') . '/' . strtoupper(random_string('alnum', 4)) ?>">
+                                <input type="text" class="form-control" id="invoice" name="invoice" value="<?= $row->invoice != '' ? $row->invoice : 'SUB/' . date('Ymd') . '/' . strtoupper(random_string('alnum', 4)) ?>" readonly>
                             </div>
 
                             <div class=" form-group">
                                 <label for="user_id">Username *</label>
                                 <select class="form-control" name="user_id" id="user_id">
-                                    <option value="">-Pilih waktu-</option>
+                                    <option value="">-Pilih username</option>
                                     <?php foreach ($user->result() as $u) : ?>
                                         <option value="<?= $u->user_id ?>" <?= $u->user_id == $row->user_id ? 'selected' : null ?>><?= $u->nama ?> ( <?= $u->username ?> )</option>
                                     <?php endforeach; ?>
@@ -86,7 +86,7 @@
                             <div class="form-group">
                                 <label for="paymethod">Payment method</label>
                                 <select class="form-control" name="paymethod" id="paymethod">
-                                    <option value="">-Pilih waktu-</option>
+                                    <option value="">-Pilih Metode-</option>
                                     <option value="Transfer" <?= $row->paymethod == 'Transfer' ? 'selected' : null ?>>Transfer</option>
                                     <option value="Potong Komisi" <?= $row->paymethod == 'Potong Komisi' ? 'selected' : null ?>>Potong Komisi</option>
                                 </select>
@@ -95,7 +95,7 @@
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <select class="form-control" name="status" id="status">
-                                    <option value="">-Pilih waktu-</option>
+                                    <option value="">-Pilih status-</option>
                                     <option value="Waiting" <?= $row->status == 'Waiting' ? 'selected' : null ?>>Waiting</option>
                                     <option value="Paid" <?= $row->status == 'Paid' ? 'selected' : null ?>>Paid</option>
                                 </select>

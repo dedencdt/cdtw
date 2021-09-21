@@ -30,7 +30,7 @@
                 <h2>Management data vendor</h2>
             </div>
             <div class="card-body">
-                untuk menambahkan akun vendor baru, silahkan buat terlebiih dahulu akun untuk login, setelah itu klik add vendor
+                untuk menambahkan akun vendor baru, silahkan buat terlebiih dahulu akun untuk login klik : <a href="<?= site_url('user/add') ?>"><span class="badge badge-info">Buat user Baru</span></a>, setelah itu klik add vendor
             </div>
             <div class="card-body table-responsive">
                 <?php if ($this->session->flashdata('success')) : ?>

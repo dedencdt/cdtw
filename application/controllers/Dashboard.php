@@ -59,7 +59,7 @@ class Dashboard extends CI_Controller
 			if ($this->db->affected_rows() > 0) {
 				$this->session->set_flashdata('success', 'Data berhasil di simpan');
 			}
-			redirect('dashboard');
+			redirect('dashboard/profile/' . $id);
 		}
 	}
 
@@ -129,6 +129,38 @@ class Dashboard extends CI_Controller
 		$data['row'] = $this->dashboard_m->getDataJUNK($config['per_page'], $data['start'], $data['keyword'],  $status, $user)->result();
 		$this->template->load('template', 'dashboard/member_junk', $data);
 	}
+
+
+	public function komisi()
+	{
+		$basepage = 'komisi/komisi/'; // url
+		$per_page = 15; // masukan baris limit data
+
+		//ambil data search
+		if ($this->input->post('search')) {
+			$data['keyword'] = $this->input->post('keyword');
+			$this->session->set_userdata('keyword', $data['keyword']);
+		} else {
+			$data['keyword'] = null;
+		}
+
+		//configurasi pagination
+		$config['total_rows'] = $this->dashboard_m->countAllDM($data['keyword']); //ambil count ALl di Model
+
+
+		$config['per_page'] = $per_page;
+		$config['base_url'] = base_url() . $basepage;
+		$data['start'] = $this->uri->segment(3);
+		$userid = $this->fungsi->user_login()->user_id;
+
+
+		//initialize
+		$this->pagination->initialize($config);
+
+		$data['row'] = $this->dashboard_m->getDataDM($config['per_page'], $data['start'], $data['keyword'], $userid);
+		$this->template->load('template', 'dashboard/member_komisi', $data);
+	}
+
 
 
 	public function support()

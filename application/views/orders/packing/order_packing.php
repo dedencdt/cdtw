@@ -12,7 +12,7 @@
     </div>
     <?php if ($this->db->affected_rows() > 0) :  ?>
         <div class="col">
-            <a href="<?= site_url() ?>orders/toexcel" class="btn btn-default btn-icon-split float-right">
+            <a href="<?= site_url() ?>packing/toexcel" class="btn btn-default btn-icon-split float-right">
                 <span class="icon text-white-50">
                     <i class="fas fa-print"></i>
                 </span>

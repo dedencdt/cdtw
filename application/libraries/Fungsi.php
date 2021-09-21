@@ -203,6 +203,7 @@ class Fungsi
         }
     }
 
+
     // fungsi komisi
     function getdataKomisi($start, $end)
     {
@@ -227,6 +228,27 @@ class Fungsi
         $query = $this->ci->db
             ->query("SELECT SUM(vendor_in) AS komisi_vendor, qv_usrvndrdetail.username , qv_usrvndrdetail.vendorid FROM tb_siapcair JOIN qv_usrvndrdetail ON qv_usrvndrdetail.vendor_id = tb_siapcair.vendor_id  WHERE tb_siapcair.created_at >= '$start' AND tb_siapcair.created_at <= '$end' GROUP BY tb_siapcair.vendor_id");
 
+        return $query;
+    }
+
+    function getscmember($tglgajian)
+    {
+        $query = $this->ci->db
+            ->query("SELECT * FROM tb_mkomisi JOIN tb_user ON tb_user.user_id = tb_mkomisi.user_id WHERE status = 'menunggu' AND tgl_gajian = '$tglgajian' ORDER BY tb_mkomisi.created_at ASC");
+        return $query;
+    }
+
+    function getsccs($tglgajian)
+    {
+        $query = $this->ci->db
+            ->query("SELECT * FROM tb_cskomisi JOIN tb_user ON tb_user.user_id = tb_cskomisi.cs_id WHERE status = 'menunggu' AND tgl_gajian = '$tglgajian' ORDER BY tb_cskomisi.created_at ASC");
+        return $query;
+    }
+
+    function getscvendor($tglgajian)
+    {
+        $query = $this->ci->db
+            ->query("SELECT * FROM tb_vkomisi JOIN tb_user ON tb_user.user_id = tb_vkomisi.vendor_id WHERE status = 'menunggu' AND tgl_gajian = '$tglgajian' ORDER BY tb_vkomisi.created_at ASC");
         return $query;
     }
 }
