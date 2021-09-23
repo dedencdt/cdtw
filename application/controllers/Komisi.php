@@ -96,7 +96,34 @@ class Komisi extends CI_Controller
         $this->pagination->initialize($config);
 
         $data['row'] = $this->komisi_m->getDataVNDR($config['per_page'], $data['start'], $data['keyword']);
-        $this->template->load('template', 'komisi/datakomisi_cs', $data);
+        $this->template->load('template', 'komisi/datakomisi_vendor', $data);
+    }
+
+    public function printmember($id)
+    {
+        $filename = "komisi-member-cdt-" . date('Y-m-d') . '.xls';
+        $data['row'] = $this->komisi_m->getId($id)->row();
+        header("Content-Disposition: attachment; filename=$filename");
+        header("Content-Type: application/vnd.ms-excel");
+        $this->load->view('komisi/toxl_member', $data);
+    }
+
+    public function printcs($id)
+    {
+        $filename = "komisi-cs-cdt-" . date('Y-m-d') . '.xls';
+        $data['row'] = $this->komisi_m->getId($id)->row();
+        header("Content-Disposition: attachment; filename=$filename");
+        header("Content-Type: application/vnd.ms-excel");
+        $this->load->view('komisi/toxl_cs', $data);
+    }
+
+    public function printvendor($id)
+    {
+        $filename = "komisi-vendor-cdt-" . date('Y-m-d') . '.xls';
+        $data['row'] = $this->komisi_m->getId($id)->row();
+        header("Content-Disposition: attachment; filename=$filename");
+        header("Content-Type: application/vnd.ms-excel");
+        $this->load->view('komisi/toxl_vendor', $data);
     }
 
     public function salesmember($id)

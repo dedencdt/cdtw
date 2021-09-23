@@ -137,7 +137,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <input type="submit" class="btn btn-primary" name="editResi" value="Simpan">
+                                                            <input type="submit" class="btn btn-primary" name="editResi" value="Simpan" onclick="return confirm('Apakah anda sudah yakin semua data benar ?? Cek kembali data yang anda input \r Tujuan Paket : <?= $adrs ?> \r dengan nomer HP: <?= $data->nowa ?> !!')">
                                                         </div>
                                                 </form>
                                             </div>

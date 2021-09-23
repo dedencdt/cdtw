@@ -98,7 +98,7 @@
                                         ";
 
                                     ?>
-                                    <?php if ($data->status == 'on-hold') : ?>
+                                    <?php if ($data->status == 'on-hold' && $data->cs_id == $this->fungsi->user_login()->user_id) : ?>
                                         <div class="row">
                                             <a href="<?= $this->fungsi->sendwa($data->nowa, $text) ?>" target="_blank">
                                                 <button class="btn btn-success"><i class="fab fa-whatsapp"></i> Follow up</button>

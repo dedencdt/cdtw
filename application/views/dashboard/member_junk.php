@@ -47,12 +47,11 @@
                     </thead>
                     <tbody>
                         <?php
-                        $no = 1;
                         foreach ($row as $data) :
                             $adrs = str_replace('~', ' ', $data->alamat);
                         ?>
                             <tr>
-                                <td> <?= $no++ ?></td>
+                                <td> <?= ++$start ?></td>
                                 <td> <?= $data->nama_produk ?></td>
                                 <td> <?= $data->penerima ?></td>
                                 <td> <?= $adrs ?></td>

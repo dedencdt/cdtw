@@ -27,7 +27,7 @@ class Orders_m extends CI_Model
         }
     }
 
-    private function _setQueryLikeFD($keyword = null)
+    private function _setQueryLikeFD($keyword = null, $user = null, $status = null)
     {
         // edit OR Like disini
 
@@ -35,7 +35,8 @@ class Orders_m extends CI_Model
             'order_id' => $keyword,
             'nowa' => $keyword
         ];
-        return $this->db->or_like($arr, 'none');
+        $this->db->or_like($arr, 'none');
+        $this->db->where('cs_id', $user);
     }
 
     // Setting Query
@@ -48,7 +49,6 @@ class Orders_m extends CI_Model
     ) {
         // $this->db->from($this->tblQVInorder);
         $this->db->from($this->tblQVOrderan);
-        $this->db->group_start();
         if ($keyword) {
 
             $this->_setQueryLikeFD($keyword);
@@ -56,7 +56,6 @@ class Orders_m extends CI_Model
 
         $this->db->like('cs_id', $user, 'none');
         $this->db->like('status', $status, 'none');
-        $this->db->group_end();
         $this->db->order_by('created_at', 'DESC');
         $this->db->limit($limit, $start);
     }
@@ -380,6 +379,7 @@ class Orders_m extends CI_Model
             $this->_setQueryLikeCEK($keyword);
         }
         $this->db->limit($limit, $start);
+        $this->db->order_by('created_at', 'DESC');
     }
 
 

@@ -12,6 +12,15 @@
 
     </div>
 
+
+    <div class="col">
+        <a href="<?= site_url() ?>komisi/printvendor/<?= $this->uri->segment(3) ?>" class="btn btn-default btn-icon-split float-right" onclick="return confirm('Ingin Print Laporan Pembayaran Komisi <?= $row->tgl_gajian ?> ??')">
+            <span class="icon text-white-50">
+                <i class="fas fa-print"></i>
+            </span>
+            <span class="text">Print Komisi Sudah Transfer</span>
+        </a>
+    </div>
 </div>
 
 

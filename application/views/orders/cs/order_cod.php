@@ -93,7 +93,7 @@
                                 <td> <?= $data->resi ?></td>
                                 <td> <?= $data->created_at ?></td>
                                 <td>
-                                    <?php if ($data->status == 'delivery') : ?>
+                                    <?php if ($data->status == 'delivery' && $data->cs_id == $this->fungsi->user_login()->user_id) : ?>
                                         <form action="<?= base_url('orders/process') ?>" method="post">
                                             <!-- hidden input -->
                                             <input type="hidden" name="order_id" value="<?= $data->order_id ?>">

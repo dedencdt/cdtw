@@ -251,4 +251,25 @@ class Fungsi
             ->query("SELECT * FROM tb_vkomisi JOIN tb_user ON tb_user.user_id = tb_vkomisi.vendor_id WHERE status = 'menunggu' AND tgl_gajian = '$tglgajian' ORDER BY tb_vkomisi.created_at ASC");
         return $query;
     }
+
+    function printvendor($tglgajian)
+    {
+        $query = $this->ci->db
+            ->query("SELECT * FROM tb_vkomisi JOIN tb_user ON tb_user.user_id = tb_vkomisi.vendor_id WHERE status = 'selsai' AND tgl_gajian = '$tglgajian' ORDER BY tb_vkomisi.created_at ASC");
+        return $query;
+    }
+
+    function printcs($tglgajian)
+    {
+        $query = $this->ci->db
+            ->query("SELECT * FROM tb_cskomisi JOIN tb_user ON tb_user.user_id = tb_cskomisi.cs_id WHERE status = 'selesai' AND tgl_gajian = '$tglgajian' ORDER BY tb_cskomisi.created_at ASC");
+        return $query;
+    }
+
+    function printmember($tglgajian)
+    {
+        $query = $this->ci->db
+            ->query("SELECT * FROM tb_mkomisi JOIN tb_user ON tb_user.user_id = tb_mkomisi.user_id WHERE status = 'selesai' AND tgl_gajian = '$tglgajian' ORDER BY tb_mkomisi.created_at ASC");
+        return $query;
+    }
 }

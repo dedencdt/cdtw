@@ -21,6 +21,21 @@
 
 <!-- Menu member- Pages Collapse Menu -->
 <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dropdonKonfPay" aria-expanded="true" aria-controls="dropdonKonfPay">
+        <i class="fas fa-fw fa-check"></i>
+        <span>Konf Pembayaran</span>
+    </a>
+    <div id="dropdonKonfPay" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Modul Payment:</h6>
+            <a class="collapse-item" href="<?= site_url('') ?>">Data Pembayaran</a>
+            <a class="collapse-item" href="<?= site_url('') ?>">Data Rekening</a>
+        </div>
+    </div>
+</li>
+
+<!-- Menu member- Pages Collapse Menu -->
+<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dropdonwOrder" aria-expanded="true" aria-controls="dropdonwOrder">
         <i class="fas fa-fw fa-users-cog"></i>
         <span>Orders</span>
@@ -28,9 +43,7 @@
     <div id="dropdonwOrder" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Modul Order:</h6>
-            <a class="collapse-item" href="<?= site_url('orders') ?>">Orderan masuk</a>
-            <a class="collapse-item" href="<?= site_url('orders') ?>">Follow up</a>
-            <a class="collapse-item" href="<?= site_url('orders') ?>">Docs REST API</a>
+            <a class="collapse-item" href="<?= site_url('manage/checkorder') ?>">Data Order</a>
         </div>
     </div>
 </li>
