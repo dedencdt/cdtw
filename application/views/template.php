@@ -55,7 +55,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?= site_url() ?> ">
                     <i class="fas fa-fw fa-home"></i>
-                    <span>Dashboard</span><span class="badge badge-info badge-sm float-right">1</span></a>
+                    <span>Dashboard</span></a>
             </li>
             <!-- CEK USER -->
             <?php
@@ -102,12 +102,6 @@
                 <?php $this->view('template/menu_cs') ?>
             <?php endif; ?>
 
-            <!-- MODUL VENDOR -->
-            <!-- Judul NAv HEad -->
-            <?php if ($this->fungsi->user_login()->role == 4) : ?>
-                <hr class="sidebar-divider my-0">
-                <?php $this->view('template/menu_vendor') ?>
-            <?php endif; ?>
 
             <!--If model admin  -->
             <?php if ($this->fungsi->user_login()->role == 1) : ?>
@@ -174,7 +168,7 @@
                                     </div>
                                     <div>
                                         <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                        <span class="font-weight-bold">This Feature is on building</span>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -185,7 +179,7 @@
                                     </div>
                                     <div>
                                         <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
+                                        This Feature is on building
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -196,7 +190,7 @@
                                     </div>
                                     <div>
                                         <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
+                                        This Feature is on building
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>

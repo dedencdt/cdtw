@@ -289,27 +289,88 @@ class Fungsi
     function count_siapcairm($userid)
     {
         // mengambil tanggal tutup buku
-        $durasigajian = 7;
-        $tglgajian_q = $this->ci->db->query("SELECT * FROM tb_tglgajian ORDER BY created_at DESC")->result();
-        $today = date('Y-m-d');
-        $tglgajian = $tglgajian_q != null ? $tglgajian_q : date('Y-m-d');
-        $bukabuku = null;
+        $qtglgajian = $this->ci->db->query("SELECT * FROM tb_tglgajian ORDER BY tgl_gajian DESC limit 1");
 
-        // DEKLARASI TUTUP BUKU
-        $tutupbuku_Q = $this->ci->db->query("SELECT * FROM tb_tglgajian ORDER BY created_at DESC LIMIT 1")->row();
-        $tutupbuku = $tutupbuku_Q->tutup_buku; // data valid
-        foreach ($tglgajian as $tglitem) {
-            $p1 = new DateTime($tglitem->tgl_rekap);
-            $p2 = new DateTime($today);
-            $diff = $p2->diff($p1);
-            if (($diff->d - 1) < $durasigajian) {
-                // get buka buku = $bukabuku
-                $bukabuku = date('Y-m-d', strtotime($tglitem->tgl_rekap)); // data valid
+        $today = date('Y-m-d');
+
+        $tutupbuku = null;
+        $bukabuku = null;
+        foreach ($qtglgajian->result() as $tgl) :
+            // cek apakag tutup buka lebih dari hari ini
+            if ($today <= $tgl->tutup_buku) {
+                $tutupbuku = $tgl->tutup_buku;
+                $bukabuku =  $tgl->buka_buku;
+            } else {
+                $tutupbuku = $today;
+                $bukabuku =  $today;
             }
-        }
+        endforeach;
+
 
         // write code this here
-        $query  = $this->ci->db->query("SELECT SUM(member_in) AS total_siapcair, user_id, updated FROM tb_siapcair WHERE user_id = '$userid' AND updated >='$bukabuku' AND updated <= '$tutupbuku' GROUP BY user_id,updated");
+        $query  = $this->ci->db->query("SELECT SUM(member_in) AS total_siapcair,user_id,created_at FROM tb_siapcair WHERE user_id = '$userid' AND created_at >='$bukabuku' AND created_at <= '$tutupbuku' GROUP BY user_id,created_at");
+        if ($query->num_rows() > 0) {
+            return $query->row()->total_siapcair;
+        } else {
+            return 0;
+        }
+    }
+
+    // hitung proses siapcair cs
+    function count_siapcaircs($userid)
+    {
+        // mengambil tanggal tutup buku
+        // mengambil tanggal tutup buku
+        $qtglgajian = $this->ci->db->query("SELECT * FROM tb_tglgajian ORDER BY tgl_gajian DESC limit 1");
+
+        $today = date('Y-m-d');
+
+        $tutupbuku = null;
+        $bukabuku = null;
+        foreach ($qtglgajian->result() as $tgl) :
+            // cek apakag tutup buka lebih dari hari ini
+            if ($today <= $tgl->tutup_buku) {
+                $tutupbuku = $tgl->tutup_buku;
+                $bukabuku =  $tgl->buka_buku;
+            } else {
+                $tutupbuku = $today;
+                $bukabuku =  $today;
+            }
+        endforeach;
+
+        // write code this here
+        $query  = $this->ci->db->query("SELECT SUM(cs_in) AS total_siapcair, cs_id, created_at FROM tb_siapcair WHERE cs_id = '$userid' AND created_at >='$bukabuku' AND created_at <= '$tutupbuku' GROUP BY cs_id,created_at");
+        if ($query->num_rows() > 0) {
+            return $query->row()->total_siapcair;
+        } else {
+            return 0;
+        }
+    }
+
+    // hitung proses siapcair vendor
+    function count_siapcairvendor($userid)
+    {
+        // mengambil tanggal tutup buku
+        // mengambil tanggal tutup buku
+        $qtglgajian = $this->ci->db->query("SELECT * FROM tb_tglgajian ORDER BY tgl_gajian DESC limit 1");
+
+        $today = date('Y-m-d');
+
+        $tutupbuku = null;
+        $bukabuku = null;
+        foreach ($qtglgajian->result() as $tgl) :
+            // cek apakag tutup buka lebih dari hari ini
+            if ($today <= $tgl->tutup_buku) {
+                $tutupbuku = $tgl->tutup_buku;
+                $bukabuku =  $tgl->buka_buku;
+            } else {
+                $tutupbuku = $today;
+                $bukabuku =  $today;
+            }
+        endforeach;
+
+        // write code this here
+        $query  = $this->ci->db->query("SELECT SUM(vendor_in) AS total_siapcair, v.user_id, s.created_at FROM tb_siapcair AS s JOIN tb_vendor AS v ON v.vendor_id = s.vendor_id WHERE v.user_id = '$userid' AND s.created_at >='$bukabuku' AND s.created_at <= '$tutupbuku' GROUP BY v.user_id,s.created_at");
         if ($query->num_rows() > 0) {
             return $query->row()->total_siapcair;
         } else {
@@ -321,24 +382,22 @@ class Fungsi
     function count_rtsm($userid)
     {
         // mengambil tanggal tutup buku
-        $durasigajian = 7;
-        $tglgajian_q = $this->ci->db->query("SELECT * FROM tb_tglgajian ORDER BY created_at DESC")->result();
-        $today = date('Y-m-d');
-        $tglgajian = $tglgajian_q != null ? $tglgajian_q : date('Y-m-d');
-        $bukabuku = null;
+        $qtglgajian = $this->ci->db->query("SELECT * FROM tb_tglgajian ORDER BY tgl_gajian DESC limit 1");
 
-        // DEKLARASI TUTUP BUKU
-        $tutupbuku_Q = $this->ci->db->query("SELECT * FROM tb_tglgajian ORDER BY created_at DESC LIMIT 1")->row();
-        $tutupbuku = $tutupbuku_Q->tutup_buku; // data valid
-        foreach ($tglgajian as $tglitem) {
-            $p1 = new DateTime($tglitem->tgl_rekap);
-            $p2 = new DateTime($today);
-            $diff = $p2->diff($p1);
-            if (($diff->d - 1)  < $durasigajian) {
-                // get buka buku = $bukabuku
-                $bukabuku = date('Y-m-d', strtotime($tglitem->tgl_rekap)); // data valid
+        $today = date('Y-m-d');
+
+        $tutupbuku = null;
+        $bukabuku = null;
+        foreach ($qtglgajian->result() as $tgl) :
+            // cek apakag tutup buka lebih dari hari ini
+            if ($today <= $tgl->tutup_buku) {
+                $tutupbuku = $tgl->tutup_buku;
+                $bukabuku =  $tgl->buka_buku;
+            } else {
+                $tutupbuku = $today;
+                $bukabuku =  $today;
             }
-        }
+        endforeach;
 
         // write code this here
         $query  = $this->ci->db->query("SELECT SUM(member_out) AS total_rts, user_id, created_at FROM tb_siapcair WHERE user_id = '$userid' AND created_at >='$bukabuku' AND created_at <= '$tutupbuku' GROUP BY user_id,created_at");
@@ -354,6 +413,31 @@ class Fungsi
     function count_menungguttfm($userid)
     {
         $query = $this->ci->db->query("SELECT diterima,user_id,status,created_at FROM tb_mkomisi WHERE user_id = '$userid' AND status='menunggu' GROUP BY user_id ORDER BY created_at DESC LIMIT 1");
+        if ($query->num_rows() > 0) {
+            return $query->row()->diterima;
+        } else {
+            return 0;
+        }
+    }
+
+    // Hhitung menunggu transfer
+    // /cs
+    function count_menungguttfcs($userid)
+    {
+        $query = $this->ci->db->query("SELECT diterima,cs_id,status,created_at FROM tb_cskomisi WHERE cs_id = '$userid' AND status='menunggu' GROUP BY cs_id ORDER BY created_at DESC LIMIT 1");
+        if ($query->num_rows() > 0) {
+            return $query->row()->diterima;
+        } else {
+            return 0;
+        }
+    }
+
+
+    // Hhitung menunggu transfer
+    // /vendor
+    function count_menungguttfvendor($userid)
+    {
+        $query = $this->ci->db->query("SELECT diterima,vendor_id,status,created_at FROM tb_vkomisi WHERE vendor_id = '$userid' AND status='menunggu' GROUP BY vendor_id ORDER BY created_at DESC LIMIT 1");
         if ($query->num_rows() > 0) {
             return $query->row()->diterima;
         } else {
@@ -384,6 +468,39 @@ class Fungsi
         }
     }
 
+    //HITUNGH SALES DI tabel sales cs
+    function count_tblsalescs($userid, $start, $end)
+    {
+        $query = $this->ci->db->query("SELECT q.updated ,COUNT(p.komisi) AS qty, SUM(4000) AS total_komisi, q.cs_id FROM qv_orderan_jn AS q JOIN tb_produk AS p ON p.produk_id = q.produk_id WHERE status='completed' AND  q.updated >= '$start' AND q.updated <= '$end' AND cs_id='$userid' GROUP BY q.updated,cs_id ORDER BY q.updated DESC");
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
+    //HITUNGH SALES DI tabel sales Vendor
+    function count_tblsalesvendor($userid, $start, $end)
+    {
+        $query = $this->ci->db->query("SELECT q.updated ,COUNT(p.harga_vendor) AS qty, SUM(p.harga_vendor) AS total_komisi, v.user_id FROM qv_orderan_jn AS q JOIN tb_produk AS p ON p.produk_id = q.produk_id JOIN tb_vendor AS v ON v.vendor_id = q.vendor_id WHERE status='completed' AND  q.updated >= '$start' AND q.updated <= '$end' AND v.user_id='$userid' GROUP BY q.updated,v.user_id ORDER BY q.updated DESC");
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
+    //HITUNGH cod DI tabel sales Vendor
+    function count_tblcodvendor($userid, $start, $end)
+    {
+        $query = $this->ci->db->query("SELECT q.updated ,COUNT(p.harga_vendor) AS qty, SUM(p.harga_vendor) AS total_komisi, v.user_id FROM qv_orderan_jn AS q JOIN tb_produk AS p ON p.produk_id = q.produk_id JOIN tb_vendor AS v ON v.vendor_id = q.vendor_id WHERE (status LIKE 'packing' OR status LIKE 'delivery') AND  q.updated >= '$start' AND q.updated <= '$end' AND v.user_id='$userid' GROUP BY q.updated,v.user_id ORDER BY q.updated DESC");
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
     //HITUNGH COD DI tabel COD member
     function count_tblcodm($userid, $start, $end)
     {
@@ -395,6 +512,82 @@ class Fungsi
         }
     }
 
+    //HITUNGH COD DI tabel COD cs
+    function count_tblcodcs($userid, $start, $end)
+    {
+        $query = $this->ci->db->query("SELECT q.updated ,COUNT(p.komisi) AS qty, SUM(4000) AS total_komisi, q.cs_id FROM qv_orderan_jn AS q JOIN tb_produk AS p ON p.produk_id = q.produk_id WHERE (status LIKE 'packing' OR status LIKE 'delivery') AND q.updated >= '$start' AND q.updated <= '$end' AND cs_id='$userid' GROUP BY q.updated,cs_id ORDER BY q.updated DESC");
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
+    // FITUR DSAHBOARD CS
+    function count_leadcs()
+    {
+        $query = $this->ci->db->query("SELECT COUNT(order_id) AS total_lead, status FROM qv_orderan_jn WHERE status = 'processing' GROUP BY status");
+        if ($query->num_rows() > 0) {
+            return $query->row()->total_lead;
+        } else {
+            return 0;
+        }
+    }
+
+    // cs
+    function count_closingpercs($userid, $start, $end)
+    {
+        $query = $this->ci->db->query("SELECT COUNT(order_id) AS total_sales, cs_id, status FROM qv_orderan_jn WHERE status = 'completed' AND cs_id = '$userid' AND updated >= '$start' AND updated <= '$end' GROUP BY cs_id");
+        if ($query->num_rows() > 0) {
+            return $query->row()->total_sales;
+        } else {
+            return 0;
+        }
+    }
+
+    // vendor closing
+    function count_closingpervendor($userid, $start, $end)
+    {
+        $query = $this->ci->db->query("SELECT COUNT(order_id) AS total_sales, v.user_id, status FROM qv_orderan_jn AS q JOIN tb_vendor AS v ON v.vendor_id = q.vendor_id WHERE status = 'completed' AND v.user_id = '$userid' AND q.updated >= '$start' AND q.updated <= '$end' GROUP BY v.user_id");
+        if ($query->num_rows() > 0) {
+            return $query->row()->total_sales;
+        } else {
+            return 0;
+        }
+    }
+
+    // vendor rts
+    function count_rtspervendor($userid, $start, $end)
+    {
+        $query = $this->ci->db->query("SELECT COUNT(order_id) AS total_rts, v.user_id, status FROM qv_orderan_jn AS q JOIN tb_vendor AS v ON v.vendor_id = q.vendor_id WHERE status = 'refunded' AND v.user_id = '$userid' AND q.updated >= '$start' AND q.updated <= '$end' GROUP BY v.user_id");
+        if ($query->num_rows() > 0) {
+            return $query->row()->total_rts;
+        } else {
+            return 0;
+        }
+    }
+
+    // cs
+    function count_codpercs($userid)
+    {
+        $query = $this->ci->db->query("SELECT COUNT(order_id) AS total_cod, cs_id, status FROM qv_orderan_jn WHERE (status LIKE 'packing' OR status LIKE 'delivery' ) AND cs_id = '$userid'  GROUP BY cs_id");
+        if ($query->num_rows() > 0) {
+            return $query->row()->total_cod;
+        } else {
+            return 0;
+        }
+    }
+
+    // fitur cod vendor
+    function count_codpervendor($userid)
+    {
+        $query = $this->ci->db->query("SELECT COUNT(order_id) AS total_cod, v.user_id, status FROM qv_orderan_jn  AS q JOIN tb_vendor  AS v ON v.vendor_id = q.vendor_id WHERE (status LIKE 'packing' OR status LIKE 'delivery' ) AND v.user_id = '$userid'  GROUP BY v.user_id");
+        if ($query->num_rows() > 0) {
+            return $query->row()->total_cod;
+        } else {
+            return 0;
+        }
+    }
 
     // ============
     // helper

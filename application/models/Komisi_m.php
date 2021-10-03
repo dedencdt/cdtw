@@ -85,19 +85,25 @@ class Komisi_m extends CI_Model
         // mengmbil tanggal terpilih
         $date = new DateTime($post['tglgajian']);
         $date1 = new DateTime($post['tglgajian']);
+        $date2 = new DateTime($post['tglgajian']);
 
         // set h-1 dari tanggal gajian
         $rekap = $date;
         $rekap->modify('-1 day');
 
-        // set h-2 
+        // set h-2 tutup buku
         $closebook = $date1;
         $closebook->modify('-2 day');
+
+        // set h-7 tutup buku
+        $openbook = $date2;
+        $openbook->modify('-8 day');
 
         $params = [
             'tglgajian_id' => $post['tglgajian_id'],
             'tgl_gajian' => $post['tglgajian'],
             'tgl_rekap' => $rekap->format('Y-m-d'),
+            'buka_buku' => $openbook->format('Y-m-d'),
             'tutup_buku' => $closebook->format('Y-m-d'),
             'created_at' => date('Y-m-d H:i:s')
         ];
@@ -111,6 +117,7 @@ class Komisi_m extends CI_Model
             'tglgajian_id' => $post['tglgajian_id'],
             'tgl_gajian' => $post['tglgajian'],
             'tgl_rekap' => $post['tglrekap'],
+            'buka_buku' => $post['bukabuku'],
             'tutup_buku' => $post['tutupbuku'],
             'updated' => date('Y-m-d H:i:s')
         ];
@@ -148,7 +155,7 @@ class Komisi_m extends CI_Model
         // $this->db->select('*,tb_user.username,created_at as langganan_created ');
         $this->db->from($this->tblsetTanggal);
         // $this->db->join('tb_user', 'tb_user.user_id = user_id'); //inner
-        $this->db->order_by('created_at', 'DESC');
+        $this->db->order_by('tgl_gajian', 'DESC');
         if ($keyword) {
             $this->_setQueryLike($keyword);
         }

@@ -54,6 +54,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Tanggal Gajian</th>
                             <th scope="col">Tanggal Rekap</th>
+                            <th scope="col">Buka Buku</th>
                             <th scope="col">Tutup Buku</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -64,6 +65,7 @@
                                 <td><?= ++$start ?></td>
                                 <td><?= $data->tgl_gajian ?></td>
                                 <td><?= $data->tgl_rekap ?></td>
+                                <td><?= $data->buka_buku ?></td>
                                 <td><?= $data->tutup_buku ?></td>
                                 <td>
                                     <div class="row">
@@ -111,6 +113,8 @@
                                                         <input type="date" name="tglgajian" id="tglgajian" class="form-control" value="<?= $data->tgl_gajian ?>">
                                                         <label for="tglrekap">Rekap data <small> (H-1 tgl Gajian)</small></label>
                                                         <input type="date" name="tglrekap" id="tglrekap" class="form-control" value="<?= $data->tgl_rekap ?>">
+                                                        <label for="bukabuku">Buka Buku <small> (H-6 tgl Gajian)</small></label>
+                                                        <input type="date" name="bukabuku" id="bukabuku" class="form-control" value="<?= $data->buka_buku ?>">
                                                         <label for="tutupbuku">tutup Buku <small> (H-2 tgl Gajian)</small></label>
                                                         <input type="date" name="tutupbuku" id="tutupbuku" class="form-control" value="<?= $data->tutup_buku ?>">
                                                     </div>

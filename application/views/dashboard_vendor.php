@@ -33,25 +33,6 @@ if (isset($_POST['interval'])) {
         <!-- Content Row -->
         <div class="row">
 
-            <!-- dashboard member -->
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4">
-                <div class="card border-left-warning shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    LEAD MASUK</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $this->fungsi->count_leadcs() ?> Lead</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-user fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-4 col-md-6 mb-4">
                 <div class="card border-left-info shadow h-100 py-2">
@@ -60,7 +41,7 @@ if (isset($_POST['interval'])) {
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                     COD</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $this->fungsi->count_codpercs($this->fungsi->user_login()->user_id, $datestart, $dateend) ?> Proses COD</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $this->fungsi->count_codpervendor($this->fungsi->user_login()->user_id, $datestart, $dateend) ?> Proses COD</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-truck fa-2x text-gray-300"></i>
@@ -78,10 +59,29 @@ if (isset($_POST['interval'])) {
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     CLOSING ORDER</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $this->fungsi->count_closingpercs($this->fungsi->user_login()->user_id, $datestart, $dateend) ?> Closing order</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $this->fungsi->count_closingpervendor($this->fungsi->user_login()->user_id, $datestart, $dateend) ?> Closing order</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-check fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- dashboard member -->
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                    RTS</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $this->fungsi->count_rtspervendor($this->fungsi->user_login()->user_id, $datestart, $dateend) ?> RTS</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-undo fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -96,7 +96,7 @@ if (isset($_POST['interval'])) {
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                     SIAP CAIR</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= number_format($this->fungsi->count_siapcaircs($this->fungsi->user_login()->user_id)) ?></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= number_format($this->fungsi->count_siapcairvendor($this->fungsi->user_login()->user_id)) ?></div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -114,7 +114,7 @@ if (isset($_POST['interval'])) {
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                     MENUNGGU TF</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= number_format($this->fungsi->count_menungguttfcs($this->fungsi->user_login()->user_id)) ?></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= number_format($this->fungsi->count_menungguttfvendor($this->fungsi->user_login()->user_id)) ?></div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-exchange-alt fa-2x text-gray-300"></i>
@@ -198,9 +198,9 @@ if (isset($_POST['interval'])) {
                     </thead>
                     <tbody>
                         <?php
-                        $tblKomisimember = $this->fungsi->count_tblsalescs($this->fungsi->user_login()->user_id, $datestart, $dateend);
-                        if ($tblKomisimember != null) :
-                            foreach ($tblKomisimember as $dkomisimember) : ?>
+                        $tblKomisivendor = $this->fungsi->count_tblsalesvendor($this->fungsi->user_login()->user_id, $datestart, $dateend);
+                        if ($tblKomisivendor != null) :
+                            foreach ($tblKomisivendor as $dkomisimember) : ?>
                                 <tr>
                                     <td><?= $dkomisimember->updated ?></td>
                                     <td><?= $dkomisimember->qty ?></td>
@@ -239,9 +239,9 @@ if (isset($_POST['interval'])) {
                     </thead>
                     <tbody>
                         <?php
-                        $tblcodcs = $this->fungsi->count_tblcodcs($this->fungsi->user_login()->user_id, $datestart, $dateend);
-                        if ($tblcodcs != null) :
-                            foreach ($tblcodcs as $dcodcs) : ?>
+                        $tblcodvendor = $this->fungsi->count_tblcodvendor($this->fungsi->user_login()->user_id, $datestart, $dateend);
+                        if ($tblcodvendor != null) :
+                            foreach ($tblcodvendor as $dcodcs) : ?>
                                 <tr>
                                     <td><?= $dcodcs->updated ?></td>
                                     <td><?= $dcodcs->qty ?></td>

@@ -24,6 +24,21 @@ class Dashboard extends CI_Controller
 		$this->template->load('template', 'dashboard_cs');
 	}
 
+	public function packing()
+	{
+		$this->template->load('template', 'dashboard_cs');
+	}
+
+	public function vendor()
+	{
+		$this->template->load('template', 'dashboard_vendor');
+	}
+
+	public function admin()
+	{
+		$this->template->load('template', 'dashboard_cs');
+	}
+
 
 	function check_role_4dashboard()
 	{

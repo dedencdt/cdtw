@@ -92,7 +92,7 @@
                                 <li><i class="far fa-circle text-success"></i> Visit <span class="float-right"><?= $this->fungsi->count_visit($this->fungsi->user_login()->user_id, 'landingpage', $datestart, $dateend) ?></span></li>
                                 <li><i class="far fa-circle text-success"></i> Form View <span class="float-right"><?= $this->fungsi->count_visit($this->fungsi->user_login()->user_id, 'formorder', $datestart, $dateend) ?></span></li>
                                 <li><i class="far fa-circle text-info"></i> Lead <span class="float-right"><?= $this->fungsi->count_visit($this->fungsi->user_login()->user_id, 'lead', $datestart, $dateend) ?></span></li>
-                                <li><i class="far fa-circle text-primary"></i> Closing COD <span class="float-right"><?= $this->fungsi->count_static($this->fungsi->user_login()->user_id, 'packing', $datestart, $dateend) ?></span></li>
+                                <li><i class="far fa-circle text-primary"></i> Closing COD <span class="float-right"><?= $this->fungsi->count_static($this->fungsi->user_login()->user_id, 'delivery', $datestart, $dateend) + $this->fungsi->count_static($this->fungsi->user_login()->user_id, 'packing', $datestart, $dateend) ?></span></li>
                             </ul>
                         </div>
                         <!-- ORDER TRACK -->
