@@ -60,7 +60,7 @@ class Dashboard extends CI_Controller
 				break;
 
 			case 5:
-				redirect('dashboard/packing');
+				redirect('packing');
 				break;
 
 			default:
