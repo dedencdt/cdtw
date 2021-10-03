@@ -111,6 +111,7 @@
                                                 <!-- data hidden for orderan -->
                                                 <input type="hidden" name="orderan_id" value="<?= $data->orderan_id ?>">
                                                 <input type="hidden" name="in_order_id" value="<?= $data->in_order_id ?>">
+                                                <input type="hidden" name="produk_id" value="<?= $data->produk_id ?>">
                                                 <input type="hidden" name="vendor_id" value="<?= $this->fungsi->getVendorOrder($data->produk_id)->vendor_id ?>">
                                                 <div class="input-group">
                                                     <select class="custom-select" id="status" name="status" required>

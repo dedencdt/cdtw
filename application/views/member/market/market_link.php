@@ -44,8 +44,18 @@
                                         <!-- create parameter url -->
                                         <br> <a href="<?= $data->vc . '?' . http_build_query($p) ?>" class="card-link"><?= $data->vc . '?' . http_build_query($p) ?></a>
                                     </li>
-                                    <li class="list-group-item"> <strong>Prelander Blogspot </strong>
-                                        <br> <a href="<?= site_url() . 'market/export/' . $data->linkproduk_id ?>" target="_blank" rel="noopener noreferrer"><button class="btn bg-light">Download XML</button></a>
+                                    <li class="list-group-item"> <strong>Prelander </strong>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col">
+
+                                                <a href="<?= site_url() . 'market/export/' . $data->linkproduk_id ?>" target="_blank" rel="noopener noreferrer"><button class="btn bg-light"><i class="fa fa-file-download"></i> XML(Blogspot)</button></a>
+                                            </div>
+
+                                            <div class="col">
+                                                <a href="<?= site_url() . 'market/export/' . $data->linkproduk_id ?>" target="_blank" rel="noopener noreferrer"><button class="btn bg-light"><i class="fa fa-file-download"></i> HTML(Shopify)</button></a>
+                                            </div>
+                                        </div>
                                     </li>
                                 </ul>
                                 <div class="card-footer bg-transparent">

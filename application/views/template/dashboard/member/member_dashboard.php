@@ -6,7 +6,7 @@
                 <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                         PROSES COD</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.40,000</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= number_format($this->fungsi->count_prosescodm($this->fungsi->user_login()->user_id)) ?></div>
                 </div>
                 <div class="col-auto">
                     <i class="fas fa-truck fa-2x text-gray-300"></i>
@@ -24,7 +24,7 @@
                 <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                         SIAP CAIR</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.215,000</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= number_format($this->fungsi->count_siapcairm($this->fungsi->user_login()->user_id)) ?></div>
                 </div>
                 <div class="col-auto">
                     <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -42,7 +42,7 @@
                 <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                         GAGAL KIRIM ( RTS )</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.215,000</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.<?= number_format($this->fungsi->count_rtsm($this->fungsi->user_login()->user_id)) ?></div>
                 </div>
                 <div class="col-auto">
                     <i class="fas fa-undo fa-2x text-gray-300"></i>
@@ -59,8 +59,8 @@
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                        Cair tanggal</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                        MENUNGGU TRANSFER</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= number_format($this->fungsi->count_menungguttfm($this->fungsi->user_login()->user_id)) ?></div>
                 </div>
                 <div class="col-auto">
                     <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -78,7 +78,7 @@
                 <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                         Komisi sudah Cair</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">180,000,000</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= number_format($this->fungsi->count_totalkomisi($this->fungsi->user_login()->user_id)) ?></div>
                 </div>
                 <div class="col-auto">
                     <i class="fas fa-comments fa-2x text-gray-300"></i>

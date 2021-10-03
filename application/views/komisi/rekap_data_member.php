@@ -78,13 +78,13 @@
                                 <td>Rp. <?= $data->rts != null ? $data->rts : 0 ?></td>
                                 <td>
                                     <?php if (!$this->fungsi->cek_data_komisi($row->tgl_gajian, $data->user_id) > 0) { ?>
-                                        <?php if (date('Y-m-d') == $row->tgl_gajian) : ?>
+                                        <?php if (date('Y-m-d') == $row->tgl_rekap) : ?>
                                             <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#ModalRekapkomisi<?= $data->user_id ?>">
                                                 <i class="fa fa-fw fa-edit "></i>
                                                 Rekap Komisi
                                             </button>
                                         <?php else : ?>
-                                            <span class="badge badge-danger">Rekapan Tersedia tgl : <?= date('d M Y', strtotime($row->tgl_gajian)) ?></span>
+                                            <span class="badge badge-danger">Rekapan Tersedia tgl : <?= date('d M Y', strtotime($row->tgl_rekap)) ?></span>
                                         <?php endif; ?>
                                     <?php } else { ?>
                                         <span class="badge badge-success p-2">Sudah di Rekap</span>

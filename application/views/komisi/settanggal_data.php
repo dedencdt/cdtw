@@ -34,6 +34,7 @@
                     <strong>Keterangan* : </strong> Rekapan komisi otomatis terekap selama H -7 dari tanggal tutup buku. <br>
                     <strong><em>Set tanggal</em></strong> di gunakan untuk menentukan tanggal gajian, dan secara otomatis tanggal rekap dan tutup buku terbuat <br>
                     <strong><em>Lihat Data Komisi</em></strong> Data Rekapan Komisi Yang harus di konfirmasi (direkap) oleh admin, Rekapan data dibuat secara otomatis oleh sistem.
+                    <span class="badge badge-danger">Set tanggal / penambahan tanggal gajian Hanya boleh di lakukan pada Tanggal saat Rekap Data !!</span>
 
 
                 </p>

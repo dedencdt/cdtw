@@ -41,7 +41,7 @@
                             <th scope="col">Nama Produk</th>
                             <th scope="col">status</th>
                             <th scope="col">Nama pelanggan</th>
-                            <th scope="col">Kota</th>
+                            <th scope="col">Alamat</th>
                             <th scope="col">Ongkir</th>
                             <th scope="col">Total</th>
                             <th scope="col">Tanggal</th>
@@ -51,34 +51,24 @@
                     <tbody>
                         <?php
                         $no = 1;
-                        foreach ($row as $data) : ?>
+                        foreach ($row->result() as $data) : ?>
                             <tr>
                                 <td> <?= $no++ ?></td>
-                                <td> <?= $data->id ?></td>
-                                <td> <?= $data->line_items[0]->name ?></td>
+                                <td> <?= $data->order_id ?></td>
+                                <td> <?= $data->nama_produk ?></td>
                                 <td> <span class=" badge badge-warning p-1"><?= $data->status ?></span></td>
-                                <td> <?= $data->billing->first_name ?></td>
-                                <td> <?= $data->billing->city ?></td>
-                                <td> <?= $data->shipping_total ?></td>
+                                <td> <?= $data->penerima ?></td>
+                                <td> <?= $data->alamat ?></td>
+                                <td> <?= $data->ongkir ?></td>
                                 <td> <?= $data->total ?></td>
-                                <td> <?= $data->date_created ?></td>
+                                <td> <?= $data->created_at ?></td>
                                 <td>
                                     <form action="<?= site_url() ?>orders/process" method="post">
                                         <!-- input hidden -->
-                                        <input type="hidden" name="in_order_id" value="<?= 'cdt' . date('ymd') . random_string('alnum', 21) ?>">
-                                        <input type="hidden" name="orderan_id" value="<?= 'cdt' . date('ymd') . random_string('alnum', 21) ?>">
-                                        <input type="hidden" name="order_id" value="<?= $data->id ?>">
+                                        <input type="hidden" name="in_order_id" value="<?= $data->in_order_id ?>">
+                                        <input type="hidden" name="order_id" value="<?= $data->order_id ?>">
                                         <input type="hidden" name="status" value="on-hold">
-                                        <input type="hidden" name="penerima" value="<?= $data->billing->first_name  ?>">
-                                        <input type="hidden" name="namaproduk" value="<?= $data->line_items[0]->name  ?>">
-                                        <input type="hidden" name="alamat" value="<?= $data->billing->address_1 . '~' . $data->billing->address_2 . '~' . $data->billing->city . '~' . $data->billing->state . '~' . $data->billing->postcode  ?>">
-                                        <input type="hidden" name="nowa" value="<?= $data->billing->phone ?>">
-                                        <input type="hidden" name="frame_id" value="<?= $data->billing->company ?>">
                                         <input type="hidden" name="cs_id" value="<?= $this->fungsi->user_login()->user_id ?>">
-                                        <input type="hidden" name="harga" value="<?= $data->line_items[0]->price ?>">
-                                        <input type="hidden" name="ongkir" value="<?= $data->shipping_total ?>">
-                                        <input type="hidden" name="total" value="<?= $data->total ?>">
-                                        <input type="hidden" name="order_created" value="<?= $data->date_created ?>">
                                         <!-- tombol -->
                                         <button type="submit" name="followup" class="btn btn-success">
                                             <i class="fa fa-download text-gray-100"></i> Get data

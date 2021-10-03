@@ -46,7 +46,7 @@
     <div class="container-fluid">
         <div class="card p-2">
             <div class="card-header">
-                <h2>Menunggu Transger</h2>
+                <h2>Menunggu Transfer</h2>
 
             </div>
             <div class="card-body table-responsive">
@@ -160,16 +160,3 @@
         </div>
     </div>
 </div>
-
-<!-- <script>
-    $(document).ready(function() {
-        $('.cin-komisi, .cin-rts, .cin-lainlain').keyup(function() {
-            let komisi = $('.cin-komisi').val();
-            let rts = $('.cin-rts').val();
-            let lainlain = $('.cin-lainlain').val();
-            let total = komisi - rts - lainlain;
-
-            $('.cin-diterima').val(total);
-        });
-    });
-</script> -->

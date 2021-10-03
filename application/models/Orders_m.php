@@ -1,5 +1,7 @@
 <?php
 
+use Monolog\Handler\IFTTTHandler;
+
 class Orders_m extends CI_Model
 {
     // endpoint ajax Model
@@ -362,6 +364,7 @@ class Orders_m extends CI_Model
         $arr = [
             'nama_cs' => $keyword, // CS
             'order_id' => $keyword, // Order ID 
+            'status' => $keyword, // Stutus
             'nama_publisher' => $keyword // Publisher
         ];
         return $this->db->or_like($arr, 'none');
@@ -405,8 +408,37 @@ class Orders_m extends CI_Model
     }
     // Batas PAgination
 
-
+    // =======================
     // common ci code
+    // =======================
+
+    function getlaststockproduct($produkid)
+    {
+        $query = $this->db->query("SELECT * FROM tb_produk WHERE produk_id = '$produkid'");
+
+        if ($query->num_rows() > 0) {
+            return $query->row()->stock;
+        } else {
+            return 0;
+        }
+    }
+
+    public function updatestockproduk($post)
+    {
+        $produkid = $post['produk_id'];
+        $tgl = date('Y-m-d H:i:s');
+        $query = $this->db->query("UPDATE tb_produk SET stock=stock-1, updated='$tgl' WHERE produk_id='$produkid'");
+        return $query;
+    }
+
+    public function updatestockminus($post)
+    {
+        $produkid = $post['produk_id'];
+        $tgl = date('Y-m-d H:i:s');
+        $totalstock = (int)$this->getlaststockproduct($produkid) + (int)1;
+        $query = $this->db->query("UPDATE tb_produk SET stock='$totalstock', updated='$tgl' WHERE produk_id='$produkid'");
+        return $query;
+    }
 
     public function getByCS($csid = null, $status = null)
     {
@@ -456,36 +488,27 @@ class Orders_m extends CI_Model
     }
 
 
-    public function add($post)
+    public function addcstoinorder($post)
     {
         $params = [
             'in_order_id' => $post['in_order_id'],
-            'order_id' => $post['order_id'],
-            'nama_produk' => $post['namaproduk'],
             'status' => $post['status'],
-            'penerima' => $post['penerima'],
-            'alamat' => $post['alamat'],
-            'nowa' => $post['nowa'],
-            'frame_id' => $post['frame_id'],
             'cs_id' => $post['cs_id'],
-            'harga' => $post['harga'],
-            'ongkir' => $post['ongkir'],
-            'total' => $post['total'],
-            'order_created' => $post['order_created'],
-            'created_at' => date('Y-m-d H:i:s')
+            'updated' => date('Y-m-d')
         ];
-        $this->db->insert('tb_in_order', $params);
+        $this->db->where('in_order_id', $post['in_order_id']);
+        $this->db->update('tb_in_order', $params);
     }
 
     public function addToOrderanFromFP($post)
     {
         $params = [
-            'orderan_id' => $post['orderan_id'],
             'in_order_id' => $post['in_order_id'],
             'status' => $post['status'],
-            'created_at' => date('Y-m-d H:i:s')
+            'updated' => date('Y-m-d')
         ];
-        $this->db->insert('tb_orderan', $params);
+        $this->db->where('in_order_id', $post['in_order_id']);
+        $this->db->update('tb_orderan', $params);
     }
 
     public function editToOrderan($post)
@@ -495,7 +518,7 @@ class Orders_m extends CI_Model
             'in_order_id' => $post['in_order_id'],
             'vendor_id' => $post['vendor_id'],
             'status' => $post['status'],
-            'updated' => date('Y-m-d H:i:s')
+            'updated' => date('Y-m-d')
         ];
         $this->db->where('orderan_id', $post['orderan_id']);
         $this->db->update('tb_orderan', $params);
@@ -509,7 +532,7 @@ class Orders_m extends CI_Model
             'penerima' => $post['penerima'],
             'alamat' => $post['alamat1'] . '~' . $post['alamat2'] . ',' . $post['kec'] . '~' . $post['kota'] . '~' . $post['prov'] . '~' . $post['kodepos'],
             'nowa' => $post['nowa'],
-            'updated' => date('Y-m-d H:i:s')
+            'updated' => date('Y-m-d')
         ];
         $this->db->where('in_order_id', $post['in_order_id']);
         $this->db->update('tb_in_order', $params);
@@ -520,7 +543,7 @@ class Orders_m extends CI_Model
         $params = [
             'in_order_id' => $post['in_order_id'],
             'status' => $post['status'],
-            'updated' => date('Y-m-d H:i:s')
+            'updated' => date('Y-m-d')
         ];
         $this->db->where('in_order_id', $post['in_order_id']);
         $this->db->update('tb_in_order', $params);
@@ -534,7 +557,7 @@ class Orders_m extends CI_Model
             'vendor_id' => $post['vendor_id'],
             'resi' => $post['resi'],
             'status' => $post['status'],
-            'updated' => date('Y-m-d H:i:s')
+            'updated' => date('Y-m-d')
         ];
         $this->db->where('orderan_id', $post['orderan_id']);
         $this->db->update('tb_orderan', $params);
@@ -546,7 +569,7 @@ class Orders_m extends CI_Model
             'orderan_id' => $post['orderan_id'],
             'in_order_id' => $post['in_order_id'],
             'status' => $post['status'],
-            'updated' => date('Y-m-d H:i:s')
+            'updated' => date('Y-m-d')
         ];
         $this->db->where('orderan_id', $post['orderan_id']);
         $this->db->update('tb_orderan', $params);
@@ -557,7 +580,7 @@ class Orders_m extends CI_Model
         $params = [
             'in_order_id' => $post['in_order_id'],
             'status'    => $post['status'],
-            'updated' => date('Y-m-d H:i:s')
+            'updated' => date('Y-m-d')
         ];
         $this->db->where('in_order_id', $post['in_order_id']);
         $this->db->update('tb_in_order', $params);
@@ -604,5 +627,23 @@ class Orders_m extends CI_Model
 
         ];
         $this->db->insert('tb_siapcair', $params);
+    }
+
+    public function grabwctoorderan($post)
+    {
+
+        $this->db->insert('tb_orderan', $post);
+    }
+
+    public function grabwctoinorder($post)
+    {
+
+        $this->db->insert('tb_in_order', $post);
+    }
+
+    public function getleadProcess()
+    {
+        $query = $this->db->query("SELECT * FROM tb_in_order WHERE status = 'processing' ORDER BY created_at DESC");
+        return $query;
     }
 }

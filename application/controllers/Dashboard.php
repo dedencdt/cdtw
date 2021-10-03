@@ -15,7 +15,42 @@ class Dashboard extends CI_Controller
 	public function index()
 	{
 
+		$this->check_role_4dashboard();
 		$this->template->load('template', 'dashboard');
+	}
+
+	public function cs()
+	{
+		$this->template->load('template', 'dashboard_cs');
+	}
+
+
+	function check_role_4dashboard()
+	{
+		$role = $this->fungsi->user_login()->role;
+
+		switch ($role) {
+
+			case 1:
+				redirect('dashboard/admin');
+				break;
+
+			case 3:
+				redirect('dashboard/cs');
+				break;
+
+			case 4:
+				redirect('dashboard/vendor');
+
+				break;
+
+			case 5:
+				redirect('dashboard/packing');
+				break;
+
+			default:
+				break;
+		}
 	}
 
 	public function profile($id)

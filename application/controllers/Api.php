@@ -85,18 +85,17 @@ class Api extends CI_Controller
 
     ////////////
 
-
     public function sendtracking($id)
     {
         // get frame ID
-        $id = $this->uri->segment(3);
+        // $id = $this->uri->segment(3);
         // $post = $this->input->post_get(null, true);
         $data = [
             'tracking_id' => 'cdt' . date('ymd') . random_string('alnum', 21),
             'label' => $this->input->post_get('label', true),
             'url' => $this->input->post_get('url', true),
             'visit' => 1,
-            'val_conversi' => $this->input->post_get('val_conversi', true),
+            'ip_address' => $this->input->post_get('ip_address', true),
             'frame_id' => $this->input->post_get('frame_id', true),
             'created_at' => date('Y-m-d')
         ];
@@ -105,9 +104,9 @@ class Api extends CI_Controller
         $apikey = $this->input->get_post('key', true);
         $key = $this->api_m->key($apikey);
         // tampilkan frame_id
-        $view = $this->api_m->getdata($id)->row();
-        $add =  $this->api_m->senddata($data);
-        if ($key->num_rows() > 0 && $add) {
+        if ($key->num_rows() > 0) {
+            $view = $this->api_m->getdata($id)->row();
+            $this->api_m->senddata($data);
             header('Content-Type: application/json');
             header('Access-Control-Allow-Credentials: true');
             header('Access-Control-Allow-Origin: *');

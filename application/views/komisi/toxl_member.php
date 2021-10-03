@@ -4,6 +4,9 @@
             <th scope="col">#</th>
             <th scope="col">No. Invoice</th>
             <th scope="col">Tanggal</th>
+            <th scope="col">Komisi Sales</th>
+            <th scope="col">Biaya RTS</th>
+            <th scope="col">Lain Lain</th>
             <th scope="col">Total Komisi</th>
             <th scope="col">status</th>
             <th scope="col">Publisher</th>
@@ -20,6 +23,9 @@
                 <td><?= $no++ ?></td>
                 <td><?= $data->invoice ?></td>
                 <td><?= date('d M Y', strtotime($row->tgl_gajian)) ?></td>
+                <td><strong> Rp. <?= number_format($data->komisisales) ?></strong></td>
+                <td><strong> Rp. <?= number_format($data->rts) ?></strong></td>
+                <td><strong> Rp. <?= number_format($data->lainlain) ?></strong></td>
                 <td><strong> Rp. <?= number_format($data->diterima) ?></strong></td>
                 <td><span class="badge badge-<?= $data->status != 'menunggu' ? 'success' : 'danger' ?> p-2"><?= $data->status ?></span></td>
                 <td><?= $data->username ?></td>

@@ -61,15 +61,13 @@ class Fungsi
      */
     function counter($userid, $page, $start, $end)
     {
-        $this->ci->db->select_sum('visit')
-            ->join('m_frame', 'm_frame.frame_id = m_tracking.frame_id')
-            ->like('m_tracking.label', $page, 'none')
-            ->where('m_frame.user_id', $userid)
-            ->where('m_tracking.created_at >=', $start)
-            ->where('m_tracking.created_at >=', $end);
-
-        $result = $this->ci->db->get('m_tracking')->row();
-        return $result->visit;
+        $query = $this->ci->db
+            ->query("SELECT SUM(visit) AS total_visit, m_frame.user_id , m_tracking.label, m_tracking.created_at FROM m_tracking JOIN m_frame ON m_frame.frame_id = m_tracking.frame_id  LIKE m_frame.label = '$page' WHERE m_frame.user_id ='$userid'  AND m_tracking.created_at >= '$start' AND m_tracking.created_at <= '$end' GROUP BY m_frame.user_id,m_tracking.label,m_tracking.created_at ");
+        if ($query->num_rows() > 0) {
+            return $query->row()->total_visit;
+        } else {
+            return 0;
+        }
     }
 
     function count_visit($userid, $page, $start, $end)
@@ -95,8 +93,8 @@ class Fungsi
         // $this->ci->db->like('m_tracking.created_at', $tgl, 'none');
         $this->ci->db->like('status', $status, 'none');
         $this->ci->db->where('user_id', $userid);
-        $this->ci->db->where('created_at >=', $start);
-        $this->ci->db->where('created_at <=', $end);
+        $this->ci->db->where('updated >=', $start);
+        $this->ci->db->where('updated <=', $end);
 
         $query = $this->ci->db->get()->num_rows();
         return $query;
@@ -271,5 +269,152 @@ class Fungsi
         $query = $this->ci->db
             ->query("SELECT * FROM tb_mkomisi JOIN tb_user ON tb_user.user_id = tb_mkomisi.user_id WHERE status = 'selesai' AND tgl_gajian = '$tglgajian' ORDER BY tb_mkomisi.created_at ASC");
         return $query;
+    }
+
+
+    // dashboard member 
+    // hitung proses cod member
+    function count_prosescodm($userid)
+    {
+        $query = $this->ci->db->query("SELECT SUM(p.komisi) AS total_cod, q.user_id , q.status FROM qv_orderan_jn AS q JOIN tb_produk AS p ON p.produk_id = q.produk_id WHERE (status LIKE 'packing' OR status LIKE 'delivery' ) AND user_id='$userid' GROUP BY user_id");
+
+        if ($query->num_rows() > 0) {
+            return $query->row()->total_cod;
+        } else {
+            return 0;
+        }
+    }
+
+    // hitung proses siapcair member
+    function count_siapcairm($userid)
+    {
+        // mengambil tanggal tutup buku
+        $durasigajian = 7;
+        $tglgajian_q = $this->ci->db->query("SELECT * FROM tb_tglgajian ORDER BY created_at DESC")->result();
+        $today = date('Y-m-d');
+        $tglgajian = $tglgajian_q != null ? $tglgajian_q : date('Y-m-d');
+        $bukabuku = null;
+
+        // DEKLARASI TUTUP BUKU
+        $tutupbuku_Q = $this->ci->db->query("SELECT * FROM tb_tglgajian ORDER BY created_at DESC LIMIT 1")->row();
+        $tutupbuku = $tutupbuku_Q->tutup_buku; // data valid
+        foreach ($tglgajian as $tglitem) {
+            $p1 = new DateTime($tglitem->tgl_rekap);
+            $p2 = new DateTime($today);
+            $diff = $p2->diff($p1);
+            if (($diff->d - 1) < $durasigajian) {
+                // get buka buku = $bukabuku
+                $bukabuku = date('Y-m-d', strtotime($tglitem->tgl_rekap)); // data valid
+            }
+        }
+
+        // write code this here
+        $query  = $this->ci->db->query("SELECT SUM(member_in) AS total_siapcair, user_id, updated FROM tb_siapcair WHERE user_id = '$userid' AND updated >='$bukabuku' AND updated <= '$tutupbuku' GROUP BY user_id,updated");
+        if ($query->num_rows() > 0) {
+            return $query->row()->total_siapcair;
+        } else {
+            return 0;
+        }
+    }
+
+    // hitung proses rts member
+    function count_rtsm($userid)
+    {
+        // mengambil tanggal tutup buku
+        $durasigajian = 7;
+        $tglgajian_q = $this->ci->db->query("SELECT * FROM tb_tglgajian ORDER BY created_at DESC")->result();
+        $today = date('Y-m-d');
+        $tglgajian = $tglgajian_q != null ? $tglgajian_q : date('Y-m-d');
+        $bukabuku = null;
+
+        // DEKLARASI TUTUP BUKU
+        $tutupbuku_Q = $this->ci->db->query("SELECT * FROM tb_tglgajian ORDER BY created_at DESC LIMIT 1")->row();
+        $tutupbuku = $tutupbuku_Q->tutup_buku; // data valid
+        foreach ($tglgajian as $tglitem) {
+            $p1 = new DateTime($tglitem->tgl_rekap);
+            $p2 = new DateTime($today);
+            $diff = $p2->diff($p1);
+            if (($diff->d - 1)  < $durasigajian) {
+                // get buka buku = $bukabuku
+                $bukabuku = date('Y-m-d', strtotime($tglitem->tgl_rekap)); // data valid
+            }
+        }
+
+        // write code this here
+        $query  = $this->ci->db->query("SELECT SUM(member_out) AS total_rts, user_id, created_at FROM tb_siapcair WHERE user_id = '$userid' AND created_at >='$bukabuku' AND created_at <= '$tutupbuku' GROUP BY user_id,created_at");
+        if ($query->num_rows() > 0) {
+            return $query->row()->total_rts;
+        } else {
+            return 0;
+        }
+    }
+
+    // Hhitung menunggu transfer
+    // /member
+    function count_menungguttfm($userid)
+    {
+        $query = $this->ci->db->query("SELECT diterima,user_id,status,created_at FROM tb_mkomisi WHERE user_id = '$userid' AND status='menunggu' GROUP BY user_id ORDER BY created_at DESC LIMIT 1");
+        if ($query->num_rows() > 0) {
+            return $query->row()->diterima;
+        } else {
+            return 0;
+        }
+    }
+
+
+    // HITUNG TOTAL KOMISI SUDAH CAIR
+    function count_totalkomisi($userid)
+    {
+        $query = $this->ci->db->query("SELECT user_id,total FROM tb_totalkomisi WHERE user_id='$userid' GROUP BY user_id");
+        if ($query->num_rows() > 0) {
+            return $query->row()->total;
+        } else {
+            return 0;
+        }
+    }
+
+    //HITUNGH SALES DI tabel sales member
+    function count_tblsalesm($userid, $start, $end)
+    {
+        $query = $this->ci->db->query("SELECT q.updated ,COUNT(p.komisi) AS qty, SUM(p.komisi) AS total_komisi, q.user_id FROM qv_orderan_jn AS q JOIN tb_produk AS p ON p.produk_id = q.produk_id WHERE status='completed' AND  q.updated >= '$start' AND q.updated <= '$end' AND user_id='$userid' GROUP BY q.updated,user_id ORDER BY q.updated DESC");
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
+    //HITUNGH COD DI tabel COD member
+    function count_tblcodm($userid, $start, $end)
+    {
+        $query = $this->ci->db->query("SELECT q.updated ,COUNT(p.komisi) AS qty, SUM(p.komisi) AS total_komisi, q.user_id FROM qv_orderan_jn AS q JOIN tb_produk AS p ON p.produk_id = q.produk_id WHERE (status LIKE 'packing' OR status LIKE 'delivery') AND q.updated >= '$start' AND q.updated <= '$end' AND user_id='$userid' GROUP BY q.updated,user_id ORDER BY q.updated DESC");
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
+
+    // ============
+    // helper
+
+    // ======
+    // ambil tanggal di dalam array  secara dinasi sesuai hari ini
+    function gettanggalgajian($today, $array)
+    {
+        $durasigajian = 7;
+        $hasiltanggal = null;
+
+        foreach ($array as $tgl) {
+            $d1 = new DateTime($tgl);
+            $d2 = new DateTime($today);
+            $diff = $d2->diff($d1);
+            if (($diff->d - 1) < $durasigajian) {
+                $hasiltanggal = $tgl;
+            }
+        }
+        // return format Y-m-d
+        return $hasiltanggal;
     }
 }
