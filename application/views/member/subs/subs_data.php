@@ -22,7 +22,7 @@
                 <p class="card-text">
                     Langganan akan secara otomatis bertambah setalah status pembayaran menjadi <strong>Paid</strong>,
                     pastikan setelah melalukakn perpanjang segera Transfer <br> <br>
-                    silahkan klik disini untuk konfirmasi <a href="#"> Konfirmasi pembayaran</a>
+                    silahkan klik disini untuk konfirmasi <a href="https://forms.gle/gxBzQRfsdHyWR2R76" target="_blank"> Konfirmasi pembayaran</a>
                     <br> Atau bisa langsung hubungi CS kami : <a href="#">Finance department</a>
                 </p>
             </div>
@@ -54,6 +54,11 @@
                 <?php if ($this->session->flashdata('success')) : ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <?= $this->session->flashdata('success'); ?>
+                        <?php
+                        $urllangganan = site_url('langganan');
+                        $text = "**Notifikasi - Perpanjang ** \r \n Data perpanjan masa aktif codtech diterima. \r \n silahkan cek di : {$urllangganan} dan silahkan tunggu konfirmasi pembayaran";
+                        $this->fungsi->apitele($this->setter->get_idteleadmin(), $text, $this->setter->get_tokenteleadmin())
+                        ?>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

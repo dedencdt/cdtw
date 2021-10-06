@@ -139,7 +139,7 @@ class Fungsi
     }
 
     // fungsi api telegram
-    function sendMessage($telegram_id, $message_text, $secret_token)
+    function apitele($telegram_id, $message_text, $secret_token)
     {
         $url = "https://api.telegram.org/bot" . $secret_token . "/sendMessage?parse_mode=markdown&chat_id=" . $telegram_id;
         $url = $url . "&text=" . urlencode($message_text);
@@ -154,9 +154,13 @@ class Fungsi
         curl_close($ch);
 
         if ($err) {
-            echo 'Pesan gagal terkirim, error :' . $err;
+            echo "<script>
+            console.log($err);
+            </script>";
         } else {
-            echo 'Pesan terkirim';
+            echo "<script>
+            console.log($result);
+            </script>";
         }
     }
 
@@ -528,7 +532,8 @@ class Fungsi
     {
         $query = $this->ci->db->query("SELECT COUNT(order_id) AS total_lead, status FROM qv_orderan_jn WHERE status = 'processing' GROUP BY status");
         if ($query->num_rows() > 0) {
-            return $query->row()->total_lead;
+            return $query->num_rows();
+            // return $query->row()->total_lead;
         } else {
             return 0;
         }

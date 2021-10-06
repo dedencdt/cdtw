@@ -3,6 +3,7 @@
         function sendJson() {
 
             let settings = {
+                // Sesuaikan url dengan REST API
                 "url": "http://localhost/cdtmember/api/sendtracking/" + frameid + "/?key=DAp2GwaOhI",
                 "method": "POST",
                 "timeout": 0,

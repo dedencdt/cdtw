@@ -16,6 +16,9 @@ class Api extends CI_Controller
      */
     public function index()
     {
+
+        check_not_login();
+        check_role(1);
         $data['row'] = $this->api_m->get();
         $this->template->load('template', 'apikey/apikey_data', $data);
     }

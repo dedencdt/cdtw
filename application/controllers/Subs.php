@@ -8,6 +8,7 @@ class Subs extends CI_Controller
         parent::__construct();
         set_timezone();
         check_not_login();
+        check_role(2);
         $this->load->model(['langganan_m', 'expdate_m', 'user_m', 'subs_m']);
     }
 

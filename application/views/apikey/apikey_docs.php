@@ -5,29 +5,41 @@
             <div class="card-body">
                 <h5 class="card-title">ENDPOINT API </h5>
                 <p>
-                    POST <span class="bg-info p-1 text-gray-100">/api/sendtracking/</span>
+                    POST <span class="bg-info p-1 text-gray-100">/api/sendtracking/frameid(automatis)</span>
                 </p>
                 <p>
-                    Kode PHP cURL untuk mengambil API
+                    GET DATA MENGGUNAKAN CURL PHP & AJAX JQ
                 </p>
                 <pre>
 // PAstikan waktu sesuai Timezone
 date_default_timezone_set('asia/jakarta');
 
-               // Membuat fungsi cURL
+=======================
+//CURL PHP
+=======================
+
+CURL 
+Intruksi setting : Untuk pertama kali settig silahkan masuk kedalam Plugin, cari di plugin ccodtech utility car file cdt-curl.php
+file source : codtech.id/wp-content/plugins/codtech-utility/ 
+kemudian sesuaikan rest url atau endpoint  
+
+// Membuat fungsi cURL
 function request_api($method, $endpoint, $data = null)
 {
 
-    $resturl = 'http://codtech.local/cdtmember'; // Masukan URL REST Server home tanpa di akhiri '/'
+    $resturl = 'http://localhost/cdtmember'; // Masukan URL REST Server home tanpa di akhiri '/'
     $urlapi = $resturl . $endpoint;
     $curl = curl_init();
 
     curl_setopt_array($curl, [
         CURLOPT_URL => $urlapi,
         CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_SSL_VERIFYPEER => false,
         CURLOPT_SSL_VERIFYHOST => false,
-        CURLOPT_CUSTOMREQUEST => $method,
+        CURLOPT_CUSTOMREQUEST => $method
     ]);
     if ($method == 'POST' || $method == 'PUT') {
         curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
@@ -44,30 +56,65 @@ function request_api($method, $endpoint, $data = null)
         return $response;
     }
 }
-
+    //========================
    // Data sisi Client => Pasang di setiap Landing page
 
-$key = [
-    'key' => 'DAp2GwaOhI' // Key REST API
-];
-$frame_id = isset($_GET['reff_cdt']) ? $_GET['reff_cdt'] : null;
-$params = http_build_query($key);
+ $key = [
+        'key' => $datas['key'] // Key REST API
+    ];
+    $frame_id = isset($_GET['reff_cdt']) ? $_GET['reff_cdt'] : null;
+    $params = http_build_query($key);
 
-$endpoint = '/api/sendtracking/'; // Endpoint Api => /api/sendtracking/
-$apiurl = $endpoint . $frame_id . '?' . $params;
+    $endpoint = '/api/sendtracking/'; // Endpoint Api => /api/sendtracking/
+    $apiurl = $endpoint . $frame_id . '?' . $params;
+    $genrateurl = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $ipaddress = $_SERVER['REMOTE_ADDR']; // mengambil ipaddress
+    $label = $datas['label'];
 
-$data = [
-    'frame_id' => $frame_id, // frame Id sesuaikan pramater reff_cdt = 
-    'label' => 'prelander', // prelander,landingpage,fromorder,lead
-    'url' => $_SERVER['PHP_SELF'] //untuk mendapatkan url saat ini - PHP , window.location.href - JS
-];
-$s = request_api('POST', $apiurl, $data);
-$s = json_decode($s);
+    $data = [
+        'frame_id' => $frame_id, // frame Id sesuaikan pramater reff_cdt = 
+        'label' => $label, // prelander,landingpage,fromorder,lead
+        'url' => $genrateurl, //untuk mendapatkan url saat ini - PHP , window.location.href - JS
+        'ip_address' => $ipaddress
+    ];
+    $s = request_api('POST', $apiurl, $data);
 
-// Hasil data ata Resultnya
-if (isset($s)) :
-    $row = $s->data->track;
-endif;
+    $s = json_decode($s);
+    // Hasil data ata Resultnya
+    if ($s->success == true) :
+        $row = $s->data->track;
+
+    else :
+        $row = $s->success;
+    endif;
+
+
+    =======================
+    AJAX JQ
+    =======================
+    AJAX 
+    Intruksi pemasangan : Silahkan masuk ke File Manager cari file di root website codtech 
+    file : codtech.id/js/ nama file 
+
+    function sendJson() {
+
+            let settings = {
+                // Sesuaikan url dengan REST API
+                "url": "http://localhost/cdtmember/api/sendtracking/" + frameid + "/?key=DAp2GwaOhI",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                "data": data
+            };
+
+            $.ajax(settings).done(function(response) {
+                let row = response.data.track
+                console.log(row);
+               
+                  }
+
                 </pre>
 
                 <div class="row">

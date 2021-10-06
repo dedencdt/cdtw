@@ -7,6 +7,7 @@ class Market extends CI_Controller
     {
         parent::__construct();
         set_timezone();
+        check_role(2);
         check_not_login();
         $this->load->model(['produk_m', 'linkproduk_m', 'market_m']);
     }
@@ -55,9 +56,9 @@ class Market extends CI_Controller
     public function exporthtml($id = null)
     {
         $data['row'] = $this->db->query("SELECT f.frame_id, p.nama_produk, p.desk, p.harga,l.vc, l.atc FROM m_frame AS f JOIN tb_produk AS p ON p.produk_id = f.produk_id JOIN p_linkproduk AS l ON l.produk_id = f.produk_id WHERE frame_id = '$id' ")->row();
-        // $namaFile = "cdt-prelander-html-{$id}.txt";
-        // header("Content-type: text/plain");
-        // header("Content-Disposition: attachment; filename=" . $namaFile);
+        $namaFile = "cdt-prelander-html-{$id}.txt";
+        header("Content-type: text/plain");
+        header("Content-Disposition: attachment; filename=" . $namaFile);
         $this->load->view('member/market/market_prelanders', $data);
     }
 
