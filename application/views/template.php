@@ -52,13 +52,11 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <?php if (!$this->fungsi->user_login()->role == 5) : ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= site_url() ?> ">
-                        <i class="fas fa-fw fa-home"></i>
-                        <span>Dashboard</span></a>
-                </li>
-            <?php endif ?>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= site_url() ?> ">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>Dashboard</span></a>
+            </li>
 
             <!-- CEK USER -->
             <?php

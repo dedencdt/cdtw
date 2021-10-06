@@ -610,4 +610,128 @@ class Fungsi
         // return format Y-m-d
         return $hasiltanggal;
     }
+
+    // ==============
+    // FUNGIS DASHBOAR ADMIN
+    // ================
+    function count_alluser()
+    {
+        $query = $this->ci->db->query("SELECT * FROM tb_user WHERE role = '2' ");
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
+    }
+
+    // hitung user aktif
+    function count_userAktif()
+    {
+        $query = $this->ci->db->query("SELECT user_id,durasi,status FROM tb_langganan WHERE status = 'Paid' AND durasi >= CURDATE() ");
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
+    }
+
+    // hitung hitung semua produk
+    function count_allProduk()
+    {
+        $query = $this->ci->db->query("SELECT * FROM tb_produk ");
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
+    }
+
+    // hitung semua pesanan masuk
+    function count_allOrderan()
+    {
+        $query = $this->ci->db->query("SELECT * FROM qv_orderan_jn ");
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
+    }
+
+    // hitung semua cod Rp
+    function count_allOrderanCod()
+    {
+        $query = $this->ci->db->query("SELECT * FROM qv_orderan_jn WHERE (status LIKE 'delivery' OR status LIKE 'packing')");
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
+    }
+
+    // hitung semua cod Rp
+    function count_allOrderanCodRp()
+    {
+        $query = $this->ci->db->query("SELECT SUM(total) AS total_cod,status FROM qv_orderan_jn WHERE (status LIKE 'delivery' OR status LIKE 'packing') GROUP BY total");
+        if ($query->num_rows() > 0) {
+            return $query->row()->total_cod;
+        } else {
+            return 0;
+        }
+    }
+
+    // hitung semua pesanan selesai
+    function count_alldone()
+    {
+        $query = $this->ci->db->query("SELECT * FROM qv_orderan_jn WHERE status='completed'");
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
+    }
+
+    // hitung semua pesanan selesai
+    function count_alldoneRp()
+    {
+        $query = $this->ci->db->query("SELECT SUM(total) AS total_sales,status FROM qv_orderan_jn WHERE status='completed' GROUP BY total");
+        if ($query->num_rows() > 0) {
+            return $query->row()->total_sales;
+        } else {
+            return 0;
+        }
+    }
+
+
+    // hitung semua pesanan selesai
+    function count_allkomisipaid()
+    {
+        $query = $this->ci->db->query("SELECT SUM(total) AS total_komisi FROM tb_totalkomisi ");
+        if ($query->num_rows() > 0) {
+            return $query->row()->total_komisi;
+        } else {
+            return 0;
+        }
+    }
+
+    //HITUNGH COD DI tabel COD sadmin
+    function count_tblcodadmin($start, $end)
+    {
+        $query = $this->ci->db->query("SELECT updated ,COUNT(harga) AS qty, SUM(harga) AS total_komisi FROM qv_orderan_jn  WHERE (status LIKE 'packing' OR status LIKE 'delivery') AND updated >= '$start' AND updated <= '$end'  GROUP BY updated  ORDER BY updated DESC");
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
+    //HITUNGH COD DI tabelsales admin
+    function count_tblsalesadmin($start, $end)
+    {
+        $query = $this->ci->db->query("SELECT updated ,COUNT(harga) AS qty, SUM(harga) AS total_komisi FROM qv_orderan_jn  WHERE status='completed' AND updated >= '$start' AND updated <= '$end'  GROUP BY updated  ORDER BY updated DESC");
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
 }

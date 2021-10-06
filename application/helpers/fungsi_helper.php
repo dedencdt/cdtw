@@ -74,3 +74,13 @@ function check_memberaktif()
         redirect('dashboard');
     }
 }
+
+
+function check_role($role)
+{
+    $ci = &get_instance();
+    $ci->load->library('fungsi');
+    if ($ci->fungsi->user_login()->role != $role) {
+        redirect('dashboard');
+    }
+}

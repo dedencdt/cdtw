@@ -8,8 +8,7 @@ class Api extends CI_Controller
 
         parent::__construct();
         set_timezone();
-        $this->load->model('api_m');
-        $this->load->model('user_m');
+        $this->load->model(['api_m', 'user_m']);
     }
 
     /**
@@ -85,11 +84,10 @@ class Api extends CI_Controller
 
     ////////////
 
-    public function sendtracking($id)
+
+
+    public function sendtracking($frameid)
     {
-        // get frame ID
-        // $id = $this->uri->segment(3);
-        // $post = $this->input->post_get(null, true);
         $data = [
             'tracking_id' => 'cdt' . date('ymd') . random_string('alnum', 21),
             'label' => $this->input->post_get('label', true),
@@ -100,13 +98,13 @@ class Api extends CI_Controller
             'created_at' => date('Y-m-d')
         ];
         //genrate nama session
-        $session_nama = $id;
         $apikey = $this->input->get_post('key', true);
+        $session_nama = $frameid;
         $key = $this->api_m->key($apikey);
         // tampilkan frame_id
+        $this->api_m->senddata($data);
         if ($key->num_rows() > 0) {
-            $view = $this->api_m->getdata($id)->row();
-            $this->api_m->senddata($data);
+            $view = $this->db->query("SELECT * FROM m_frame WHERE frame_id = '$frameid'")->row();
             header('Content-Type: application/json');
             header('Access-Control-Allow-Credentials: true');
             header('Access-Control-Allow-Origin: *');
@@ -122,7 +120,7 @@ class Api extends CI_Controller
             header('Content-Type: application/json');
             echo json_encode([
                 'success' => false,
-                'message' => 'Data gagal'
+                'message' => 'Akses di tolak'
             ]);
         }
     }

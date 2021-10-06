@@ -40,6 +40,8 @@ class Market extends CI_Controller
             $this->market_m->addmarketlink($post);
         } elseif (isset($_POST['edit'])) {
             $this->market_m->editframe($post);
+        } elseif (isset($_POST['deletelink'])) {
+            $this->market_m->updatelinktodel($post);
         }
 
         if ($this->db->affected_rows() > 0) {
@@ -50,12 +52,13 @@ class Market extends CI_Controller
     }
 
     // Page untuk membuat file txt prelander
-    public function export($id = null)
+    public function exporthtml($id = null)
     {
-        $namaFile = 'cdt-prelander.txt';
-        header("Content-type: text/plain");
-        header("Content-Disposition: attachment; filename=" . $namaFile);
-        echo "ini data TXT";
+        $data['row'] = $this->db->query("SELECT f.frame_id, p.nama_produk, p.desk, p.harga,l.vc, l.atc FROM m_frame AS f JOIN tb_produk AS p ON p.produk_id = f.produk_id JOIN p_linkproduk AS l ON l.produk_id = f.produk_id WHERE frame_id = '$id' ")->row();
+        // $namaFile = "cdt-prelander-html-{$id}.txt";
+        // header("Content-type: text/plain");
+        // header("Content-Disposition: attachment; filename=" . $namaFile);
+        $this->load->view('member/market/market_prelanders', $data);
     }
 
     public function del($id)

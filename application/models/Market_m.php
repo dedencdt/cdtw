@@ -41,6 +41,7 @@ class Market_m extends CI_Model
         $this->db->select('tb_marketlink.*', 'user_id as market_user_id');
         $this->db->like('tb_marketlink.user_id', $user, 'none');
         $this->db->like('tb_marketlink.produk_id', $produk, 'none');
+        $this->db->where('tb_marketlink.visible', '1');
         // $this->db->like('tb_marketlink.produk_id', $produk, 'none');
         $this->db->join('p_linkproduk', 'p_linkproduk.linkproduk_id = tb_marketlink.linkproduk_id');
         $this->db->join('m_frame', 'm_frame.frame_id = tb_marketlink.frame_id');
@@ -51,6 +52,17 @@ class Market_m extends CI_Model
         }
         $query = $this->db->get();
         return $query;
+    }
+
+    public function updatelinktodel($post)
+    {
+        $params = [
+            'marketlink_id' => $post['marketlink_id'],
+            'visible' => $post['visible'],
+        ];
+        $this->db
+            ->where('marketlink_id', $post['marketlink_id'])
+            ->update('tb_marketlink', $params);
     }
 
     public function addframe($post)

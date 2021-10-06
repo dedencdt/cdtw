@@ -21,23 +21,28 @@ class Dashboard extends CI_Controller
 
 	public function cs()
 	{
+		check_role(3);
 		$this->template->load('template', 'dashboard_cs');
 	}
 
 	public function packing()
 	{
+		check_role(5);
 		$this->template->load('template', 'dashboard_cs');
 	}
 
 	public function vendor()
 	{
+		check_role(4);
 		$this->template->load('template', 'dashboard_vendor');
 	}
 
 	public function admin()
 	{
-		$this->template->load('template', 'dashboard_cs');
+		check_role(1);
+		$this->template->load('template', 'dashboard_admin');
 	}
+
 
 
 	function check_role_4dashboard()
@@ -70,6 +75,13 @@ class Dashboard extends CI_Controller
 
 	public function profile($id)
 	{
+		$idurl = $this->uri->segment(3);
+		$idlogin = $this->fungsi->user_login()->user_id;
+		// Cegah masuk ke profile selain yang punya
+		if ($idurl != $idlogin) {
+			redirect('dashboard');
+		}
+
 		/**
 		 * Form Validation
 		 */

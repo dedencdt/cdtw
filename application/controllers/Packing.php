@@ -6,6 +6,7 @@ class Packing extends CI_Controller
     {
         parent::__construct();
         check_not_login();
+        check_role(5);
         $this->load->model(['orders_m', 'produk_m']);
     }
     public function index()

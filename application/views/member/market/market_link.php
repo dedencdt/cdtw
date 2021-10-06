@@ -49,17 +49,21 @@
                                         <div class="row">
                                             <div class="col">
 
-                                                <a href="<?= site_url() . 'market/export/' . $data->linkproduk_id ?>" target="_blank" rel="noopener noreferrer"><button class="btn bg-light"><i class="fa fa-file-download"></i> XML(Blogspot)</button></a>
+                                                <a href="#" target="_blank" onclick="return alert('Mohon maaf untuk saat ini XML belum tersedia')" rel="noopener noreferrer"><button class="btn bg-light"><i class="fa fa-file-download"></i> XML(Blogspot)</button></a>
                                             </div>
 
                                             <div class="col">
-                                                <a href="<?= site_url() . 'market/export/' . $data->linkproduk_id ?>" target="_blank" rel="noopener noreferrer"><button class="btn bg-light"><i class="fa fa-file-download"></i> HTML(Shopify)</button></a>
+                                                <a href="<?= site_url() . 'market/exporthtml/' . $data->frame_id ?>" target="_blank" rel="noopener noreferrer"><button class="btn bg-light"><i class="fa fa-file-download"></i> HTML(Shopify)</button></a>
                                             </div>
                                         </div>
                                     </li>
                                 </ul>
                                 <div class="card-footer bg-transparent">
-                                    <a href="<?= site_url() . 'market/del/' . $data->frame_id ?>" class="float-right"><button class="btn btn-danger btn-sm">Hapus</button></a>
+                                    <form action="<?= site_url('market/process') ?>" method="post">
+                                        <input type="hidden" name="visible" value="0">
+                                        <input type="hidden" name="marketlink_id" value="<?= $data->marketlink_id ?>">
+                                        <button class="float-right btn btn-danger btn-sm" type="submit" name="deletelink">Hapus</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

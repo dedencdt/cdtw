@@ -28,7 +28,7 @@
     <div id="dropdonKonfPay" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Modul Payment:</h6>
-            <a class="collapse-item" href="<?= site_url('') ?>">Data Pembayaran</a>
+            <a class="collapse-item" href="<?= site_url('konfirmasi') ?>">Data Pembayaran</a>
             <a class="collapse-item" href="<?= site_url('') ?>">Data Rekening</a>
         </div>
     </div>

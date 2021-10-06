@@ -65,7 +65,8 @@ class Api_m extends CI_Model
         // $cekQuery = isset($queryVisitor) ? ($queryVisitor) : 0;
 
         // if ($cekQuery == 0) {
-        $this->db->insert('m_tracking', $data);
+        $query =  $this->db->insert('m_tracking', $data);
+
 
         //     // jika sudah ada
         // } else {
@@ -75,15 +76,16 @@ class Api_m extends CI_Model
 
     public function getdata($id = null)
     {
-        // $this->db->select('m_tracking.fbpx1,fbpx2,hidden_key,user_id,produk_id');
         $this->db->from('m_frame');
-        $this->db->order_by('created_at', 'ASC', 1);
         if ($id != null) {
-            // mengambil parameter id = frame id
             $this->db->where('frame_id', $id);
         }
         $query = $this->db->get();
-        return $query;
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return false;
+        }
     }
 
 
