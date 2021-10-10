@@ -49,7 +49,7 @@ class Subs extends CI_Controller
         $post = $this->input->post(null, TRUE);
         if (isset($_POST['add'])) {
             // input data ke databse
-            // $this->langganan_m->add($post);
+            $this->langganan_m->add($post);
 
             // Keterangan
             $exharga = explode('|', $post['exp_date']);
