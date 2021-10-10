@@ -65,7 +65,7 @@ class Api_m extends CI_Model
         // $cekQuery = isset($queryVisitor) ? ($queryVisitor) : 0;
 
         // if ($cekQuery == 0) {
-        $query =  $this->db->insert('m_tracking', $data);
+        $this->db->insert('m_tracking', $data);
 
 
         //     // jika sudah ada

@@ -94,7 +94,7 @@
                                 <td>
                                     <?php
                                     // TEKS WHATSAPP
-                                    $text = "Hai ka {$data->penerima} , pesanannya sudah kami terima,\r \n \r \n*Details Order* \r \n *InvoiceID* : #{$data->order_id}\r \n *Pesanan* : {$data->nama_produk}\r \n *Harga* : {$data->ongkir}  \r \n *Ongkir* : {$data->ongkir}  \r \n *Total* : {$data->total} \r \n \r \n*Detail Alamat* \r \n *Penerima* : {$data->penerima} \r \n*No. Whatsapp* : {$data->nowa} \r \n *Alamat* : {$data->alamat} \r \n \r \n Jika data sudah benar silahkan *konfirmasi* agar segera kami proses untuk pengiriman.\r \n\r \n _note*_ : _jika ada data yang salah mohon kirimkan data validnya ke nomer ini, Terimakasih_ 
+                                    $text = "Hai ka {$data->penerima} , pesanannya sudah kami terima,\r \n \r \n*Details Order* \r \n *InvoiceID* : #{$data->order_id}\r \n *Pesanan* : {$data->nama_produk}\r \n *Harga* : {$data->total}  \r \n *Ongkir* : {$data->ongkir}  \r \n *Total* : {$data->total} \r \n \r \n*Detail Alamat* \r \n *Penerima* : {$data->penerima} \r \n*No. Whatsapp* : {$data->nowa} \r \n *Alamat* : {$data->alamat} \r \n \r \n Jika data sudah benar silahkan *konfirmasi* agar segera kami proses untuk pengiriman.\r \n\r \n _note*_ : _jika ada data yang salah mohon kirimkan data validnya ke nomer ini, Terimakasih_ 
                                         ";
 
                                     ?>
