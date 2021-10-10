@@ -58,7 +58,7 @@
                         $userlangganan = $this->fungsi->user_login()->username;
                         $urllangganan = site_url('langganan');
                         $text = "**Notifikasi - Perpanjang member : $userlangganan ** \r \n Data perpanjan masa aktif codtech diterima. \r \n silahkan cek di : {$urllangganan} dan silahkan tunggu konfirmasi pembayaran";
-                        // $this->fungsi->apitele($this->setter->get_idteleadmin(), $text, $this->setter->get_tokenteleadmin())
+                        $this->fungsi->apitele($this->setter->get_idteleadmin(), $text, $this->setter->get_tokenteleadmin())
                         ?>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -120,6 +120,9 @@
                     <input type="hidden" name="user_id" id="user_id" value="<?= $this->fungsi->user_login()->user_id ?>">
                     <!-- status -->
                     <input type="hidden" name="status" id="status" value="Waiting">
+                    <!-- email -->
+                    <input type="hidden" name="email" id="email" value="<?= $this->fungsi->user_login()->email ?>">
+
 
                     <!-- durasi -->
                     <div class="form-group">

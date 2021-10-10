@@ -100,8 +100,8 @@ class Langganan extends CI_Controller
             $this->langganan_m->setConfStatus($post);
 
             // text to email
-            $email = getuserbyId($post['user_id'])->email;
-            $username = getuserbyId($post['user_id'])->username;
+            $email = $post['email'];
+            $username = $post['user_id'];
             $subject = "Pembayaran terkonfirmasi ";
             $msg = "
             <h2>Selamat Akun anda Telah Aktif</h2>
