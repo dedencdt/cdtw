@@ -84,3 +84,15 @@ function check_role($role)
         redirect('dashboard');
     }
 }
+
+// fungsi untuk mengambil data by userid
+function getuserbyId($id)
+{
+    $ci = &get_instance();
+    $query = $ci->db->query("SELECT * FROM tb_user WHERE user_id = '$id'");
+    if ($query->num_rows() > 0) {
+        return $query->row();
+    } else {
+        return false;
+    }
+}

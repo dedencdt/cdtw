@@ -55,9 +55,10 @@
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <?= $this->session->flashdata('success'); ?>
                         <?php
+                        $userlangganan = $this->fungsi->user_login()->username;
                         $urllangganan = site_url('langganan');
-                        $text = "**Notifikasi - Perpanjang ** \r \n Data perpanjan masa aktif codtech diterima. \r \n silahkan cek di : {$urllangganan} dan silahkan tunggu konfirmasi pembayaran";
-                        $this->fungsi->apitele($this->setter->get_idteleadmin(), $text, $this->setter->get_tokenteleadmin())
+                        $text = "**Notifikasi - Perpanjang member : $userlangganan ** \r \n Data perpanjan masa aktif codtech diterima. \r \n silahkan cek di : {$urllangganan} dan silahkan tunggu konfirmasi pembayaran";
+                        // $this->fungsi->apitele($this->setter->get_idteleadmin(), $text, $this->setter->get_tokenteleadmin())
                         ?>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -132,7 +133,6 @@
                             </div>
                         <?php endforeach; ?>
                     </div>
-
                     <div class="form-group">
                         <label for="paymethod" class="col-form-label">Metode Pembayaran</label>
                         <select class="form-control" name="paymethod" id="paymethod" required>

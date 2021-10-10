@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Continues</title>
+    <title><?= $row->nama_produk ?></title>
 
     <!-- CSS BOOTSTRAP -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -29,14 +29,16 @@
     <script id="fbx"></script>
 
     <div class="cdt-hidden cdt-keyword" style="display: none;">
+        {{content_for_header}}
+        {{content_for_layout}}
         <div class="cdt-address">
             <center><span class="text-white">Jl Sumbon 2 Ds. Kedokangabus - Kec gabuswetan - Indramayu 45263</span></center>
         </div>
     </div>
     <!-- web konten -->
-    <div class="cdt-webcontent"">
+    <div class="cdt-webcontent">
         <!-- enwebcontent -->
-    </div> 
+    </div>
     <!-- end webconten -->
 
     <!-- mobile content -->

@@ -739,4 +739,56 @@ class Fungsi
             return false;
         }
     }
+
+
+    // Kirim email
+    function sendEmail($subject, $to, $msg1)
+    {
+        $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => $this->ci->setter->get_smtpuser(),
+            'smtp_pass' => $this->ci->setter->get_smtppass(),
+            'smtp_port' => 465,
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        ];
+
+        $msg = "
+        <div style='width:100%; background-color:#edf6f7; padding:50px 0'>
+        <div style='width:70%;margin:0 auto; background-color:white; padding:20px'>
+        <center>
+            <img src='https://member.codtech.id/assets/img/logo-codtech.png' width='200px'>
+        </center>
+        <hr style='margin:20px 0'>
+            $msg1
+            
+              
+        <br><br><br>
+        Best Regards <br>
+        Codtech crew <br><br>
+        More Information: <br>
+        Website : codtech.id <br>
+        Fanspage : facebook.com/codtech.id <br>
+        Alamat : Jalan sumbon 2 Kedokangabus Rt.12/05 Kec.Gabuswetan - Indramayu
+        </div></div>
+        ";
+        $this->ci->load->library('email', $config);
+
+        $this->ci->email->from($this->ci->setter->get_smtpuser(), $this->ci->setter->get_aliassender());
+        $this->ci->email->to($to);
+        $this->ci->email->subject($subject);
+        $this->ci->email->message($msg);
+
+        if ($this->ci->email->send()) {
+            return true;
+        } else {
+            echo "<script>
+            console.log(" . $this->ci->email->print_debugger() . ");
+            
+            </script>";
+            die;
+        }
+    }
 }

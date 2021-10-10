@@ -69,10 +69,21 @@ class User extends CI_Controller
             $post = $this->input->post(null, TRUE);
             $this->user_m->add($post);
 
+            $msg = "<h2>Selamat akun anda telah di buat</h2>
+    berikut informasi mengenai data akun Anda : <br><br>
+    username : " . $post['username'] . " <br>
+    Password : " . $post['password'] . "<br><br>
+    Silahkan anda login ke alamat : " . site_url() . " kemudian segera ganti password dan lengkapi data diri di menu profile. <br>
+    Terimakasih sudah menjadi bagian dari keluarga codtech
+";
+            $emailto = $post['email'];
+
             if ($this->db->affected_rows() > 0) {
-                echo "<script>alert('Data berhasil di tambah') </script>";
+
+                $this->session->set_flashdata('success', 'Data berhasil di simpan');
+                $this->fungsi->sendEmail('Pendaftaran member baru', $emailto, $msg);
             }
-            echo "<script> window.location = '" . site_url('user') . "' </script>";
+            redirect('user');
         }
     }
 

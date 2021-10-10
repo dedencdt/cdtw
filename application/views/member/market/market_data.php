@@ -58,7 +58,9 @@
                                         <li class="list-group-item">Komisi Affiliate : <strong>Rp. <?= number_format($data->komisi) ?></strong></strong></li>
                                         <li class="list-group-item">Stock: <strong> <?= $data->stock ?></strong></li>
                                     </ul>
-                                    <a href="<?= site_url() . 'market/link/' . $data->produk_id ?>" class="card-link float-right">Link Affiliate</a>
+                                    <?php if ($data->harga != 0 && $data->komisi != 0) : ?>
+                                        <a href="<?= site_url() . 'market/link/' . $data->produk_id ?>" class="card-link float-right">Link Affiliate</a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>

@@ -98,6 +98,19 @@ class Langganan extends CI_Controller
             $this->langganan_m->edit($post);
         } elseif (isset($_POST['konfirmasi'])) {
             $this->langganan_m->setConfStatus($post);
+
+            // text to email
+            $email = getuserbyId($post['user_id'])->email;
+            $username = getuserbyId($post['user_id'])->username;
+            $subject = "Pembayaran terkonfirmasi ";
+            $msg = "
+            <h2>Selamat Akun anda Telah Aktif</h2>
+            akun dengan username : $username , telah aktif dan bisa mengakses semua fitur yang ada di website member.
+            <br>Salam profit,, Gas Terus.
+            ";
+
+
+            $this->fungsi->sendEmail($subject, $email, $msg);
         }
 
         if ($this->db->affected_rows() > 0) {

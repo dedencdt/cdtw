@@ -48,12 +48,65 @@ class Subs extends CI_Controller
     {
         $post = $this->input->post(null, TRUE);
         if (isset($_POST['add'])) {
-            $this->langganan_m->add($post);
+            // input data ke databse
+            // $this->langganan_m->add($post);
+
+            // Keterangan
+            $exharga = explode('|', $post['exp_date']);
+            $nameuser = $this->getdatauser($post['user_id'])->nama;
+            $tgldibuat = date('Y-m-d H:i:s');
+            $paymentmethod = $post['paymethod'];
+            $tagihan = number_format($exharga[1]);
+            $urlwa = 'https://wa.me/6282210348224?text=' . urlencode("Saya ingin perpanjang langganan dengan potong komisi , dengan no: invoice " . $post['invoice'] . "");
+
+            // text email
+            $msg = "
+            YTH $nameuser , <br>
+            Ini adalah pemberitahuan bahwa faktur langganan member telah dibuat $tgldibuat.<br>
+            Metode Pembayaran Anda adalah : $paymentmethod ( Manual ), <br><br>
+            Invoice : " . $post['invoice'] . " <br>
+            Jumlah Tagihan : Rp. $tagihan <br>
+
+            <h2>Cara Pembayaran  Via Transfer </h2>
+            Transfer Tagihan sesuai dengan jumlah yang tetera , Kirim ke Rekening : <br>
+            <strong>
+            BANK JAGO : 1011 2158 1208 A.n MUJAHID HIJBULLAH 
+            </strong> 
+
+            <h2>Cara Pembayaran via Potong Komisi </h2>
+            Langsung ke konfirmasi pembayaran dengan, ikuti petunjuk <strong>Cara Konfirmasi pembayaran</strong>
+
+            <h2>Cara Konfirmasi Pembayaran</h2>
+            Setelah melakukan Pembayaran, Silahkan konfirmasi melalui :
+            <ul>
+            <li>
+            <strong>Live chat</strong> yang ada di pojok kanan bawah
+            </li>
+            <li>
+            Atau Chat Bagian Keuangan : <a href='$urlwa'>Klik disini</a>
+            </li>
+            </ul>
+            ";
+            $subject = "Perpanjangan langganan - invoice #" . $post['invoice'];
+            $emailto = $this->getdatauser($post['user_id'])->email;
         }
 
         if ($this->db->affected_rows() > 0) {
+            $this->fungsi->sendEmail($subject, $emailto, $msg);
             $this->session->set_flashdata('success', 'Data berhasil di simpan');
         }
         redirect('subs');
+    }
+
+
+    function getdatauser($id)
+    {
+        $query = $this->db->query("SELECT * FROM tb_user WHERE user_id = '$id'");
+
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return false;
+        }
     }
 }
