@@ -110,7 +110,9 @@ class Langganan extends CI_Controller
             ";
 
 
-            $this->fungsi->sendEmail($subject, $email, $msg);
+            if ($this->fungsi->sendEmail($subject, $email, $msg)) {
+                return true;
+            }
         }
 
         if ($this->db->affected_rows() > 0) {

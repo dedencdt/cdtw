@@ -92,7 +92,10 @@ class Subs extends CI_Controller
         }
 
         if ($this->db->affected_rows() > 0) {
-            $this->fungsi->sendEmail($subject, $emailto, $msg);
+            if ($this->fungsi->sendEmail($subject, $emailto, $msg)) {
+                return true;
+            }
+
             $this->session->set_flashdata('success', 'Data berhasil di simpan');
         }
         redirect('subs');

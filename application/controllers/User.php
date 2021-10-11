@@ -50,10 +50,10 @@ class User extends CI_Controller
     public function add()
     {
 
-        // $this->form_validation->set_rules('username', 'Username', 'required|is_unique[tb_user.username]|min_length[5]');
+        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[tb_user.username]|min_length[5]');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
         $this->form_validation->set_rules('passconf', 'Password Confirmation', 'matches[password]');
-        // $this->form_validation->set_rules('email', 'Email', 'required|is_unique[tb_user.email]|valid_email');
+        $this->form_validation->set_rules('email', 'Email', 'required|is_unique[tb_user.email]|valid_email');
         $this->form_validation->set_rules('role', 'Role', 'required');
         $this->form_validation->set_rules('nohp', 'Nomer HP / Whatsapp', 'required');
 
@@ -69,13 +69,13 @@ class User extends CI_Controller
             $post = $this->input->post(null, TRUE);
             $this->user_m->add($post);
 
-            $emailto = $post['email'];
 
             if ($this->db->affected_rows() > 0) {
 
                 $this->session->set_flashdata('success', 'Data berhasil di simpan');
             }
 
+            $emailto = $post['email'];
             $msg = "<h2>Selamat akun anda telah di buat</h2>
     berikut informasi mengenai data akun Anda : <br><br>
     username : " . $post['username'] . " <br>
@@ -83,7 +83,10 @@ class User extends CI_Controller
     Silahkan anda login ke alamat : " . site_url() . " kemudian segera ganti password dan lengkapi data diri di menu profile. <br>
     Terimakasih sudah menjadi bagian dari keluarga codtech
 ";
-            $this->fungsi->sendEmail('Pendaftaran member baru', $emailto, $msg);
+            $emailsend =  $this->fungsi->sendEmail('Pendaftaran member baru', $emailto, $msg);
+            if ($emailsend) {
+                return true;
+            }
             redirect('user');
         }
     }

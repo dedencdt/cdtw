@@ -784,11 +784,12 @@ class Fungsi
         if ($this->ci->email->send()) {
             return true;
         } else {
-            echo "<script>
-            console.log(" . $this->ci->email->print_debugger() . ");
-            
-            </script>";
-            die;
+            // echo "<script>
+            // console.log(" . $this->ci->email->print_debugger() . ");
+
+            // </script>";
+            // die;
+            return false;
         }
     }
 }
