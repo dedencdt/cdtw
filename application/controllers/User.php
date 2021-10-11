@@ -50,10 +50,10 @@ class User extends CI_Controller
     public function add()
     {
 
-        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[tb_user.username]|min_length[5]');
+        // $this->form_validation->set_rules('username', 'Username', 'required|is_unique[tb_user.username]|min_length[5]');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
         $this->form_validation->set_rules('passconf', 'Password Confirmation', 'matches[password]');
-        $this->form_validation->set_rules('email', 'Email', 'required|is_unique[tb_user.email]|valid_email');
+        // $this->form_validation->set_rules('email', 'Email', 'required|is_unique[tb_user.email]|valid_email');
         $this->form_validation->set_rules('role', 'Role', 'required');
         $this->form_validation->set_rules('nohp', 'Nomer HP / Whatsapp', 'required');
 
