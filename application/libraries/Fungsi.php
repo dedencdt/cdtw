@@ -749,9 +749,9 @@ class Fungsi
             'smtp_crypto' => 'tls',
             // Sever Google
             // 'smtp_host' => 'ssl://smtp.googlemail.com',
-            // 'smtp_host' => 'smtp.gmail.com',
+            'smtp_host' => 'smtp.gmail.com',
             // Server hosting
-            'smtp_host' => 'mail.codtech.id',
+            // 'smtp_host' => 'mail.codtech.id',
             'smtp_user' => $this->ci->setter->get_smtpuser(),
             'smtp_pass' => $this->ci->setter->get_smtppass(),
             'smtp_port' => 465,
