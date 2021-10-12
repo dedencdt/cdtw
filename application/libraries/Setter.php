@@ -28,8 +28,8 @@ class Setter
         $tele_token = '2055110738:AAHeUlt9cWKeGFwRDa2DF81m6RLpks67GuE',
 
         // CONFIGURASI UNTUK SETTING EMAIL
-        $smtpuser = 'codtech.info@gmail.com', //Masukan email namaemail@email.com
-        $smtppass = 'wordpress2020', //Masukan password email
+        $smtpuser = 'noreply@codtech.id', //Masukan email namaemail@email.com
+        $smtppass = 'wordpress2021', //Masukan password email
         $Aliaslsender = 'Codtech ID'; //Nama pengirim Alias Email
 
 
