@@ -746,13 +746,15 @@ class Fungsi
     {
         $config = [
             'protocol' => 'smtp',
+            'smtp_crypto' => 'tls',
             // 'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_host' => 'ssl://smtp.gmail.com',
+            'smtp_host' => 'smtp.gmail.com',
             'smtp_user' => $this->ci->setter->get_smtpuser(),
             'smtp_pass' => $this->ci->setter->get_smtppass(),
             'smtp_port' => 465,
             'mailtype' => 'html',
             'charset' => 'utf-8',
+            'crlf' => "\r\n",
             'newline' => "\r\n"
         ];
 
