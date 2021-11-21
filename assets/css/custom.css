@@ -1,0 +1,33 @@
+.clear {
+	clear: both;
+}
+
+.cdt-track {
+	color: brown;
+}
+
+#accordionSidebar {
+	background-color: rgb(242, 244, 248);
+}
+
+.cdt-icon,
+#cdt-title,
+#accordionSidebar li a,
+#accordionSidebar li a i {
+	color: rgb(40, 40, 49);
+}
+
+
+#accordionSidebar li a:hover {
+	background-color: rgba(73, 85, 92, 0.4188);
+	color: rgba(76, 99, 161, 0.966);
+}
+
+/* 
+#cdt-title {
+	color: rgb(182, 183, 208);
+}
+
+#accordionSidebar li a i {
+	color: rgb(73, 70, 70);
+} */

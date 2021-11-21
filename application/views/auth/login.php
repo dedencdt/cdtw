@@ -18,6 +18,7 @@
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/') ?>css/sb-admin-2.min.css" rel="stylesheet">
 
+
 </head>
 
 <body class="bg-gradient-300">
@@ -60,11 +61,12 @@
 
                                     </form>
                                     <hr>
-                                    <div class="text-center">
+                                    <!-- <div class="text-center">
                                         <a class="small" href="#">Forgot Password?</a>
-                                    </div>
+                                    </div> -->
                                     <div class="text-center">
-                                        <a class="small" href="#">Create an Account!</a>
+                                        <a class="btn btn-transparant" href="<?= site_url('auth/registration') ?>">Create an Account!</a>
+                                        <!-- <button type="button" class="btn btn-transparant" data-toggle="modal" data-target="#ModalRegis">Create an Account!</button> -->
                                     </div>
                                 </div>
                             </div>
@@ -77,6 +79,27 @@
         </div>
 
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="ModalRegis" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Pendaftaran Member</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="reff">Kode Refferal</label>
+                    <input class="form-control" type="text" id="kode_leader" name="kode_leader" placeholder="Masukan Kode Refferal Leader Anda." required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="checkRefferal()">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?= base_url('assets/') ?>vendor/jquery/jquery.min.js"></script>
@@ -87,6 +110,9 @@
 
     <!-- Custom scripts for all pages-->
     <script src="<?= base_url('assets/') ?>js/sb-admin-2.min.js"></script>
+
+
+
 
 </body>
 

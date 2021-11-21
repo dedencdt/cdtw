@@ -26,7 +26,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
     <!-- Custom styles by deden-->
-    <link href="<?= base_url() ?>assets/css/cdt-style.css" rel="stylesheet">
+    <link href="<?= base_url() ?>assets/css/custom.css" rel="stylesheet">
 
 
 </head>
@@ -36,16 +36,16 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Sidebar clas ="bg-gradient-secondary " -->
+        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
                 <div class="sidebar-brand-icon rotate-n-15 navbar-brand">
-                    <i class="fas fa-code"></i>
+                    <i class="fas fa-code cdt-icon"></i>
                     <!-- <img src="<?= site_url('assets/img/logo-codtech.png') ?>" alt="codtech member" width="100" height="60"> -->
                 </div>
-                <div class="sidebar-brand-text mx-3">CODTECH<sup>id</sup></div>
+                <div class="sidebar-brand-text mx-3" id="cdt-title">CODTECH<sup>id</sup></div>
             </a>
 
             <!-- Divider -->

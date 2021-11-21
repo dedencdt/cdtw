@@ -746,10 +746,10 @@ class Fungsi
     {
         $config = [
             'protocol' => 'smtp',
-            'smtp_crypto' => 'tls',
+            // 'smtp_crypto' => 'tls',
             // Sever Google
-            'smtp_host' => 'smtp.googlemail.com',
-            // 'smtp_host' => 'ssl://smtp.googlemail.com',
+            // 'smtp_host' => 'smtp.googlemail.com',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
             // 'smtp_host' => 'smtp.gmail.com',
             // Server hosting
             // 'smtp_host' => 'mail.codtech.id',
@@ -759,7 +759,8 @@ class Fungsi
             'mailtype' => 'html',
             'charset' => 'utf-8',
             'crlf' => "\r\n",
-            'newline' => "\r\n"
+            'newline' => "\r\n",
+            'charset' => 'iso-8859-1'
         ];
 
         $msg = "
@@ -783,20 +784,19 @@ class Fungsi
         ";
         $this->ci->load->library('email', $config);
 
+        $this->ci->email->initialize($config);
         $this->ci->email->from($this->ci->setter->get_smtpuser(), $this->ci->setter->get_aliassender());
         $this->ci->email->to($to);
         $this->ci->email->subject($subject);
         $this->ci->email->message($msg);
-
         if ($this->ci->email->send()) {
             return true;
         } else {
-            // echo "<script>
-            // console.log(" . $this->ci->email->print_debugger() . ");
+            echo "<script>
+            console.log(" . $this->ci->email->print_debugger() . ");
 
-            // </script>";
-            // die;
-            return false;
+            </script>";
+            die;
         }
     }
 }

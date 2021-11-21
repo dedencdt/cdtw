@@ -10,6 +10,46 @@ class Auth extends CI_Controller
         $this->load->view('auth/login');
     }
 
+    public function registration()
+    {
+
+        $this->load->view('auth/registrasi');
+    }
+
+    public function load()
+    {
+        $post = $this->input->post(null, TRUE);
+        if (isset($post['daftar'])) {
+            $nama = $post['nama'];
+            $email =  $post['email'];
+            $username =  $post['username'];
+            $wa =  $post['wa'];
+
+            $msg = "Selamat $nama anda berhasil terdaftar sebagai member, berikut detail pendaftaran anda : <br>
+            username : $username <br>
+            Whatsapp : $wa
+            ";
+
+            $pesan = "Pendaftaran Member Baru \r\n \r\n
+            =========================== \r\n
+            Nama : $nama \r\n
+            Username : $username \r\n
+            Password : asldnjmoi2 \r\n
+            Email : $email \r\n
+            No. Whatsapp : $wa \r\n \r\n
+            Pendaftara melalui link : - 
+            Refferal dari : -
+           
+             
+            ";
+
+            $this->fungsi->apitele($this->setter->get_idteleadmin(), $pesan, $this->setter->get_tokenteleadmin());
+            // $this->fungsi->sendEmail('Pendaftaran member baru', $email,  $msg);
+        } else {
+            echo "Gagal memasukan data";
+        }
+    }
+
     public function process()
     {
         $post = $this->input->post(null, TRUE);
