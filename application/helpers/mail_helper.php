@@ -2,7 +2,7 @@
 
 function send_mail($oThis,$data)
 {
-  // Konfigurasi email
+  // Konfigurasi email 
   $config = [
     'mailtype'  => 'html',
     'charset'   => 'utf-8',
