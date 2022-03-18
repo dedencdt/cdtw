@@ -43,7 +43,7 @@
                                     <?php $this->session->unset_userdata('success'); ?>
                                 <?php endif; ?>
                                 <div class="form-group">
-                                    <input type="nama" class="form-control form-control-user" id="nama" name="nama" placeholder="Nama lengkap">
+                                    <input type="text" class="form-control form-control-user" id="nama" name="nama" placeholder="Nama lengkap">
                                 </div>
                                 <div class="form-group">
                                     <input type="username" class="form-control form-control-user" id="username" name="username" placeholder="Username" required>
@@ -53,6 +53,9 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="number" class="form-control form-control-user" id="wa" name="wa" placeholder="No. Whatsapp" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="idrefferal" name="idrefferal" placeholder="Kode Referral / Kode Leader" required>
                                 </div>
                                 <button name="daftar" type="submit" class="btn  btn-user btn-block" style="background-color:#ff7400; color:white;">
                                     Register Account

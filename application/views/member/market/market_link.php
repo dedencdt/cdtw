@@ -49,7 +49,7 @@
                                         <div class="row">
                                             <div class="col">
 
-                                                <a href="#" target="_blank" onclick="return alert('Mohon maaf untuk saat ini XML belum tersedia')" rel="noopener noreferrer"><button class="btn bg-light"><i class="fa fa-file-download"></i> XML(Blogspot)</button></a>
+                                                <a href="<?= site_url() . 'market/exportxmlblogspot/' . $data->frame_id ?>" target="_blank" rel="noopener noreferrer"><button class="btn bg-light"><i class="fa fa-file-download"></i> XML(Blogspot)</button></a>
                                             </div>
 
                                             <div class="col">

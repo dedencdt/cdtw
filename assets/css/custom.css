@@ -23,6 +23,10 @@
 	color: rgba(76, 99, 161, 0.966);
 }
 
+.btn-login:hover {
+	color: #ff7400;
+	background-color: #723a0c;
+}
 /* 
 #cdt-title {
 	color: rgb(182, 183, 208);

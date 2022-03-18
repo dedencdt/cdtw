@@ -57,7 +57,7 @@
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" name="password" id="password" placeholder="Password.." required>
                                         </div>
-                                        <input type="submit" name="login" class="btn btn-user btn-block" style="background-color:#ff7400; color:white;" value="Login" />
+                                        <input type="submit" name="login" class="btn btn-user btn-block btn-login" style="background-color:#ff7400; color:white;" value="Login" />
 
                                     </form>
                                     <hr>

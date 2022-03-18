@@ -53,7 +53,7 @@ class Dashboard_m extends CI_Model
     }
 
     // Setting Query
-    private function _setQueryDM($limit, $start, $keyword = null, $user)
+    private function _setQueryDM($limit, $start, $keyword = null, $user = null )
     {
         $this->db->select('*');
         $this->db->from($this->tblMKomisi);
@@ -81,7 +81,7 @@ class Dashboard_m extends CI_Model
         return $this->db->count_all_results();
     }
 
-    public function getDataDM($limit, $start, $keyword = null, $user)
+    public function getDataDM($limit, $start, $keyword = null, $user = null )
     {
         $this->_setQueryDM($limit, $start, $keyword, $user);
         return $this->db->get();

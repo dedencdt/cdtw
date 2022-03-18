@@ -62,6 +62,16 @@ class Market extends CI_Controller
         $this->load->view('member/market/market_prelanders', $data);
     }
 
+    // Page untuk membuat file txt prelander XML BLOGSPOT
+    public function exportxmlblogspot($id = null)
+    {
+        $data['row'] = $this->db->query("SELECT f.frame_id, p.nama_produk, p.desk, p.harga,l.vc, l.atc, l.prelander FROM m_frame AS f JOIN tb_produk AS p ON p.produk_id = f.produk_id JOIN p_linkproduk AS l ON l.produk_id = f.produk_id WHERE frame_id = '$id' ")->row();
+        $namaFile = "cdt-prelander-html-{$id}.txt";
+        // header("Content-type: text/plain");
+        // header("Content-Disposition: attachment; filename=" . $namaFile);
+        $this->load->view('member/market/market_prelanders_xml', $data);
+    }
+
     public function del($id)
     {
         $this->market_m->del($id);
