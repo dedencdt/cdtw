@@ -74,17 +74,10 @@ $active_group = 'default';
 $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
-<<<<<<< HEAD
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'db_cdtw',
-=======
 	'hostname' => $_ENV['HOSTNAME'],
 	'username' => $_ENV['USERNAMEDB'],
 	'password' => $_ENV['PASSWORD'],
 	'database' => $_ENV['DATABASE'],
->>>>>>> 0f336b53a09d3388c7c433fd032fad45cb1242d0
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
