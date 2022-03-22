@@ -1,6 +1,7 @@
 <?php
 
-function send_mail($oThis,$data)
+
+function send_mail($oThis, $data)
 {
   // Konfigurasi email 
   $config = [
