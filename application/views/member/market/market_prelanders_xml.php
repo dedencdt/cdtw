@@ -1,3 +1,4 @@
+<?php echo '<?xml version="1.0" encoding="UTF-8" ?>' ?>
 <html xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 
 <head>
