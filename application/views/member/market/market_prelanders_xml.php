@@ -2,11 +2,14 @@
 <html xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 
 <head>
-  <title><?= $row->nama_produk ?></title>
+  <!-- Required meta tags -->
+  <title></title>
   <b:include data='blog' name='all-head-content' />
-
-  <meta content='https://cdn.hellosehat.com/wp-content/uploads/2016/08/buah-apel.jpg' property='og:image' />
-  <meta content='Mengkonsumsi buah buahan dan sayuran sangat bermanfaat bagi kesehatan tubuh karena bnyak mengandung vitamin, mineral, serat, dan antioksidan .' property='og:description' />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:title" content="Parfume Wangi" />
+  <meta property="og:description" content="Parfum wanita terbaik yang wanginya tahan lama bisa kamu temukan dengan berbagai variasi wangi dan harga" />
+  <meta property="og:image" content="https://codtech.id/wp-content/uploads/2022/02/Parum-ozawa.jpg" />
   <b:skin>
     <![CDATA[
                   
@@ -14,67 +17,47 @@
                   
                   ]]>
   </b:skin>
-
-  <!-- CSS BOOTSTRAP -->
-  <link crossorigin='anonymous' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' rel='stylesheet' />
-  <!-- FA -->
-  <link crossorigin='anonymous' href='https://pro.fontawesome.com/releases/v5.10.0/css/all.css' integrity='sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p' rel='stylesheet' />
-
-  <style>
-    .cdt-mobilecontent {
-      background-color: rgb(166, 196, 204);
-      width: 100%;
-      height: 100%;
-      padding-top: 20%;
-    }
-  </style>
-  <script>
-
-  </script>
-
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 </head>
 
-<body onload='sendJson()'>
-
+<body onload="sendJson()">
   <b:section class='hello' id='hello' />
+  <div class="fbpx"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="cdt-konten">
+          <h1></h1>
+          <a href="" class="btn btn-danger btn-lg cdt-next"></a>
 
-  <script id='fbx' />
+          <div class="cdt-hidden">
+            <div class="kmember"></div>
 
-  <div class='cdt-hidden cdt-keyword' style='display: none;'>
+            <div class="masukinDiSini">
+              <!--  ADS COPY -->
 
-    <div class='cdt-address'>
-      <center><span class='text-white'>Jl Sumbon 2 Ds. Kedokangabus - Kec gabuswetan - Indramayu 45263</span></center>
+
+              <!--BATAS  ADS COPY -->
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <!-- web konten -->
-  <div class='cdt-webcontent'>
-    <!-- enwebcontent -->
-  </div>
-  <!-- end webconten -->
 
-  <!-- mobile content -->
-  <div class='cdt-mobilecontent'>
-    <!-- masukan content android disini -->
-  </div>
+  <!-- Optional JavaScript; choose one of the two! -->
 
-  <!-- JQ BOOTSTRAP -->
-  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js' />
-  <script crossorigin='anonymous' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' />
-  <script crossorigin='anonymous' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' />
-  <script crossorigin='anonymous' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' />
-  <script src='https://codtech.id/js/cdtPLV1_tOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfE.js' />
+  <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+  <script src='https://codtech.id/js/cdtPLV1_tOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfE.js'></script>
+
   <script>
-    // Variabel
-    let isMobile = /iPhone|iPad|iPod|Android|Mobi/i.test(navigator.userAgent);
-    let webContent = document.querySelector(".cdt-webcontent");
-    let mobileContent = document.querySelector(".cdt-mobilecontent");
-    let addressOrigin = window.location.origin;
-
-
     // Dynamic data of website
     let frameid = '<?= $row->frame_id ?>';
     let dataurl = window.location.href.toString();
-    let dataip = 'shopify';
+    let dataip = 'blogspot';
     let data = {
       'label': 'prelander',
       'url': dataurl,
@@ -82,17 +65,12 @@
       'frame_id': frameid
     };
 
-    // Dynamic data of server
-    let pLpLink = '<?= $row->vc ?>?reff_cdt=<?= $row->frame_id ?>';
-    let pAtc = '<?= $row->atc ?>?reff_cdt=<?= $row->frame_id ?>';
-    let pTitle = '<?= $row->nama_produk ?>';
-    let pDesk = '<?= $row->desk ?>';
-    let pPrice = '<?= number_format($row->harga) ?>';
+
+    // SETT DATA PRELANDER
+    let titleWeb = '<?= $row->nama_produk ?>' + ' | ';
+    let linkStep = '<?= $row->nama_produk ?>?reff_cdt=' + frameid;
   </script>
-  <!-- LOGICAL -->
-  <script src='https://codtech.id/js/cdtPLV100_ScQsAAPkeEzDLFoR43cG1P.js' />
-
-
+  <script src="https://codtech.id/js/cdtXMLBLV002.js"></script>
 </body>
 
 </html>

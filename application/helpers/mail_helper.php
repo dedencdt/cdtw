@@ -21,7 +21,7 @@ function send_mail($oThis, $to, $subjet, $msg, $attach = null)
   $oThis->load->library('email', $config);
 
   // Email dan nama pengirim
-  $oThis->email->from('admin@codtech.id', 'Codtech.id');
+  $oThis->email->from('noreply@codtech.id', 'Codtech.id');
 
   // Email penerima
   $oThis->email->to($to); // Ganti dengan email tujuan
@@ -42,6 +42,7 @@ function send_mail($oThis, $to, $subjet, $msg, $attach = null)
     echo 'Sukses! email berhasil dikirim.';
   } else {
     echo 'Error! email tidak dapat dikirim.';
+    echo $oThis->email->print_debugger();
   }
 }
 
