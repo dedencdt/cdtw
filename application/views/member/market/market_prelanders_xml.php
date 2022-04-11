@@ -3,22 +3,22 @@
 
 <head>
   <!-- Required meta tags -->
-  <title></title>
   <b:include data='blog' name='all-head-content' />
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta property="og:title" content="Parfume Wangi" />
   <meta property="og:description" content="Parfum wanita terbaik yang wanginya tahan lama bisa kamu temukan dengan berbagai variasi wangi dan harga" />
   <meta property="og:image" content="https://codtech.id/wp-content/uploads/2022/02/Parum-ozawa.jpg" />
   <b:skin>
     <![CDATA[
-                  
-                  /****CSS CODE*****/
-                  
-                  ]]>
+      
+      /****CSS CODE*****/
+      
+      ]]>
   </b:skin>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
+  <title></title>
 </head>
 
 <body onload="sendJson()">
