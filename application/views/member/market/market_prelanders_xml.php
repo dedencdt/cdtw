@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <title></title>
   <b:include data='blog' name='all-head-content' />
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta property="og:title" content="Parfume Wangi" />
   <meta property="og:description" content="Parfum wanita terbaik yang wanginya tahan lama bisa kamu temukan dengan berbagai variasi wangi dan harga" />
@@ -18,7 +18,7 @@
                   ]]>
   </b:skin>
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
 </head>
 
 <body onload="sendJson()">
@@ -49,9 +49,9 @@
   <!-- Optional JavaScript; choose one of the two! -->
 
   <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-  <script src='https://codtech.id/js/cdtPLV1_tOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfE.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous" />
+  <script src='https://codtech.id/js/cdtPLV1_tOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfE.js' />
 
   <script>
     // Dynamic data of website
@@ -68,9 +68,9 @@
 
     // SETT DATA PRELANDER
     let titleWeb = '<?= $row->nama_produk ?>' + ' | ';
-    let linkStep = '<?= $row->nama_produk ?>?reff_cdt=' + frameid;
+    let linkStep = '<?= $row->prelander ?>?reff_cdt=' + frameid;
   </script>
-  <script src="https://codtech.id/js/cdtXMLBLV002.js"></script>
+  <script src="https://codtech.id/js/cdtXMLBLV002.js" />
 </body>
 
 </html>
