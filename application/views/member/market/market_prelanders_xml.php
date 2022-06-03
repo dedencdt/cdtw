@@ -23,7 +23,7 @@
 
 <body onload="sendJson()">
   <b:section class='hello' id='hello' />
-  <div class="fbpx"></div>
+  <div id="fbpx"></div>
   <div class="container">
     <div class="row">
       <div class="col">
