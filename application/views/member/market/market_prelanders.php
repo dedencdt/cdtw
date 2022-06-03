@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta content='https://cdn.hellosehat.com/wp-content/uploads/2016/08/buah-apel.jpg' property='og:image' />
+    <meta content='Mengkonsumsi buah buahan dan sayuran sangat bermanfaat bagi kesehatan tubuh karena bnyak mengandung vitamin, mineral, serat, dan antioksidan .' property='og:description' />
+
     <title><?= $row->nama_produk ?></title>
 
     <!-- CSS BOOTSTRAP -->
@@ -16,7 +20,8 @@
         .cdt-mobilecontent {
             background-color: rgb(166, 196, 204);
             width: 100%;
-            height: 575px;
+            height: 100%;
+            padding-top: 20%;
         }
     </style>
     <script>

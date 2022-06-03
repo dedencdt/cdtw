@@ -13,7 +13,6 @@ class Api_m extends CI_Model
         return $query;
     }
 
-
     public function add($post)
     {
         $params = [

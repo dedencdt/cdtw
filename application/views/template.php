@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Member Area | Codtech.idk</title>
+    <title>Member Area | Codtech.id</title>
 
 
     <!-- Custom fonts for this template-->

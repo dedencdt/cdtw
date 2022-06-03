@@ -43,7 +43,9 @@ class Auth extends CI_Controller
              
             ";
 
-            $this->fungsi->apitele($this->setter->get_idteleadmin(), $pesan, $this->setter->get_tokenteleadmin());
+
+            // $this->fungsi->apitele($this->setter->get_idteleadmin(), $pesan, $this->setter->get_tokenteleadmin());
+            send_mail($this, $email, "Pendaftaran Berhasil", $pesan);
             // $this->fungsi->sendEmail('Pendaftaran member baru', $email,  $msg);
         } else {
             echo "Gagal memasukan data";

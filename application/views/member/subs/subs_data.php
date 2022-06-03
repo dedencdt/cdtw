@@ -14,28 +14,60 @@
 </div>
 
 <!-- KOLOM INFORMASI -->
-<div class="row mb-4">
+<!-- Card peringatan akun nonaktif -->
+<div class="row cdt-notiftolangganan">
     <div class="container-fluid">
-        <div class="card bg-success text-gray-100">
+        <div class="card text-white bg-danger mb-3 " style="max-width: 100%;">
+            <div class="card-header bg-danger">Pemberitahuan</div>
             <div class="card-body">
-                <h5 class="card-title">Pastikan Transfer setalah melakukan perpanjang</h5>
-                <p class="card-text">
-                    Langganan akan secara otomatis bertambah setalah status pembayaran menjadi <strong>Paid</strong>,
-                    pastikan setelah melalukakn perpanjang segera Transfer <br> <br>
-                    silahkan klik disini untuk konfirmasi <a href="https://forms.gle/gxBzQRfsdHyWR2R76" target="_blank"> Konfirmasi pembayaran</a>
-                    <br> Atau bisa langsung hubungi CS kami : <a href="#">Finance department</a>
+                <h5 class="card-title">Akun anda belum aktif</h5>
+                <p class="card-text">Silahkan klik perpanjang untuk mengaktifkan member, <br>
+                    Klik Tombol Perpanjang > Pilih Durasi & Metode Pembayaran > Klik Perpanjang Sekarang <br>
+                    Setelah itu ikuti petunjuk yang ada.
                 </p>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Card Invoice Created -->
+<div class="row cdt-invMember">
+    <div class="container-fluid">
+        <div class="card text-white bg-info mb-3 " style="max-width: 100%;">
+            <div class="card-header bg-info">Pesan Pemberitahuan</div>
+            <div class="card-body">
+                <h5 class="card-title">Tagihan langganan member</h5>
+                <p class="card-text">Hai ka nama, ini adalah pemberitahuan tagihan yang di buat pada TGL <br>
+                    dengan metode pembayaran : Transfer ( Manual )<br>
+                    <br> No. Invoice : INV
+                    <br> Jumlah Tagian :
+
+                    <br><br>
+                    <strong>Invoice Items</strong> <br>
+                    Perpanjang Langanan Member DURASI,
+
+                    <br><br>
+                    <strong>Pembayaran</strong><br>
+                    Bank Jago : 1231XXXX
+                    <br>A.n XXXXXX
+                    <br> Jangan lupa untuk konfirmasi pembayaran melalui Live chat atau link <br>
+                    linkk,
+
+
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <!-- KOLOM TOMBOL PERPANJANG -->
 <div class="row mb-4">
     <div class="container-fluid">
         <div class="card text-center">
             <div class="card-body">
-                <h6 class="card-title">Akun anda <?= $this->fungsi->durasi_langganan() <= date('Y-m-d') ? 'tidak aktif'  : 'aktif sampai' ?></h6>
+                <h6 class="card-title">Akun anda <?= $this->fungsi->durasi_langganan() <= date('Y-m-d') ? "<span class='badge badge-danger p-1'>tidak aktif</span>"  : "Aktif Sampai <i class='fas fa-fw fa-check text-success'></i>" ?></h6>
                 <h5 class="card-title"><strong><?= $this->fungsi->durasi_langganan() ?> </strong> <br></h5>
                 <p class="card-text">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Perpanjang</button>
@@ -87,7 +119,44 @@
                                 <td><?= $data->durasi ?></td>
                                 <td>Rp. <?= number_format($data->harga) ?></td>
                                 <td><?= $data->paymethod ?></td>
-                                <td><?= $data->status ?></td>
+                                <td data-status="<?= $data->status ?>"><?= $data->status ?></td>
+                                <!-- setting card petunjuk langganan -->
+                                <?php
+
+                                // CEK AKUN tidak
+                                if ($this->fungsi->durasi_langganan() <= date('Y-m-d')) {
+                                    echo "
+                                            <script>
+                                           document.querySelector('.cdt-notiftolangganan').classList.toggle('d-none');
+                                            // document.querySelector('.cdt-invMember').setAttribute('style','display:none');
+                                            </script>
+                                            ";
+                                } elseif ($data->status == "Waiting") {
+                                    echo "
+                                            <script>
+                                        //    document.querySelector('.cdt-notiftolangganan').classList.toggle('d-none');
+                                          document.querySelector('.cdt-invMember').classList.toggle('d-none');
+                                            </script>
+                                            ";
+                                }
+                                // if (!$data->status == "Waiting" || $data->status == null) {
+                                //     // tampilkan card
+                                //     echo "
+                                //                 <script>
+                                //                document.querySelector('.cdt-notiftolangganan').classList.toggle('d-none');
+                                //                 // document.querySelector('.cdt-invMember').setAttribute('style','display:none');
+                                //                 </script>
+                                //                 ";
+                                // } else {
+                                //     // matikan card
+                                //     echo "
+                                //                 <script>
+                                //                 document.querySelector('.cdt-invMember').setAttribute('style','display:block');
+                                //                 </script>
+                                //                 ";
+                                // }
+                                //         // Langganan aktif
+                                ?>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
